@@ -15,6 +15,10 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "files": [
+    "../node_modules/firebase/firebase.d.ts" 
+   ]
+
   }
 }

@@ -18,3 +18,10 @@
   </li>
 </ul>
 
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.$value}}
+  </li>
+</ul>
+
+<h1>{{ (categories | async)?.categories }}</h1>
