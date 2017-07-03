@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 //import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { GeneralService } from './firebaseserv/general.service';
+import { FirebasedbService } from './firebaseserv/firebasedb.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent {
   //items: Array<any>;
   categories: FirebaseObjectObservable<any>;
 
-  constructor(db: GeneralService) {
+  constructor(db: FirebasedbService) {
     //console.log(db.getCategories())
     db.getCategories().forEach((x)=>{console.log(x[0]); this.items = x[0]});
     console.log(this.items)

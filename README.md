@@ -1,10 +1,11 @@
 # Fccr3
 
-## Some References:
+## Some References Angular4 + angular-cli + firebase:
 * https://progblog.io/Angular-2-Firebase-Tutorial-Part-3-Adding-the-Realtime-Database/
 * https://github.com/angular/angularfire2
 * Eduonix course (Udemy)
 * Max course (Udemy)
+* https://www.typescriptlang.org/docs/handbook/basic-types.html
 
 Notes:
 //getting a : Cannot find name 'FirebaseObjectObservable' ERROR

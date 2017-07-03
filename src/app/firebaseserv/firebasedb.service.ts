@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 //import {Category} from '../models/Category';
 
 @Injectable()
-export class GeneralService {
+export class FirebasedbService {
   categories: FirebaseListObservable<any[]>;
   
   constructor(private db: AngularFireDatabase) {}
