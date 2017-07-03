@@ -10,7 +10,9 @@ export class FirebasedbService {
   platforms: FirebaseListObservable<any[]>;
   texts: FirebaseListObservable<any[]>;
 
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase) {
+    this.platforms = this.db.list('/platformstable');
+  }
   
   
   getCategories() {
@@ -23,10 +25,15 @@ export class FirebasedbService {
      return this.subjects;   
  }
 
- getPlatforms() {
-     this.platforms = this.db.list('/platformstable');
-     return this.platforms;   
- }
+ //getPlatforms() {
+ //    this.platforms = this.db.list('/platformstable');
+ //    return this.platforms;   
+ //}
+
+ //getPlatforms() {
+ //    var message;
+ //    this.platforms.push(message); 
+ //}
 
   getTexts() {
      this.texts = this.db.list('/textstable');
