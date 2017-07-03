@@ -6,7 +6,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class FirebasedbService {
   categories: FirebaseListObservable<any[]>;
-  
+  subjects: FirebaseListObservable<any[]>;
+  platforms: FirebaseListObservable<any[]>;
+  texts: FirebaseListObservable<any[]>;
+
   constructor(private db: AngularFireDatabase) {}
   
   
@@ -14,4 +17,20 @@ export class FirebasedbService {
      this.categories = this.db.list('/categories');
      return this.categories;
  };
+
+ getSubjects() {
+     this.subjects = this.db.list('/cv');
+     return this.subjects;   
+ }
+
+ getPlatforms() {
+     this.platforms = this.db.list('/platformstable');
+     return this.platforms;   
+ }
+
+  getTexts() {
+     this.texts = this.db.list('/textstable');
+     return this.texts;   
+ }
+
 }

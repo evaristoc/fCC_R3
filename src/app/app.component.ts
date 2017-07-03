@@ -10,21 +10,25 @@ import { FirebasedbService } from './firebaseserv/firebasedb.service';
 })
 export class AppComponent {
   title = 'app';
-  items : Array<any>;
-  //items: Array<any>;
-  categories: FirebaseObjectObservable<any>;
+  categories : Array<any>;
+  subjects : Array<any>;
+  platforms : Array<any>;
+
 
   constructor(db: FirebasedbService) {
-    //console.log(db.getCategories())
-    db.getCategories().forEach((x)=>{console.log(x[0]); this.items = x[0]});
-    console.log(this.items)
-    //this.items = [1,2,3,4]
-    //var categories = db.object('/categories');
-    //categories.forEach((x)=>{console.log(x)});
-  //constructor(db: AngularFireDatabase) {
-  //this.items = db.list('/items');
-  //this.categories = db.object('/categories')
-  //this.categories.forEach((x)=>{console.log(x)})
+
+    db.getCategories().forEach((x)=>{console.log(x[0]); this.categories = x[0]});
+    console.log(this.categories)
+
+    db.getSubjects().forEach((x)=>{console.log(x[0]); this.subjects = x[0]});
+    console.log(this.subjects)
+
+    db.getPlatforms().forEach((x)=>{console.log(x)});
+    //console.log(this.platforms)
+
+    db.getTexts().forEach((x)=>{console.log(x)});
+    //console.log(this.platforms)
+
   }
 
 }
