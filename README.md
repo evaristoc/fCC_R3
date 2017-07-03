@@ -1,5 +1,21 @@
 # Fccr3
 
+## Some References:
+* https://progblog.io/Angular-2-Firebase-Tutorial-Part-3-Adding-the-Realtime-Database/
+* https://github.com/angular/angularfire2
+* Eduonix course (Udemy)
+* Max course (Udemy)
+
+Notes:
+//getting a : Cannot find name 'FirebaseObjectObservable' ERROR
+//One way is by directly calling the file (Eudonix example). Other is by typing the files as in:
+//It is recommended to include it in path: https://github.com/angular/angularfire2/blob/master/docs/1-install-and-setup.md
+//BUT for typing you should install typing:
+//-- https://github.com/angular/angularfire2/issues/160
+//Following the Eudonix route for now
+
+=============================================================
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
 ## Development server

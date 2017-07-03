@@ -10,6 +10,8 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 
+import { GeneralService } from './firebaseserv/general.service'
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +21,7 @@ import { AppComponent } from './app.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
   ],
-  providers: [],
+  providers: [GeneralService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
