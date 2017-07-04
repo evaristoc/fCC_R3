@@ -1,3 +1,13 @@
-p {
-    margin-bottom:100px;
+label {
+    padding:1em;
+    margin: 0.5em;
+    border:1px solid #000;
+    border-radius:3px;
+    transition:all 1s ease;
+}
+label:hover {
+    background: #aaa;
+}
+.form-check {
+    display: inline-block;
 }
