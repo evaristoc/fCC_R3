@@ -10,11 +10,15 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 
-import { FirebasedbService } from './firebaseserv/firebasedb.service'
+import { FirebasedbService } from './firebaseserv/firebasedb.service';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
