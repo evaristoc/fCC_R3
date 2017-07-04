@@ -8,18 +8,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 
-import { AppComponent } from './app.component';
-
 import { FirebasedbService } from './firebaseserv/firebasedb.service';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component'
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavComponent,
-    FooterComponent,
     SearchFormComponent
   ],
   imports: [
