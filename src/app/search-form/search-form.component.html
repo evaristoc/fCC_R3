@@ -1,32 +1,26 @@
 <div class="row text-center">
     <div class="col-12">
-        <div class="row">
 
-            <div class="col-6">
-                <h3>Categories (names of the classes)</h3>
-                <ss-multiselect-dropdown 
-                [options]="categoryOptions" 
-                [texts]="categoryTexts" 
-                [settings]="categorySettings" 
-                [(ngModel)]="optionsModel">
-                </ss-multiselect-dropdown>
+            <label>Category: </label>
+            <ss-multiselect-dropdown 
+            [options]="categoryOptions" 
+            [texts]="categoryTexts" 
+            [settings]="categorySettings" 
+            [(ngModel)]="categoryModel"
+            (ngModelChange)="onChangeCategory($event)">
+            </ss-multiselect-dropdown>
 
-            </div>
-            <div class="col-6">
-               <h3>Subjects (names and data over cv subjects)</h3>
-               <div class="form-check" *ngFor="let subject of subjects">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" >
-                    {{subject[1]}}
-                  </label>
-                </div>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
 
-        </div>
+            <label>Subject: </label>
+           <ss-multiselect-dropdown 
+            [options]="subjectOptions" 
+            [texts]="subjectTexts" 
+            [settings]="subjectSettings" 
+            [(ngModel)]="subjectModel"
+            (ngModelChange)="onChangeSubject($event)">>
+            </ss-multiselect-dropdown>
 
+            <button type="submit" class="btn btn-primary">Submit</button>
 
 <!--
 <h3>Platforms</h3>
@@ -36,5 +30,5 @@
     </li>
 </ul>
 -->
-</div>
+    </div>
 </div>
