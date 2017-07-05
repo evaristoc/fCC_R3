@@ -56,7 +56,12 @@ export class SearchFormComponent implements OnInit {
 
     //db.getPlatforms();
     this.platforms = this.db.platforms;
-    console.log(this.platforms)
+    this.platforms.forEach((x) => {
+      x.forEach((arrItem) => {
+        console.log(arrItem);
+      })
+    })
+    console.log(this.platforms);
 
     db.getTexts().forEach((x)=>{console.log(x)});
     //console.log(this.platforms)
