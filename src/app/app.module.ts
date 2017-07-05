@@ -7,25 +7,31 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
 
 import { FirebasedbService } from './firebaseserv/firebasedb.service';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
-import { SearchFormComponent } from './search-form/search-form.component'
+import { SearchFormComponent } from './search-form/search-form.component';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
+    FormsModule,
+    MultiselectDropdownModule
   ],
   providers: [FirebasedbService],
   bootstrap: [AppComponent]

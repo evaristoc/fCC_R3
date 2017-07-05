@@ -4,12 +4,13 @@
 
             <div class="col-6">
                 <h3>Categories (names of the classes)</h3>
-                <div class="form-check" *ngFor="let category of categories">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" >
-                    {{category}}
-                  </label>
-                </div>
+                <ss-multiselect-dropdown 
+                [options]="categoryOptions" 
+                [texts]="categoryTexts" 
+                [settings]="categorySettings" 
+                [(ngModel)]="optionsModel">
+                </ss-multiselect-dropdown>
+
             </div>
             <div class="col-6">
                <h3>Subjects (names and data over cv subjects)</h3>
