@@ -18,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { ResultsComponent } from './results/results.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ResultsComponent } from './results/results.component';
     FooterComponent,
     SearchFormComponent,
     ResultsComponent,
+    AboutComponent,
     
   ],
   imports: [
