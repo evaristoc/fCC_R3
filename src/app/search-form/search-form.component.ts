@@ -10,7 +10,6 @@ import { FirebasedbService } from '../firebaseserv/firebasedb.service';
 })
 export class SearchFormComponent implements OnInit {
 
-  title = 'app';
   categories : Array<any>;
   subjects : Array<any>;
   //platforms : Array<any>;
