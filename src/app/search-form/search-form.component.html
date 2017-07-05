@@ -1,17 +1,13 @@
-<div class="row text-center">
-    <div class="col-12">
+<div class="text-center" >
+    <div class="col-12"style="padding:0" >
+        <div class="col-12 d-flex justify-content-center align-items-center mainSearch">
+        <div class="col-6 row" style="background: rgba(255,255,255,0.5); padding:1em; border-radius: 3px">
+            <h1>Find the best resources and start coding today</h1>
+            <p>Select what and how you want to learn, and read what fellow programmers 
+            think of the resources available.</p>
 
-            <label>Category: </label>
-            <ss-multiselect-dropdown 
-            [options]="categoryOptions" 
-            [texts]="categoryTexts" 
-            [settings]="categorySettings" 
-            [(ngModel)]="categoryModel"
-            (ngModelChange)="onChangeCategory($event)">
-            </ss-multiselect-dropdown>
-
-
-            <label>Subject: </label>
+            <div class="card col-12">
+            <h3>What subject(s) interest you? </h3>
            <ss-multiselect-dropdown 
             [options]="subjectOptions" 
             [texts]="subjectTexts" 
@@ -19,8 +15,20 @@
             [(ngModel)]="subjectModel"
             (ngModelChange)="onChangeSubject($event)">>
             </ss-multiselect-dropdown>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="card col-12">
+            <h3>Type of resources: </h3>
+            <ss-multiselect-dropdown 
+            [options]="categoryOptions" 
+            [texts]="categoryTexts" 
+            [settings]="categorySettings" 
+            [(ngModel)]="categoryModel"
+            (ngModelChange)="onChangeCategory($event)">
+            </ss-multiselect-dropdown>
+            </div>
+            <div class="col-12">
+            <button type="submit" class="btn btn-primary">Get reviews</button>
+            </div>
 
 <!--
 <h3>Platforms</h3>
@@ -30,5 +38,15 @@
     </li>
 </ul>
 -->
+    </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center about">
+        <div class="col-6">
+        <h2>Why use FreeCodeCamp review?</h2>
+        <p>There are million of resources available to learn to code.</p>
+        <p> 
+        Save yourself some time and filter through the resources that FreeCodeCampers reviewed 
+        to figure out the best platforms for your optimum learning experience.</p>
+        </div>
     </div>
 </div>

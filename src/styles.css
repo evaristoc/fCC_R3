@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.css";
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.container-fluid {
+    padding:0;
+}
+.mainSearch {
+    min-height: 100vh;
+    background: #eee; 
+    background-size: cover;
+    background-image: url(assets/background.jpg);
+    background-repeat: no-repeat
+}

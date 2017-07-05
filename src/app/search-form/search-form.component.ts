@@ -61,6 +61,7 @@ export class SearchFormComponent implements OnInit {
         console.log(arrItem);
       })
     })
+    
     console.log(this.platforms);
 
     db.getTexts().forEach((x)=>{console.log(x)});
@@ -85,8 +86,8 @@ export class SearchFormComponent implements OnInit {
       checkAll: 'Select all',
       uncheckAll: 'Unselect all',
       checked: 'selected',
-      checkedPlural: 'categories selected',
-      defaultTitle: 'Choose category(ies)',
+      checkedPlural: 'types selected',
+      defaultTitle: 'Please select',
       allSelected: 'All selected',
   };
   
@@ -111,7 +112,7 @@ export class SearchFormComponent implements OnInit {
       uncheckAll: 'Unselect all',
       checked: 'selected',
       checkedPlural: 'subjects selected',
-      defaultTitle: 'Choose subject(s)',
+      defaultTitle: 'Please select',
       allSelected: 'All selected',
   };
   
