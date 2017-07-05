@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input , OnInit} from '@angular/core';
+import { SearchFormComponent } from '../search-form/search-form.component';
 
 @Component({
   selector: 'app-results',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
+  selectedSubjects = {};
+  @Input('subj') subjects:string;
+  @Input('cat') categories:string;
+  constructor() {
 
-  constructor() { }
+    
+  }
 
   ngOnInit() {
   }

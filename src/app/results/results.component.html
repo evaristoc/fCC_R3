@@ -1,3 +1,14 @@
-<p>
-  results works!
-</p>
+<div class="col-12 d-flex justify-content-center about" id="results">
+    <div class="col-6">
+          <span class="badge badge-pill badge-default" *ngFor="let subject of subjects">
+            {{subject}}
+          </span>
+
+    </div>
+    <div class="col-6">
+          <span class="badge badge-pill badge-primary" *ngFor="let category of categories">
+            {{category}}
+          </span>
+
+    </div>
+</div>
