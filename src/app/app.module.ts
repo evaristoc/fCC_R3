@@ -17,6 +17,7 @@ import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     NavComponent,
     FooterComponent,
     SearchFormComponent,
+    ResultsComponent,
     
   ],
   imports: [
