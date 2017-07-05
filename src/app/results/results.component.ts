@@ -8,11 +8,10 @@ import { SearchFormComponent } from '../search-form/search-form.component';
 })
 export class ResultsComponent implements OnInit {
   selectedSubjects = {};
-  @Input('subj') subjects:string;
-  @Input('cat') categories:string;
+  @Input('result') results: Array<any>;
+  title= "You chose";
   constructor() {
 
-    
   }
 
   ngOnInit() {

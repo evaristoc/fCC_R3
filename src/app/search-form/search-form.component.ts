@@ -19,6 +19,7 @@ export class SearchFormComponent implements OnInit {
   subjOptions: Array<any>;
   selectedSubjects: Array<any>;
   selectedCategories: Array<any>;
+  searchResults: Array<any>;
   //platforms : Array<any>;
   public platforms : FirebaseListObservable<any>;
   
@@ -153,6 +154,13 @@ export class SearchFormComponent implements OnInit {
   }
   loadSubject() {
     this.subjectOptions = this.subjOptions;
+  }
+  getReviews() {
+    console.log("get reviews");
+    this.searchResults = [];
+    this.searchResults.push(this.selectedSubjects);
+    this.searchResults.push(this.selectedCategories);
+    console.log(this.searchResults);
   }
 
 }

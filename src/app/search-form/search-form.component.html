@@ -27,7 +27,7 @@
             </ss-multiselect-dropdown>
             </div>
             <div class="col-12">
-            <button type="submit" class="btn btn-primary">Get reviews</button>
+            <button type="submit" class="btn btn-primary" (click)="getReviews()">Get reviews</button>
             </div>
 
 <!--
@@ -40,7 +40,7 @@
 -->
     </div>
     </div>
-    <app-results [subj] ="selectedSubjects" [cat]="selectedCategories"></app-results>
+    <app-results [result] ="searchResults"></app-results>
 
     
 </div>
