@@ -27,7 +27,7 @@
             </ss-multiselect-dropdown>
             </div>
             <div class="col-12">
-            <button type="submit" class="btn btn-primary" (click)="getReviews()">Get reviews</button>
+            <button type="submit" class="btn btn-primary" (click)="getReviews()" [disabled]="!isActive">Get reviews</button>
             </div>
 
 <!--

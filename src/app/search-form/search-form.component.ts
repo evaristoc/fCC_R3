@@ -22,6 +22,7 @@ export class SearchFormComponent implements OnInit {
   searchResults: Array<any>;
   //platforms : Array<any>;
   public platforms : FirebaseListObservable<any>;
+  isActive = false;
   
   constructor(public db: FirebasedbService) {
 
@@ -131,8 +132,7 @@ export class SearchFormComponent implements OnInit {
       this.selectedCategories.push(categ[0].name);
     })
     
-    console.log("Selected categories are: ", this.selectedCategories);
-    
+  this.isActive = (this.selectedCategories.length > 0 && this.selectedSubjects.length > 0) ? true : false;
   }
   
   onChangeSubject() {
@@ -144,7 +144,7 @@ export class SearchFormComponent implements OnInit {
       this.selectedSubjects.push(subj[0].name);
     })
     
-    console.log("Selected subjects are: ", this.selectedSubjects.join(", "));
+    this.isActive = (this.selectedCategories.length > 0 && this.selectedSubjects.length > 0) ? true : false;
   }
   
   
