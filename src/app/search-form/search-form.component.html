@@ -27,7 +27,7 @@
             </ss-multiselect-dropdown>
             </div>
             <div class="col-12">
-            <button type="submit" class="btn btn-primary" (click)="getReviews()" [disabled]="!isActive">Get reviews</button>
+            <button scrollTo scrollTargetSelector="#resultDiv" type="submit" class="btn btn-primary" (click)="getReviews()" [disabled]="!isActive">Get reviews</button>
             </div>
 
 <!--
@@ -40,7 +40,8 @@
 -->
     </div>
     </div>
-    <app-results [result] ="searchResults" *ngIf="showResultSection" id="resultDiv"></app-results>
+    <div id="resultDiv"></div>
+    <app-results [result] ="searchResults" [hidden]="!showResultSection" ></app-results>
 
     
 </div>
