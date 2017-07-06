@@ -145,6 +145,7 @@ export class SearchFormComponent implements OnInit {
   ngOnInit() {
   }
   onChangeCategory() {
+    this.selectedCategories = [];
     this.categoryModel.forEach((catModel) => {
       var categ = this.categoryOptions.filter((cat) => {
         return cat.id === catModel;
@@ -156,7 +157,7 @@ export class SearchFormComponent implements OnInit {
   }
   
   onChangeSubject() {
-    
+    this.selectedSubjects =[];
     this.subjectModel.forEach((subjModel) => {
       var subj = this.subjectOptions.filter((subj) => {
         return subj.id === subjModel;
