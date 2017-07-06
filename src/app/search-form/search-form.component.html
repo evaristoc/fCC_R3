@@ -40,7 +40,7 @@
 -->
     </div>
     </div>
-    <app-results [result] ="searchResults" [hidden]="!showResultSection"></app-results>
+    <app-results [result] ="searchResults" *ngIf="showResultSection" id="resultDiv"></app-results>
 
     
 </div>
