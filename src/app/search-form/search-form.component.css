@@ -1,0 +1,11 @@
+.mainSearch {
+    min-height: 100vh;
+
+}
+.card {
+    padding: 1em;
+    margin: 2em 0em;
+}
+.about {
+    margin: 3em;
+}
