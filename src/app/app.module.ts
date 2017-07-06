@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+
 import { NgModule } from '@angular/core';
 //setting for angularfire2: see https://github.com/angular/angularfire2
 //see also:
@@ -34,6 +36,7 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     FormsModule,

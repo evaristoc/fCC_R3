@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, trigger, transition, style, animate, state } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
@@ -8,6 +10,24 @@ import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts   } from 'a
 
 @Component({
   selector: 'app-search-form',
+  animations: [
+    trigger(
+      'myAnimation',
+      [
+        transition(
+        ':enter', [
+          style({transform: 'translateX(100%)', 'opacity': 0}),
+          animate('500ms', style({transform: 'translateX(0)', 'opacity': 1}))
+        ]
+      ),
+      transition(
+        ':leave', [
+          style({transform: 'translateX(0)', 'opacity': 1}),
+          animate('500ms', style({transform: 'translateX(100%)', 'opacity': 0}))
+        ]
+      )]
+    )
+  ],
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css']
 })

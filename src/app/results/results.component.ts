@@ -1,6 +1,7 @@
 import { Component, Input , OnInit} from '@angular/core';
 import { SearchFormComponent } from '../search-form/search-form.component';
 
+
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
