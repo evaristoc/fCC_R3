@@ -8,6 +8,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+//-- https://www.npmjs.com/package/ng2-scroll-to
+import {ScrollToModule} from 'ng2-scroll-to';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 
 import { AppComponent } from './app.component';
@@ -16,7 +19,6 @@ import { FirebasedbService } from './firebaseserv/firebasedb.service';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
-import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { ResultsComponent } from './results/results.component';
 import { AboutComponent } from './about/about.component';
 
@@ -35,7 +37,8 @@ import { AboutComponent } from './about/about.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     FormsModule,
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    ScrollToModule.forRoot(),
   ],
   providers: [FirebasedbService],
   bootstrap: [AppComponent]
