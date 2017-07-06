@@ -23,6 +23,7 @@ export class SearchFormComponent implements OnInit {
   //platforms : Array<any>;
   public platforms : FirebaseListObservable<any>;
   isActive = false;
+  showResultSection = false;
   
   constructor(public db: FirebasedbService) {
 
@@ -160,7 +161,7 @@ export class SearchFormComponent implements OnInit {
     this.searchResults = [];
     this.searchResults.push(this.selectedSubjects);
     this.searchResults.push(this.selectedCategories);
-    console.log(this.searchResults);
+    this.showResultSection = true;
   }
 
 }
