@@ -132,7 +132,7 @@ export class SearchFormComponent implements OnInit {
       this.selectedCategories.push(categ[0].name);
     })
     
-  this.isActive = (this.selectedCategories.length > 0 && this.selectedSubjects.length > 0) ? true : false;
+  this.isActive = (this.selectedCategories.length > 0 && (typeof this.selectedSubjects !== undefined && this.selectedSubjects.length > 0)) ? true : false;
   }
   
   onChangeSubject() {
@@ -144,7 +144,7 @@ export class SearchFormComponent implements OnInit {
       this.selectedSubjects.push(subj[0].name);
     })
     
-    this.isActive = (this.selectedCategories.length > 0 && this.selectedSubjects.length > 0) ? true : false;
+    this.isActive = ((typeof this.selectedCategories !== undefined && this.selectedCategories.length > 0) && this.selectedSubjects.length > 0) ? true : false;
   }
   
   
