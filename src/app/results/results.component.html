@@ -1,0 +1,21 @@
+<div>
+  
+<div class="col-12"  style="margin-top:3em;"><h2>Your result</h2></div>
+<div class="col-12 d-flex justify-content-center about" id="results" style="margin-bottom:3em; text-align:left">
+    
+    <div class="col-md-8" style="padding:1em; background: #eee">
+      <p style="width:100%"><strong>Your selection: </strong>
+      <br/>Subject: 
+          <span class="badge badge-pill badge-default" *ngFor="let subject of results[0]">
+            {{subject}}
+          </span>
+      <br/>
+      Types of resources: 
+          <span class="badge badge-pill badge-primary" *ngFor="let category of results[1]">
+            {{category}}
+          </span>
+      </p>
+    </div>
+
+</div>
+</div>
