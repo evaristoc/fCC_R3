@@ -7,6 +7,7 @@ import { FirebasedbService } from '../firebaseserv/firebasedb.service';
 // from https://github.com/softsimon/angular-2-dropdown-multiselect
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts   } from 'angular-2-dropdown-multiselect';
 
+//OJO: check the use of Enums https://www.gurustop.net/blog/2016/05/24/how-to-use-typescript-enum-with-angular2/
 
 @Component({
   selector: 'app-search-form',

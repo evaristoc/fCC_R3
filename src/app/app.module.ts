@@ -18,12 +18,18 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { AppComponent } from './app.component';
 
 import { FirebasedbService } from './firebaseserv/firebasedb.service';
+import { Routes, RouterModule } from '@angular/router';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ResultsComponent } from './results/results.component';
 import { AboutComponent } from './about/about.component';
 import { NgxElasticlunrModule } from 'ngx-elasticlunr';
+import { PlatformComponent } from './platform/platform.component';
+
+const appRoutes: Routes = [
+{path: 'platform', component: PlatformComponent}
+];
 
 @NgModule({
   declarations: [
@@ -33,6 +39,7 @@ import { NgxElasticlunrModule } from 'ngx-elasticlunr';
     SearchFormComponent,
     ResultsComponent,
     AboutComponent,
+    PlatformComponent,
     
   ],
   imports: [
@@ -43,7 +50,8 @@ import { NgxElasticlunrModule } from 'ngx-elasticlunr';
     FormsModule,
     MultiselectDropdownModule,
     ScrollToModule.forRoot(),
-    NgxElasticlunrModule.forRoot()
+    NgxElasticlunrModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [FirebasedbService],
   bootstrap: [AppComponent]
