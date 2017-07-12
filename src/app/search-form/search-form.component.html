@@ -1,36 +1,25 @@
-<div class="text-center" >
-    <div class="col-12"style="padding:0" >
+<div class="text-center">
+    <div class="col-12" style="padding:0">
         <div class="col-12 d-flex justify-content-center align-items-center mainSearch">
-        <div class="col-md-6 row" style="background: rgba(255,255,255,0.5); padding:1em; border-radius: 3px">
-            <h1>Find the best resources and start coding today</h1>
-            <p>Select what and how you want to learn, and read what fellow programmers 
-            think of the resources available.</p>
+            <div class="col-md-6 row" style="background: rgba(255,255,255,0.5); padding:1em; border-radius: 3px">
+                <h1>Find the best resources and start coding today</h1>
+                <p>Select what and how you want to learn, and read what fellow programmers think of the resources available.</p>
 
-            <div class="card col-12">
-            <h3>What subject(s) interest you? </h3>
-           <ss-multiselect-dropdown 
-            [options]="subjectOptions" 
-            [texts]="subjectTexts" 
-            [settings]="subjectSettings" 
-            [(ngModel)]="subjectModel"
-            (ngModelChange)="onChangeSubject($event)">>
-            </ss-multiselect-dropdown>
-            </div>
-            <div class="card col-12">
-            <h3>Type of resources: </h3>
-            <ss-multiselect-dropdown 
-            [options]="categoryOptions" 
-            [texts]="categoryTexts" 
-            [settings]="categorySettings" 
-            [(ngModel)]="categoryModel"
-            (ngModelChange)="onChangeCategory($event)">
-            </ss-multiselect-dropdown>
-            </div>
-            <div class="col-12">
-            <button scrollTo scrollTargetSelector="#resultDiv" type="submit" class="btn btn-primary" (click)="getReviews()" [disabled]="!isActive">Get reviews</button>
-            </div>
+                <div class="card col-12">
+                    <h3>What subject(s) interest you? </h3>
+                    <ss-multiselect-dropdown [options]="subjectOptions" [texts]="subjectTexts" [settings]="subjectSettings" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">>
+                    </ss-multiselect-dropdown>
+                </div>
+                <div class="card col-12">
+                    <h3>Type of resources: </h3>
+                    <ss-multiselect-dropdown [options]="categoryOptions" [texts]="categoryTexts" [settings]="categorySettings" [(ngModel)]="categoryModel" (ngModelChange)="onChangeCategory($event)">
+                    </ss-multiselect-dropdown>
+                </div>
+                <div class="col-12">
+                    <button scrollTo scrollTargetSelector="#resultDiv" type="submit" class="btn btn-primary" (click)="getReviews()" [disabled]="!isActive">Get reviews</button>
+                </div>
 
-<!--
+                <!--
 <h3>Platforms</h3>
 <ul>
     <li class="text" *ngFor="let platform of platforms | async">
@@ -38,10 +27,9 @@
     </li>
 </ul>
 -->
-    </div>
-    </div>
-    <div id="resultDiv"></div>
-    <app-results [result] ="searchResults" *ngIf="showResultSection" [@myAnimation]></app-results>
+            </div>
+        </div>
+        <div id="resultDiv"></div>
+        <app-results [result]="searchResults" *ngIf="showResultSection" [@myAnimation]></app-results>
 
-    
-</div>
+    </div>

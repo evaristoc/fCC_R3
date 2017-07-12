@@ -26,10 +26,9 @@
                 <th style="width:60%;">CATEGORY</th>
             </tr>
             <tr style="text-align:left;" *ngFor="let selection of selectedPlatforms">
-                <td>{{selection[0]}}</td>
+                <td><a routerLink="/platform" routerLinkActive="active">{{selection[0]}}</a></td>
                 <td>{{selection[1]}}</td>
             </tr>
         </table>
-
     </div>
 </div>
