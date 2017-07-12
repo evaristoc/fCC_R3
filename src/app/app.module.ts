@@ -23,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ResultsComponent } from './results/results.component';
 import { AboutComponent } from './about/about.component';
+import { NgxElasticlunrModule } from 'ngx-elasticlunr';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AboutComponent } from './about/about.component';
     FormsModule,
     MultiselectDropdownModule,
     ScrollToModule.forRoot(),
+    NgxElasticlunrModule.forRoot()
   ],
   providers: [FirebasedbService],
   bootstrap: [AppComponent]

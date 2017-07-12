@@ -48,9 +48,9 @@ export class SearchFormComponent implements OnInit {
   constructor(public db: FirebasedbService) {
 
     db.getCategories().forEach((x) => {
-      console.log(x[0]); 
+      //console.log(x[0]); 
       this.categories = x[0];
-      console.log(this.categories[0]);
+      //console.log(this.categories[0]);
       this.catOptions = [];
       this.categories.forEach((category, index) => {
         var categoryObj = {};
@@ -81,13 +81,15 @@ export class SearchFormComponent implements OnInit {
     this.platforms = this.db.platforms;
     this.platforms.forEach((x) => {
       x.forEach((arrItem) => {
-        console.log(arrItem);
+        //console.log(arrItem);
       })
     })
     
     console.log(this.platforms);
 
-    db.getTexts().forEach((x)=>{console.log(x)});
+    db.getTexts().forEach((x)=>{
+      //console.log(x)
+    });
     //console.log(this.platforms)
 
   };

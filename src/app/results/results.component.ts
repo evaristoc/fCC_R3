@@ -16,6 +16,9 @@ export class ResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    if (this.results){
+      console.log(this.results)
+    }  
+}
 
 }
