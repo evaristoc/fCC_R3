@@ -1,21 +1,35 @@
 <div>
-  
-<div class="col-12"  style="margin-top:3em;"><h2>Your result</h2></div>
-<div class="col-12 d-flex justify-content-center about" id="results" style="margin-bottom:3em; text-align:left">
-    
-    <div class="col-md-8" style="padding:1em; background: #eee">
-      <p style="width:100%"><strong>Your selection: </strong>
-      <br/>Subject: 
-          <span class="badge badge-pill badge-default" *ngFor="let subject of results[0]">
+
+    <div class="col-12" style="margin-top:3em;">
+        <h2>Your result</h2>
+    </div>
+    <div class="col-12 d-flex justify-content-center about" id="results" style="margin-bottom:3em; text-align:left">
+
+        <div class="col-md-8" style="padding:1em; background: #eee">
+            <p style="width:100%"><strong>Your selection: </strong>
+                <br/>Subject:
+                <span class="badge badge-pill badge-default" *ngFor="let subject of results[0]">
             {{subject}}
           </span>
-      <br/>
-      Types of resources: 
-          <span class="badge badge-pill badge-primary" *ngFor="let category of results[1]">
+                <br/> Types of resources:
+                <span class="badge badge-pill badge-primary" *ngFor="let category of results[1]">
             {{category}}
           </span>
-      </p>
-    </div>
+            </p>
+        </div>
 
-</div>
+    </div>
+    <div>
+        <table>
+            <tr class="header">
+                <th style="width:40%;">PLATFORM</th>
+                <th style="width:60%;">CATEGORY</th>
+            </tr>
+            <tr style="text-align:left;" *ngFor="let selection of selectedPlatforms">
+                <td>{{selection[0]}}</td>
+                <td>{{selection[1]}}</td>
+            </tr>
+        </table>
+
+    </div>
 </div>
