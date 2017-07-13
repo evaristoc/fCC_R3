@@ -1,7 +1,7 @@
 <div>
 
     <div class="col-12" style="margin-top:3em;">
-        <h2>Your result</h2>
+        <h2>{{selectedPlatforms.length}} results</h2>
     </div>
     <div class="col-12 d-flex justify-content-center about" id="results" style="margin-bottom:3em; text-align:left">
 
@@ -19,16 +19,17 @@
         </div>
 
     </div>
-    <div>
-        <table>
-            <tr class="header">
-                <th style="width:40%;">PLATFORM</th>
-                <th style="width:60%;">CATEGORY</th>
-            </tr>
-            <tr style="text-align:left;" *ngFor="let selection of selectedPlatforms">
-                <td><a routerLink="/platform" routerLinkActive="active">{{selection[0]}}</a></td>
-                <td>{{selection[1]}}</td>
-            </tr>
-        </table>
+    <div class="col-12 d-flex justify-content-center flex-wrap">
+        <div class="btn-group mb-4 col-8" *ngFor="let selection of selectedPlatforms">
+            <input type="text" class="form-control" placeholder={{selection[0]}} readonly
+            >
+            <button type="button" class="input-group-addon moreButton" ><a routerLink="/platform" routerLinkActive="active"></a></button>
+        </div>
+        
+        <div class="input-group" *ngFor="let selection of selectedPlatforms">
+          <input type="text" class="form-control" placeholder={{selection[0]}} aria-describedby="basic-addon1" readonly>
+          <span class="input-group-addon moreButton" id="basic-addon1"><a routerLink="/platform" routerLinkActive="active"></a></span>
+        </div>
     </div>
+
 </div>

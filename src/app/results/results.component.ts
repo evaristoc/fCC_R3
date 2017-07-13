@@ -39,10 +39,21 @@ this.platforms.forEach((x) => {
         "\n",
         "POPULARITY (prevalence) : ", this.calculatePrevalence(value.prevalence),
         "\n\n",
-        ); 
-        this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence])
+        );
+        //only show relevant
+        if (relevance > 0) {
+          this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence])
+        }
       }
     })
+  })
+  this.selectedPlatforms = this.selectedPlatforms.sort((a,b)=> {
+    if (a[3]<b[3]) {
+      return 1
+    } else if (a[3]>b[3]) {
+      return -1
+    } 
+    return 0
   })
 })
 
@@ -56,6 +67,7 @@ calculateRelevance(subjects) {
 }
 
 calculatePrevalence(prevalence){
+  // return prevalence (popularity)
   return prevalence.reduce((a,b) => {return a+b}, 0)/11;
 }
 

@@ -1,0 +1,23 @@
+.moreButton a {
+    height: 100%;
+    background: #eee;
+    color: #000;
+    display:block;
+    transition: all 0.5s ease;
+}
+.moreButton a:after {
+    content: '\f105';
+    font-family: 'FontAwesome';
+    font-size:3em;
+}
+
+.moreButton a:hover {
+    text-decoration:none;
+    background: #aaa;
+    color: #fff;
+}
+
+.resultList {
+    margin-bottom:1em;
+    border-bottom: #eee solid 1px;
+}
