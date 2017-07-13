@@ -28,20 +28,35 @@ this.platforms.forEach((x) => {
   x.forEach((a) => {
     Object.keys(a).forEach((x) => {
       var value = a[x]; 
+      
       if(value.category == this.results[1]){
+        var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[this.results[0][0]] : undefined);
+        var prevalence = this.calculatePrevalence(value.prevalence); 
         console.log("PLATFORM : ", value.origurl,
         "\n", 
-        "RELEVANCE (controlled) : ", typeof a.subjects != 'undefined' ? Object.keys(a.subjects[this.results[0][0]]).map((d) => {return a.subjects[this.results[0][0]][d]['count']})[0]:0,
+        "RELEVANCE (controlled) : ", 
+        this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[this.results[0][0]] : undefined),
         "\n",
-        "POPULARITY (prevalence) : ", value.prevalence.reduce((a,b) => {return a+b}, 0)/11,
-        "\n\n"); 
-        this.selectedPlatforms.push([value.origurl, value.category])
+        "POPULARITY (prevalence) : ", this.calculatePrevalence(value.prevalence),
+        "\n\n",
+        ); 
+        this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence])
       }
     })
   })
 })
 
     
+}
+
+calculateRelevance(subjects) {
+  // return relevance
+  return typeof subjects != 'undefined' ? 
+          Object.keys(subjects).map((d) => {return subjects[d]['count']})[0]:0
+}
+
+calculatePrevalence(prevalence){
+  return prevalence.reduce((a,b) => {return a+b}, 0)/11;
 }
 
 showPlatforms(){

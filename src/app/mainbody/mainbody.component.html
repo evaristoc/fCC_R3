@@ -1,27 +1,4 @@
-   <h3>Categories (names of the classes)</h3>
-    <ul>
-        <li class="text" *ngFor="let category of categories">
-            {{category}}
-        </li>
-    </ul>
 
-    <h3>Subjects (names and data over cv subjects)</h3>
-    <ul>
-        <li class="text" *ngFor="let subject of subjects">
-            {{subject[1]}} -- length of sub-arrays: {{subject.length}}
-        </li>
-    </ul>
-
-    <h3>Platforms</h3>
-    <ul>
-        <li class="text" *ngFor="let platform of platforms | async">
-            {{platform.$key}}
-        </li>
-    </ul>
-
-    =======
-
-        >>>>>>> 5a9d0a5afdfe5821bfbf8112b282085da329f7f9
         <!--<ul>
     <li class="text" *ngFor="let item of items | async">
         {{item.$value}}
