@@ -1,4 +1,4 @@
-import { Component, Input , OnInit} from '@angular/core';
+import { Component, Input , OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
@@ -6,6 +6,7 @@ import { FirebasedbService } from '../firebaseserv/firebasedb.service';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
@@ -22,21 +23,25 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit() {
     if (this.results){
-      //console.log(this.results);
+      console.log(this.results);
     }
-this.platforms.forEach((x) => {
+    //this.outputResult(this.results)
+  }
+  
+  outputResult(results) {
+    this.selectedPlatforms = [];
+    this.platforms.forEach((x) => {
   x.forEach((a) => {
     Object.keys(a).forEach((x) => {
       var value = a[x]; 
-      
       if(value.category == this.results[1]){
-        var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[this.results[0][0]] : undefined);
+        var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined);
         var prevalence = this.calculatePrevalence(value.prevalence); 
         var ranking = this.calculateRanking(relevance, prevalence)
         console.log("PLATFORM : ", value.origurl,
         "\n", 
         "RELEVANCE (controlled) : ", 
-        this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[this.results[0][0]] : undefined),
+        this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined),
         "\n",
         "POPULARITY (prevalence) : ", this.calculatePrevalence(value.prevalence),
         "\n\n",
@@ -57,9 +62,7 @@ this.platforms.forEach((x) => {
     return 0
   })
 })
-
-    
-}
+  }
 
 calculateRelevance(subjects) {
   // return relevance
@@ -78,5 +81,14 @@ calculateRanking(relevance, prevalence) {
 showPlatforms(){
   //console.log(this.platforms)
 }
+
+ngOnChanges(changes: SimpleChanges) {
+  console.log(changes, changes.results.currentValue);
+  if (changes.results.currentValue != changes.results.previousValue){
+    this.outputResult(changes.results.currentValue)
+    
+  }
+        //this.outputResult(changes['results'])
+    }
 
 }
