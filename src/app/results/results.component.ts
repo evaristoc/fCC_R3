@@ -35,7 +35,7 @@ export class ResultsComponent implements OnInit {
         var ranking = this.calculateRanking(relevance, prevalence)
         //only show relevant
         if (relevance > 0) {
-          this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence, ranking])
+          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking])
         }
       }
     })
