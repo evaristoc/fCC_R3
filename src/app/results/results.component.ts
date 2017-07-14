@@ -32,6 +32,7 @@ this.platforms.forEach((x) => {
       if(value.category == this.results[1]){
         var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[this.results[0][0]] : undefined);
         var prevalence = this.calculatePrevalence(value.prevalence); 
+        var ranking = this.calculateRanking(relevance, prevalence)
         console.log("PLATFORM : ", value.origurl,
         "\n", 
         "RELEVANCE (controlled) : ", 
@@ -42,15 +43,15 @@ this.platforms.forEach((x) => {
         );
         //only show relevant
         if (relevance > 0) {
-          this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence])
+          this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence, ranking])
         }
       }
     })
   })
   this.selectedPlatforms = this.selectedPlatforms.sort((a,b)=> {
-    if (a[3]<b[3]) {
+    if (a[4]<b[4]) {
       return 1
-    } else if (a[3]>b[3]) {
+    } else if (a[4]>b[4]) {
       return -1
     } 
     return 0
@@ -71,6 +72,9 @@ calculatePrevalence(prevalence){
   return prevalence.reduce((a,b) => {return a+b}, 0)/11;
 }
 
+calculateRanking(relevance, prevalence) {
+  return relevance * prevalence
+}
 showPlatforms(){
   //console.log(this.platforms)
 }
