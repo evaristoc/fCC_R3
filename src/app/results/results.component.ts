@@ -16,16 +16,10 @@ export class ResultsComponent implements OnInit {
   @Input('result') results: Array<any>;
   title= "You chose";
   constructor(public db : FirebasedbService) {
-
     this.platforms = this.db.platforms;
-
   }
 
   ngOnInit() {
-    if (this.results){
-      console.log(this.results);
-    }
-    //this.outputResult(this.results)
   }
   
   outputResult(results) {
@@ -38,14 +32,6 @@ export class ResultsComponent implements OnInit {
         var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined);
         var prevalence = this.calculatePrevalence(value.prevalence); 
         var ranking = this.calculateRanking(relevance, prevalence)
-        console.log("PLATFORM : ", value.origurl,
-        "\n", 
-        "RELEVANCE (controlled) : ", 
-        this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined),
-        "\n",
-        "POPULARITY (prevalence) : ", this.calculatePrevalence(value.prevalence),
-        "\n\n",
-        );
         //only show relevant
         if (relevance > 0) {
           this.selectedPlatforms.push([value.origurl, value.category, relevance, prevalence, ranking])
@@ -78,17 +64,13 @@ calculatePrevalence(prevalence){
 calculateRanking(relevance, prevalence) {
   return relevance * prevalence
 }
-showPlatforms(){
-  //console.log(this.platforms)
-}
+
 
 ngOnChanges(changes: SimpleChanges) {
   console.log(changes, changes.results.currentValue);
   if (changes.results.currentValue != changes.results.previousValue){
     this.outputResult(changes.results.currentValue)
-    
   }
-        //this.outputResult(changes['results'])
     }
 
 }
