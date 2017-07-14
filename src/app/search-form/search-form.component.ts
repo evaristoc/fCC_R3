@@ -101,10 +101,13 @@ export class SearchFormComponent implements OnInit {
   categorySettings: IMultiSelectSettings = {
       checkedStyle: 'fontawesome',
       buttonClasses: 'btn btn-default btn-block',
-      displayAllSelectedText: true,
+      displayAllSelectedText: false,
       dynamicTitleMaxItems: 1,
-      showCheckAll: true,
-      showUncheckAll: true
+      showCheckAll: false,
+      showUncheckAll: false,
+      selectionLimit: 1,
+      autoUnselect: true,
+      closeOnSelect: true
   };
   
   // Text configuration
@@ -126,10 +129,13 @@ export class SearchFormComponent implements OnInit {
   subjectSettings: IMultiSelectSettings = {
       checkedStyle: 'fontawesome',
       buttonClasses: 'btn btn-default btn-block',
-      displayAllSelectedText: true,
+      displayAllSelectedText: false,
       dynamicTitleMaxItems: 2,
-      showCheckAll: true,
-      showUncheckAll: true
+      showCheckAll: false,
+      showUncheckAll: false,
+      selectionLimit: 1,
+      autoUnselect: true,
+      closeOnSelect: true
   };
   
   // Text configuration
