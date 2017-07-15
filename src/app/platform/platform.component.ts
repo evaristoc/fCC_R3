@@ -13,6 +13,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   private sub: any;
   public platforms : FirebaseListObservable<any>;
   platform: object;
+  subjects: object;
   
   constructor(private route: ActivatedRoute, public db : FirebasedbService) {
     this.platforms = this.db.platforms;
@@ -25,9 +26,11 @@ export class PlatformComponent implements OnInit, OnDestroy  {
       this.platforms.forEach((x) => {
           x.forEach((a) => {
             Object.keys(a).forEach((x) => {
-              if (a.$key === this.selection && a[x].category) {
-                this.platform = a[x];
-                console.log(a[x]);
+              if (a.$key === this.selection) {
+                if (a[x].category) {
+                  this.platform = a[x];
+                  console.log(a[x]);
+                } 
               }
             })
           

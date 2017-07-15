@@ -1,2 +1,12 @@
+<div class="container-fluid text-left">
+    <div class="col-md-12">
 <h1>{{platform.title}}</h1>
 <p>{{platform.description}}</p>
+</div>
+<div class="col-md-6">
+<h2>{{platform.origurl}} links that might interest you</h2>
+<ul>
+    <li *ngFor="let link of platform.params"><a href="{{platform.minsecurity}}{{platform.origurl}}{{link}}"> {{link}}</a></li>
+</ul>
+</div>
+</div>
