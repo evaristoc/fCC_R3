@@ -31,13 +31,13 @@ export class ResultsComponent implements OnInit {
       if (value.category) {
      // console.log("key", a.$key, x);
       }
-      if(value.category == this.results[1]){
+      if(value.category){
         var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined);
         var prevalence = this.calculatePrevalence(value.prevalence); 
         var ranking = this.calculateRanking(relevance, prevalence)
         //only show relevant
         if (relevance > 0) {
-          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, x]);
+          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, value.category]);
           //console.log("title", value.title)
         }
       }
@@ -73,7 +73,8 @@ calculateRanking(relevance, prevalence) {
 ngOnChanges(changes: SimpleChanges) {
   console.log(changes, changes.results.currentValue);
   if (changes.results.currentValue != changes.results.previousValue){
-    this.outputResult(changes.results.currentValue)
+    this.outputResult(changes.results.currentValue);
+    console.log("changes")
   }
     }
 

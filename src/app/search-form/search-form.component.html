@@ -10,14 +10,6 @@
                     <ss-multiselect-dropdown [options]="subjectOptions" [texts]="subjectTexts" [settings]="subjectSettings" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">>
                     </ss-multiselect-dropdown>
                 </div>
-                <div class="card col-12">
-                    <h3>Type of resources: </h3>
-                    <ss-multiselect-dropdown [options]="categoryOptions" [texts]="categoryTexts" [settings]="categorySettings" [(ngModel)]="categoryModel" (ngModelChange)="onChangeCategory($event)">
-                    </ss-multiselect-dropdown>
-                </div>
-                <div class="col-12">
-                    <button scrollTo scrollTargetSelector="#resultDiv" type="submit" class="btn btn-primary" (click)="getReviews()" [disabled]="!isActive">Get reviews</button>
-                </div>
 
                 <!--
 <h3>Platforms</h3>
