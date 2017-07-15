@@ -6,7 +6,7 @@ import { MainbodyComponent } from '../mainbody/mainbody.component';
 
 const appRoutes: Routes = [
 { path: '',   component: MainbodyComponent },
-{path: 'platform', component: PlatformComponent},
+{path: 'platform/:selection', component: PlatformComponent},
 //{path: '*', component: MainbodyComponent}
 { path: '',   redirectTo: '/mainbody', pathMatch: 'full' },
 ];

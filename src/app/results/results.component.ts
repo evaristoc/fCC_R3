@@ -28,14 +28,17 @@ export class ResultsComponent implements OnInit {
   x.forEach((a) => {
     Object.keys(a).forEach((x) => {
       var value = a[x]; 
-      console.log(value);
+      if (value.category) {
+     // console.log("key", a.$key, x);
+      }
       if(value.category == this.results[1]){
         var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined);
         var prevalence = this.calculatePrevalence(value.prevalence); 
         var ranking = this.calculateRanking(relevance, prevalence)
         //only show relevant
         if (relevance > 0) {
-          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking])
+          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, x]);
+          //console.log("title", value.title)
         }
       }
     })

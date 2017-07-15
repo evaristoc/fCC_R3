@@ -37,7 +37,7 @@
                 <tbody>
                     <tr *ngFor="let selection of selectedPlatforms">
                         <td class="text-left">{{selection[0]}}</td>
-                        <td class="text-left"><a routerLink='/platform' routerLinkActive="active" class="btn btn-primary">
+                        <td class="text-left"><a [routerLink]="['/platform/',selection[5]]" routerLinkActive="active" class="btn btn-primary">
                             More info
                         </a></td>
                     </tr>
