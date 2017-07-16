@@ -37,6 +37,7 @@ export class SearchFormComponent implements OnInit {
   categories : Array<any>;
   subjects : Array<any>;
   catOptions: Array<any>;
+  categoryOptions: Array<any>;
   subjOptions: Array<any>;
   selectedSubjects: Array<any> = [];
   selectedCategories: Array<any> = [];
@@ -47,6 +48,16 @@ export class SearchFormComponent implements OnInit {
   showResultSection = false;
   
   constructor(public db: FirebasedbService) {
+    db.getCategories().forEach((x) => {
+      console.log(x[0]); 
+      this.categories = x[0];
+      console.log(this.categories[0]);
+      this.catOptions = [];
+      this.categories.forEach((category, index) => {
+        this.catOptions.push(category);
+      });
+    });
+    
     db.getSubjects().forEach((x)=>{
       this.subjects = x[0];
       this.subjOptions = [];
@@ -130,10 +141,13 @@ export class SearchFormComponent implements OnInit {
   loadSubject() {
     this.subjectOptions = this.subjOptions;
   }
+  
+  
   getReviews() {
     console.log("get reviews");
     this.searchResults = [];
     this.searchResults.push(this.selectedSubjects);
+    this.searchResults.push(this.catOptions);
     this.showResultSection = true;
     var el = document.getElementById("resultDiv");
     var top = el.offsetTop;

@@ -7,7 +7,13 @@
 
                 <div class="card col-12">
                     <h3>What subject(s) interest you? </h3>
-                    <ss-multiselect-dropdown [options]="subjectOptions" [texts]="subjectTexts" [settings]="subjectSettings" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">>
+                    <ss-multiselect-dropdown 
+                    [options]="subjectOptions" 
+                    [texts]="subjectTexts" [settings]="subjectSettings" 
+                    [(ngModel)]="subjectModel" 
+                    (ngModelChange)="onChangeSubject($event)"
+                    >
+                        
                     </ss-multiselect-dropdown>
                 </div>
 

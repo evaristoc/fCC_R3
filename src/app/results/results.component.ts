@@ -11,16 +11,26 @@ import { FirebasedbService } from '../firebaseserv/firebasedb.service';
 })
 export class ResultsComponent implements OnInit {
   selectedSubjects = {};
-  selectedPlatforms = []
+  selectedPlatforms: Array<any> = [];
+  show:boolean = true;
+  filters:object = {};
   public platforms : FirebaseListObservable<any>;
   @Input('result') results: Array<any>;
   title= "You chose";
   constructor(public db : FirebasedbService) {
     this.platforms = this.db.platforms;
+    
   }
 
   ngOnInit() {
+   
   }
+  
+  setFilters(results) {
+    
+    results[1].forEach((result)=> {this.filters[result] = true});
+    console.log(this.filters)
+  } 
   
   outputResult(results) {
     this.selectedPlatforms = [];
@@ -54,6 +64,19 @@ export class ResultsComponent implements OnInit {
 })
   }
 
+toggleCat(event, cat) {
+  console.log(event.target, cat)
+  event.target.classList.toggle("btn-success");
+  event.target.classList.toggle("btn-danger");
+  
+  if (event.target.classList.contains("btn-danger")) {
+    this.filters[cat]= false
+  } else {
+    this.filters[cat] = true;
+  }
+  
+}
+
 calculateRelevance(subjects) {
   // return relevance
   return typeof subjects != 'undefined' ? 
@@ -70,11 +93,13 @@ calculateRanking(relevance, prevalence) {
 }
 
 
+
 ngOnChanges(changes: SimpleChanges) {
   console.log(changes, changes.results.currentValue);
   if (changes.results.currentValue != changes.results.previousValue){
     this.outputResult(changes.results.currentValue);
-    console.log("changes")
+    this.setFilters(this.results);
+    console.log("changes", changes.results)
   }
     }
 
