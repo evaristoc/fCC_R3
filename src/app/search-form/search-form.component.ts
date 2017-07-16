@@ -122,6 +122,7 @@ export class SearchFormComponent implements OnInit {
       });
       this.selectedSubjects.push(subj[0].name);
       this.getReviews();
+      
     })
     
     this.isActive = (this.selectedSubjects.length > 0) ? true : false;
@@ -134,6 +135,9 @@ export class SearchFormComponent implements OnInit {
     this.searchResults = [];
     this.searchResults.push(this.selectedSubjects);
     this.showResultSection = true;
+    var el = document.getElementById("resultDiv");
+    var top = el.offsetTop;
+    window.scrollTo(0,top);
   }
 
 }
