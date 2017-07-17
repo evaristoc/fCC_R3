@@ -1,34 +1,47 @@
 <div>
 
     <div class="col-12" style="margin-top:3em;">
-        <h2>Your result</h2>
+        <h2>Platforms for <span class="badge badge-pill badge-default" *ngFor="let subject of results[0]">
+                    {{subject}}
+                </span></h2>
     </div>
     <div class="col-12 d-flex justify-content-center about" id="results" style="margin-bottom:3em; text-align:left">
 
         <div class="col-md-8" style="padding:1em; background: #eee">
-            <p style="width:100%"><strong>Your selection: </strong>
-                <br/>Subject:
-                <span class="badge badge-pill badge-default" *ngFor="let subject of results[0]">
-            {{subject}}
-          </span>
-                <br/> Types of resources:
-                <span class="badge badge-pill badge-primary" *ngFor="let category of results[1]">
-            {{category}}
-          </span>
+            <h3>Filter by:</h3>
+            <p>
+              <button *ngFor="let cat of results[1]" class="btn btn-success mb-3 mr-3" (click)="toggleCat($event, cat)">{{cat}}</button>
             </p>
         </div>
 
     </div>
-    <div>
-        <table>
-            <tr class="header">
-                <th style="width:40%;">PLATFORM</th>
-                <th style="width:60%;">CATEGORY</th>
-            </tr>
-            <tr style="text-align:left;" *ngFor="let selection of selectedPlatforms">
-                <td><a routerLink="/platform" routerLinkActive="active">{{selection[0]}}</a></td>
-                <td>{{selection[1]}}</td>
-            </tr>
-        </table>
+
+    
+    <div class="col-12 d-flex justify-content-center flex-wrap">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Platform
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let selection of selectedPlatforms" >
+                    <tr *ngIf="filters[selection[6]]" >
+                        <td class="text-left"><strong>{{selection[0]}}</strong><br/><span class="badge badge-default">{{selection[6]}}</span></td>
+                        <td class="text-left"><a [routerLink]="['/platform/',selection[5]]" routerLinkActive="active" class="btn btn-primary">
+                            More info
+                        </a></td>
+                    </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
     </div>
+    
 </div>

@@ -37,6 +37,7 @@ export class SearchFormComponent implements OnInit {
   categories : Array<any>;
   subjects : Array<any>;
   catOptions: Array<any>;
+  categoryOptions: Array<any>;
   subjOptions: Array<any>;
   selectedSubjects: Array<any> = [];
   selectedCategories: Array<any> = [];
@@ -47,21 +48,16 @@ export class SearchFormComponent implements OnInit {
   showResultSection = false;
   
   constructor(public db: FirebasedbService) {
-
     db.getCategories().forEach((x) => {
-      //console.log(x[0]); 
+      console.log(x[0]); 
       this.categories = x[0];
-      //console.log(this.categories[0]);
+      console.log(this.categories[0]);
       this.catOptions = [];
       this.categories.forEach((category, index) => {
-        var categoryObj = {};
-        categoryObj['id'] = index+1;
-        categoryObj['name'] = category;
-        this.catOptions.push(categoryObj);
+        this.catOptions.push(category);
       });
-      this.loadCategory();
     });
-
+    
     db.getSubjects().forEach((x)=>{
       this.subjects = x[0];
       this.subjOptions = [];
@@ -96,40 +92,20 @@ export class SearchFormComponent implements OnInit {
   };
   
   
-  categoryModel: number[];
- // Settings configuration
-  categorySettings: IMultiSelectSettings = {
-      checkedStyle: 'fontawesome',
-      buttonClasses: 'btn btn-default btn-block',
-      displayAllSelectedText: true,
-      dynamicTitleMaxItems: 1,
-      showCheckAll: true,
-      showUncheckAll: true
-  };
-  
-  // Text configuration
-  categoryTexts: IMultiSelectTexts = {
-      checkAll: 'Select all',
-      uncheckAll: 'Unselect all',
-      checked: 'selected',
-      checkedPlural: 'types selected',
-      defaultTitle: 'Please select',
-      allSelected: 'All selected',
-  };
-  
-  // Labels / Parents
-  categoryOptions: IMultiSelectOption[] = [];
-  
+ 
   
   subjectModel: number[];
   // Settings configuration
   subjectSettings: IMultiSelectSettings = {
       checkedStyle: 'fontawesome',
       buttonClasses: 'btn btn-default btn-block',
-      displayAllSelectedText: true,
+      displayAllSelectedText: false,
       dynamicTitleMaxItems: 2,
-      showCheckAll: true,
-      showUncheckAll: true
+      showCheckAll: false,
+      showUncheckAll: false,
+      selectionLimit: 1,
+      autoUnselect: true,
+      closeOnSelect: true
   };
   
   // Text configuration
@@ -147,17 +123,7 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit() {
   }
-  onChangeCategory() {
-    this.selectedCategories = [];
-    this.categoryModel.forEach((catModel) => {
-      var categ = this.categoryOptions.filter((cat) => {
-        return cat.id === catModel;
-      });
-      this.selectedCategories.push(categ[0].name);
-    })
-    
-  this.isActive = (this.selectedCategories.length > 0 && (typeof this.selectedSubjects !== undefined && this.selectedSubjects.length > 0)) ? true : false;
-  }
+
   
   onChangeSubject() {
     this.selectedSubjects =[];
@@ -166,25 +132,26 @@ export class SearchFormComponent implements OnInit {
         return subj.id === subjModel;
       });
       this.selectedSubjects.push(subj[0].name);
+      this.getReviews();
+      
     })
     
-    this.isActive = ((typeof this.selectedCategories !== undefined && this.selectedCategories.length > 0) && this.selectedSubjects.length > 0) ? true : false;
-  }
-  
-  
-  loadCategory() {
-    this.categoryOptions = this.catOptions;
-
+    this.isActive = (this.selectedSubjects.length > 0) ? true : false;
   }
   loadSubject() {
     this.subjectOptions = this.subjOptions;
   }
+  
+  
   getReviews() {
     console.log("get reviews");
     this.searchResults = [];
     this.searchResults.push(this.selectedSubjects);
-    this.searchResults.push(this.selectedCategories);
+    this.searchResults.push(this.catOptions);
     this.showResultSection = true;
+    var el = document.getElementById("resultDiv");
+    var top = el.offsetTop;
+    window.scrollTo(0,top);
   }
 
 }
