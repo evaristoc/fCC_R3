@@ -32,4 +32,4 @@ Having those requirements, and assuming you also share a UNIX operating system a
 
 ## Related projects
 
-For more information about the advances in data mining, analysis and machine learning associated with the full project, please visit this repository: https://github.com/evaristoc/fCC_R3_DataAnalysis (currently under construction)
+For more information about the associated advances in data mining, analysis and machine learning, please visit this repository: https://github.com/evaristoc/fCC_R3_DataAnalysis (currently under construction)
