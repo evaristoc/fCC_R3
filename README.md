@@ -22,7 +22,7 @@ This section of the project is done using [node.js](https://nodejs.org/en/) and 
 
 The project is also been created under *UNIX operating systems*.
 
-To see the project you might require to have node.js installed, and then possibly angular-cli.
+To have a look of how the project looks in the browser you might require to have node.js installed, and then possibly angular-cli.
 
 Having those requirements, and assuming you also share a UNIX operating system and navigate using a shell,
 * clone and extract this repository
