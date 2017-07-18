@@ -18,7 +18,7 @@ As frontend the data are presented in a searchable list ranked according to plat
 
 The project allows different kind of comparisons between some of the platforms. Some collected data about each platform are presented in a more detailed format.
 
-This project is being managed using a Kanban methodology (https://realtimeboard.com/blog/choose-between-agile-lean-scrum-kanban/#.WW5nlh9Nybk). This repository of the project shows the advances of the frontend work. There exists another repository to shows some of the advances in data mining, analysis and machine learning.
+This project is being managed using Kanban methodology (https://realtimeboard.com/blog/choose-between-agile-lean-scrum-kanban/#.WW5nlh9Nybk). This repository of the project shows the advances of the frontend work. There exists another repository to shows some of the advances in data mining, analysis and machine learning.
 
 ## Installation
 
