@@ -12,7 +12,9 @@ The resources (`platforms`) are relevant urls about online content mentioned by 
 
 Specific information about each platform is extracted either from fCC chatrooms, the platform itself or even other sources. The platforms also receive a `category` that allows to distinguish the platform's main mission. 
 
-Data about platforms is presented in a searchable list format ordered according to its relevance when compared to the different `subjects` or topics of the fCC curriculum as in the current beta version of the fCC website (https://beta.freecodecamp.com/en/map).
+Data is saved in Firebase.
+
+As frontend the data are presented in a searchable list ordered according to item's relevance as compared to the different `subjects` or topics of the fCC curriculum found in the current beta version of the fCC website (https://beta.freecodecamp.com/en/map).
 
 The project allows different kind of comparisons between the shown platforms as well as some useful data of interest at platform level.
 
