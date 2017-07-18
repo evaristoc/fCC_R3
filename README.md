@@ -8,7 +8,9 @@ The project mission is to offer users, in principle new developers, a curated li
 
 This project is a Proof of Concept.
 
-The resources (`platforms`) are relevant urls about online content mentioned by fCC social media users. The main sources from where the data is being currently extracted are fCC chatrooms. Specific information about each platform is extracted either from fCC chatrooms, the platform itself or other sources when required. The platforms also receive a `category` that allows to distinguish the platform's main mission. 
+The resources (`platforms`) are relevant urls about online content mentioned by fCC social media users. The main sources from where the data is being currently extracted are fCC chatrooms.
+
+Specific information about each platform is extracted either from fCC chatrooms, the platform itself or even other sources. The platforms also receive a `category` that allows to distinguish the platform's main mission. 
 
 Data about platforms is presented in a searchable list format ordered according to its relevance when compared to the different `subjects` or topics of the fCC curriculum as in the current beta version of the fCC website (https://beta.freecodecamp.com/en/map).
 
