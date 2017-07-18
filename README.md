@@ -1,6 +1,6 @@
 # Fccr3
 
-The tentative name of this project is FreeCodeCamp (fCC) Community Resources Review. Although it borrows the name of fCC as source of inspiration and origin, this project is NOT currently in direct connection with the organization (www.freecodecamp.org).
+The tentative name of this project is FreeCodeCamp (fCC) Community Resources Review. Although it borrows the name from fCC as source of inspiration and origin, this project is NOT currently in direct connection with the organization (www.freecodecamp.org).
 
 ## Description
 
