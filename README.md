@@ -14,9 +14,9 @@ Specific information about each platform is extracted either from fCC chatrooms,
 
 Data is saved in Firebase.
 
-As frontend the data are presented in a searchable list ordered according to item's relevance as compared to the different `subjects` or topics of the fCC curriculum found in the current beta version of the fCC website (https://beta.freecodecamp.com/en/map).
+As frontend the data are presented in a searchable list ranked according to platform's relevance when queried by `subjects` or topics. Subjects are defined based on the fCC curriculum found in the current beta version of the fCC website (https://beta.freecodecamp.com/en/map).
 
-The project allows different kind of comparisons between the shown platforms as well as some useful data of interest at platform level.
+The project allows different kind of comparisons between some of the platforms. Some collected data about each platform are presented in a more detailed format.
 
 This project is being managed using a Kanban methodology (https://realtimeboard.com/blog/choose-between-agile-lean-scrum-kanban/#.WW5nlh9Nybk). This repository of the project shows the advances of the frontend work. There exists another repository to shows some of the advances in data mining, analysis and machine learning.
 
