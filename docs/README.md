@@ -1,3 +1,12 @@
+# Platform Category Definitions
+
+* At https://github.com/evaristoc/fCC_R3_DataAnalysis/blob/development/docs/category_operationalization.md
+
+# Subjects
+
+* ['getting started', 'responsive web design', 'javascript algorithms data structures', 'front end libraries', 'data visualization', 'apis microservices', 'information security quality assurance', 'contribute open source help nonprofits', 'coding interview questions take home assignments']
+
+
 # Firebase Schema (last update: 14 Jul 2017):
 
 Comments:
