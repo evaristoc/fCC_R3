@@ -5,6 +5,10 @@ Comments:
 * table name "cv" changed into "fcc_subjects"
 * table name "categories" changed into "plt_categories" (for platform categories)
 
+
+------------------------
+
+
 platformstable (an object) --->
 
             www--example--com ($key, an object):
@@ -58,7 +62,9 @@ plt_categories (a list) --->
 
 --------------------------
 
-fcc_subjects (hmmm...forgot the type.) ---> [position in the FCC cv, name of the subject, list of words associated to this subject, length of the list of words]
+fcc_subjects (hmmm...forgot the type.) ---> 
+
+            [position in the FCC cv, name of the subject, list of words associated to this subject, length of the list of words]
 
 --------------------------
 
