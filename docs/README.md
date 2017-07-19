@@ -1,12 +1,14 @@
 # Firebase Schema (last update: 14 Jul 2017):
 
 Comments:
--- userstable added
--- table name "cv" changed into "fcc_subjects"
--- table name "categories" changed into "plt_categories" (for platform categories)
+* userstable added
+* table name "cv" changed into "fcc_subjects"
+* table name "categories" changed into "plt_categories" (for platform categories)
 
 platformstable (an object) --->
+
             www--example--com ($key, an object):
+
                    origurl : www.example.com (original form of the url before modifying it for technical restrictions)
 
                    category: (category of the platform: tutorial, blog, etc)
@@ -40,6 +42,7 @@ platformstable (an object) --->
 
 
 userstable (an object) --->
+
             user1 ($key): list of urls that users mentioned
 
             user2 ($key): ....
@@ -49,6 +52,7 @@ userstable (an object) --->
 ------------------------
 
 plt_categories (a list) --->
+
             category1, category2, category3, ....
 
 
