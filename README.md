@@ -6,7 +6,7 @@ The tentative full name of this project is FreeCodeCamp (fCC) Community Resource
 
 The project mission is to offer users, in principle new developers, a curated list of relevant resources to learn programming.
 
-This project is a Proof of Concept.
+This repository of the project shows the advances of the frontend work. This project is a Proof of Concept.
 
 The resources (`platforms`) are relevant online content mentioned by fCC social media users. The main sources from where the data is being currently extracted are fCC chatrooms.
 
@@ -18,7 +18,7 @@ The data is first rendered as a searchable list ranked according to platform's r
 
 The rendering allows different kind of comparisons between some of the platforms. Some collected data about each platform are presented in a more detailed format.
 
-This project is being managed using Kanban methodology (https://realtimeboard.com/blog/choose-between-agile-lean-scrum-kanban/#.WW5nlh9Nybk). This repository of the project shows the advances of the frontend work. There exists another repository to shows some of the advances in data mining, analysis and machine learning.
+This project is being approached using Kanban methodology (https://realtimeboard.com/blog/choose-between-agile-lean-scrum-kanban/#.WW5nlh9Nybk).
 
 ## Installation
 
@@ -38,4 +38,6 @@ Having those requirements, and assuming you also share a UNIX operating system a
 
 ## Related projects
 
-For more information about the associated advances in data mining, analysis and machine learning, please visit this repository: https://github.com/evaristoc/fCC_R3_DataAnalysis (currently under construction)
+For more information about the associated advances in data mining, analysis and machine learning, please visit this repository: https://github.com/evaristoc/fCC\_R3\_DataAnalysis (currently under construction).
+
+We recently started an exploratory module to interact with Slack. If you are interested please visit the following repository: https://github.com/evaristoc/fCC\_R3\_ChinguModule (currently under construction).
