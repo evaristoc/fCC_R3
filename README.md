@@ -38,6 +38,6 @@ Having those requirements, and assuming you also share a UNIX operating system a
 
 ## Related projects
 
-For more information about the associated advances in data mining, analysis and machine learning, please visit this repository: https://github.com/evaristoc/fCC\_R3\_DataAnalysis (currently under construction).
+For more information about the associated advances in data mining, analysis and machine learning, please visit this repository: https://github.com/evaristoc/fCC_R3_DataAnalysis (currently under construction).
 
-We recently started an exploratory module to interact with Slack. If you are interested please visit the following repository: https://github.com/evaristoc/fCC\_R3\_ChinguModule (currently under construction).
+We recently started an exploratory module to interact with Slack. If you are interested please visit the following repository: https://github.com/evaristoc/fCC_R3_ChinguModule (currently under construction).
