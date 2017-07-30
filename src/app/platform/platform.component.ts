@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
+//import { NgxElasticlunrModule } from 'ngx-elasticlunr';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 declare var elasticlunr: any;
 
@@ -19,31 +22,42 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   subjects: object;
   subjOptions:Array<any>;
   subjectOptions: Array<any>;
+  //subjOptions:Observable;
+  //subjectOptions:Observer;
   filterer : string;
-elObj: any;
- suburls : string = 'suburls';
- suburlsid : string = 'suburlsid';
+  elObj: any;
+   //suburls : string = 'suburls';
+   //suburlsid : string = 'suburlsid';
 
   constructor(private route: ActivatedRoute, public db : FirebasedbService) {
 
-  console.log("THIS IS elasticlunr", new elasticlunr);
-    this.elObj = elasticlunr(function() {
+  //console.log("THIS IS elasticlunr", new elasticlunr);
+   //this.subjOptions = new Observable(observer => this.subjectOptions = observer);
+
+   this.elObj = new elasticlunr(function() {
                 this.addField('suburls');
                 this.setRef('suburlsid');
-                this.saveDocument(true);
+                this.saveDocument(false);
             });
+    
+    //console.log("THIS IS elasticlunr installed as third party JS library", this.elObj)
+    
     this.platforms = this.db.platforms;
 
-    console.log("THIS IS TYPE OF getSubject ", Object.keys(db.getSubjects()))
+    //console.log("THIS IS TYPE OF getSubject ", Object.keys(db.getSubjects()))
     db.getSubjects().forEach((x)=>{
       this.allsubjects = x[0];
       this.subjOptions = [];
      this.allsubjects.forEach((subject, index) => {
         var subjectObj = {};
+        let selectedsubject:string = sessionStorage.getItem('selectedsubject').split(',')[0];
+        console.log("THIS IS selectedsubject", selectedsubject);
+        if (subject[1] === selectedsubject){
         subjectObj['id'] = index+1;
         subjectObj['name'] = subject[1];
         subjectObj['filterer'] = subject[2].toString().replace(",", " ");
        this.subjOptions.push(subjectObj);
+        }
       });
       this.loadSubject();
       
@@ -69,7 +83,7 @@ elObj: any;
                   //if (pltdetkey && pltdetkey === 'params'){
                     platformdetails[pltdetkey].params.forEach((par, i) => {
                       //console.log('THIS IS THE params OF SELECTED PLATFORM', i, par.replace(/-|_|\/|:/ig,' '))
-                      console.log('THIS IS THE params OF SELECTED PLATFORM', i, par.replace(/\W|\d/ig,' '))
+                      //console.log('THIS IS THE params OF SELECTED PLATFORM', i, par.replace(/\W|\d/ig,' '))
                       this.loadELlist(par, i)
 
                     })
@@ -91,9 +105,9 @@ elObj: any;
 
                 if (platformdetails[pltdetkey].category) {
                   this.platform = platformdetails[pltdetkey];
-                  console.log(platformdetails[pltdetkey]);
-                  console.log(this.elObj)
-                  this.showELlist()
+                  //console.log(platformdetails[pltdetkey]);
+                  //console.log(this.elObj)
+                  //this.showELlist("AQUI")
                 } 
               }
             })
@@ -102,29 +116,37 @@ elObj: any;
       })
     });
 
-    
-
+  //console.log(this.subjOptions)  
+  console.log("THIS IS THE showELlist outside... ", this.showELlist("OTHER"));
   }
 
-loadELlist(par:string, i:number){
-              if (par !== null){
-                      this.elObj.addDoc({
-                        'suburls' : par.replace(/\W|\d/ig,' '),
-                        //'suburls' : 'adfgart;logn',
-                        'suburlsid' :  i
-                      })
-              }
-}
+  loadELlist(par: string, i: number) {
+    if (par !== null) {
+      this.elObj.addDoc({
+         'suburls': par.replace(/\W|\d/ig, ' '),
+        //'suburls' : 'adfgart;logn',
+         'suburlsid': i
+       })
+     }
+   }
 
-showELlist() {
-  console.log("THIS IS THE SEARCH OF elObj", this.elObj.search("javascript", {"fields": {"suburls" : {"boost": 1}}}));
-  //console.log("THIS IS THE SEARCH OF elObj", this.elObj.search("JavaScript"));
+   showELlist(filterer:string) {
+     //let filterer ;
+     console.log("THIS IS filterer inside showELlist", filterer)
+     console.log(this.elObj);
+     //console.log(this.elObj.search);
+     console.log("THIS IS THE SEARCH OF elObj", this.elObj.search("react", { "fields": { "suburls": { "boost": 1 } } }));
+     //console.log("THIS IS THE SEARCH OF elObj", this.elObj.search("JavaScript"));
 
-}
+   }
 
   loadSubject() {
     this.subjectOptions = this.subjOptions;
-    console.log("THIS IS subjectOptions", this.subjectOptions)
+    console.log("THIS IS subjectOptions", this.subjectOptions);
+    if (this.subjectOptions){
+    //this.showELlist(this.subjectOptions[0].filterer.replace(/,/ig," "))
+    }
+    //return this.subjOptions;
   }
 
   ngOnDestroy() {
