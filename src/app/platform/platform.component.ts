@@ -28,7 +28,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   elObj: any;
    //suburls : string = 'suburls';
    //suburlsid : string = 'suburlsid';
-
+  bla : any;
   constructor(private route: ActivatedRoute, public db : FirebasedbService) {
 
   //console.log("THIS IS elasticlunr", new elasticlunr);
@@ -50,7 +50,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
       this.subjOptions = [];
      this.allsubjects.forEach((subject, index) => {
         var subjectObj = {};
-        let selectedsubject:string = sessionStorage.getItem('selectedsubject').split(',')[0];
+        let selectedsubject:string = localStorage.getItem('selectedsubject').split(',')[0];
         console.log("THIS IS selectedsubject", selectedsubject);
         if (subject[1] === selectedsubject){
         subjectObj['id'] = index+1;
@@ -79,6 +79,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
 
                 if (platformdetails[pltdetkey].category) {
                   this.platform = platformdetails[pltdetkey];
+                  this.bla = this.saveLength(platformdetails[pltdetkey].params.length)
                   //console.log('THIS IS platformdetails[pltdetkey]', platformdetails[pltdetkey]);
                   //if (pltdetkey && pltdetkey === 'params'){
                     platformdetails[pltdetkey].params.forEach((par, i) => {
@@ -120,6 +121,11 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   console.log("THIS IS THE showELlist outside... ", this.showELlist("OTHER"));
   }
 
+  saveLength(v:number){
+    var vv = v;
+    return () => {return vv} 
+  }
+  
   loadELlist(par: string, i: number) {
     if (par !== null) {
       this.elObj.addDoc({
@@ -148,9 +154,27 @@ export class PlatformComponent implements OnInit, OnDestroy  {
     }
     //return this.subjOptions;
   }
+  
+  deleteELlist(){
+    if ("params" in Object.keys(this.platform)){
+      console.log(this.platform["params"])
+      //for (let inddoc = 0; inddoc < this.platform.params.length; inddoc++){
+      //  this.elObj.removeDoc(inddoc)
+      //}
+    }else{
+      for (let inddoc = 0; inddoc < this.bla; inddoc++){
+         this.elObj.removeDoc(inddoc)
+      }    
+    }
+  }
 
   ngOnDestroy() {
+    console.log("this.platform in ngOnDestroy", Object.keys(this.platform))
+    this.deleteELlist()
+    //console.log("this.platform IN ngOnDestroy ", this.platform)
     this.sub.unsubscribe();
+
+    
   }
 
 }

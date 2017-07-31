@@ -98,7 +98,7 @@ ngOnChanges(changes: SimpleChanges) {
   if (changes.results.currentValue != changes.results.previousValue){
     //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
     //https://codepen.io/chrisenytc/pen/gyGcx
-    sessionStorage.setItem('selectedsubject', changes.results.currentValue);
+    localStorage.setItem('selectedsubject', changes.results.currentValue);
     this.outputResult(changes.results.currentValue);
     this.setFilters(this.results);
     console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
