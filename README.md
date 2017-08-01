@@ -8,6 +8,10 @@ The project mission is to offer users, in principle new developers, a curated li
 
 This repository of the project shows the advances of the frontend work. This project is a Proof of Concept.
 
+A first demo view of this project can be found at: 
+
+***https://evaristoc.github.io/fCC_R3c/*** (OBSERVATION: this address will be changed soon!)
+
 The resources (`platforms`) are relevant online content mentioned by fCC social media users. The main sources from where the data is being currently extracted are fCC chatrooms.
 
 Specific information about each platform is extracted either from fCC chatrooms, the platform itself or even other sources. The platforms also receive a `category` that allows to distinguish the platform's main mission. 

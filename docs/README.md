@@ -1,6 +1,6 @@
 # Platform Category Definitions
 
-* At https://github.com/evaristoc/fCC_R3_DataAnalysis/blob/development/docs/category_operationalization.md
+* At https://github.com/evaristoc/fCC_R3_DataAnalysis/blob/development/docs/category_operationalization.csv
 
 # Subjects
 
