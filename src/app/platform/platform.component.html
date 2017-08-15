@@ -9,5 +9,10 @@
             <li *ngFor="let link of platform.params"><a href="{{platform.minsecurity}}{{platform.origurl}}{{link}}"> {{link}}</a></li>
         </ul>
     </div>
-    {{elObj.search('react', { "fields": { "suburls": { "boost": 1 } } })}}
+    <p>{{subjectOptions[0].filterer}}</p>
+    <!--<p>{{elObj.search(subjectOptions[0].filterer, { "fields": { "suburls": { "boost": 1 } } })[0].ref}}</p>-->
+    <p>ref, score, doc</p>
+    <ul>
+        <li *ngFor="let obj of elObj.search(subjectOptions[0].filterer, { 'fields': { 'suburls': { 'boost': 1 } } })"><a href="#"> {{obj.doc.suburls}}</a></li>
+    </ul>
 </div>

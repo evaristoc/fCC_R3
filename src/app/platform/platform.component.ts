@@ -60,7 +60,7 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
         if (subject[1] === selectedsubject){
         subjectObj['id'] = index+1;
         subjectObj['name'] = subject[1];
-        subjectObj['filterer'] = subject[2].toString().replace(",", " ");
+        subjectObj['filterer'] = subject[2].toString().replace(/,/g, " | ");
        this.subjOptions.push(subjectObj);
         }
       });
@@ -97,9 +97,9 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
       })
     });
 
-  let selectedsubject:any = sessionStorage.getItem('selectedsubject');
+  let selectedsubject:any = localStorage.getItem('selectedsubject').split(',')[0];
 
-
+    console.log("SELECTEDSUBJECTS in PLATFORM.comp", selectedsubject)
     this.sub = this.route.params.subscribe(routedparams => {
       this.selectedplatform = routedparams['selection']; 
       this.platforms.forEach((platform) => {
@@ -109,15 +109,15 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
 
                 if (platformdetails[pltdetkey].category) {
                   this.platform = platformdetails[pltdetkey];
-                  this.xxxx = this.elObj;
+                  //this.xxxx = this.elObj;
                   console.log("THIS IS THE showELlist as service... ", this.elunr.getRanking("OTHER"));
                   //this.oldRank = this.elunr.getRanking("OTHER")
-                  if (localStorage.getItem('rankList').split(',')[0] === 'undefined'){
-                    console.log("LOCAL STORAGE undefined");
-                    localStorage.setItem('rankList', String(this.elunr.getRanking("ANOTHER")));
-                  }else{
-                    console.log("LOCAL STORAGE ", localStorage.getItem('rankList').split(','))
-                  }
+                  //if (localStorage.getItem('rankList').split(',')[0] === 'undefined'){
+                  //  console.log("LOCAL STORAGE undefined");
+                  //  localStorage.setItem('rankList', String(this.elunr.getRanking("ANOTHER")));
+                  //}else{
+                  //  console.log("LOCAL STORAGE ", localStorage.getItem('rankList').split(','))
+                  //}
                   //console.log(platformdetails[pltdetkey]);
                   //console.log(this.elObj)
                   //this.showELlist("AQUI")
