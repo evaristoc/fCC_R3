@@ -18,6 +18,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { AppComponent } from './app.component';
 
 import { FirebasedbService } from './firebaseserv/firebasedb.service';
+import { ElasticlunrService } from './elasticlunrserv/elasticlunr.service';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
@@ -54,7 +55,7 @@ import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
     NgxElasticlunrModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [FirebasedbService],
+  providers: [FirebasedbService, ElasticlunrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

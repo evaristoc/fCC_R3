@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
+import { ElasticlunrService } from '../elasticlunrserv/elasticlunr.service';
 //import { NgxElasticlunrModule } from 'ngx-elasticlunr';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -13,7 +14,7 @@ declare var elasticlunr: any;
   templateUrl: './platform.component.html',
   styleUrls: ['./platform.component.css']
 })
-export class PlatformComponent implements OnInit, OnDestroy  {
+export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
   selectedplatform: string;
   private sub: any;
   public platforms : FirebaseListObservable<any>;
@@ -26,10 +27,12 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   //subjectOptions:Observer;
   filterer : string;
   elObj: any;
+  newRank: any;
+  oldRank: any;
    //suburls : string = 'suburls';
    //suburlsid : string = 'suburlsid';
   bla : any;
-  constructor(private route: ActivatedRoute, public db : FirebasedbService) {
+  constructor(private route: ActivatedRoute, public db : FirebasedbService, public elunr : ElasticlunrService ) {
 
   //console.log("THIS IS elasticlunr", new elasticlunr);
    //this.subjOptions = new Observable(observer => this.subjectOptions = observer);
@@ -40,6 +43,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
                 this.saveDocument(false);
             });
     
+    console.log("IN CONSTRUCTOR ", localStorage.getItem('rankList').split(','));
     //console.log("THIS IS elasticlunr installed as third party JS library", this.elObj)
     
     this.platforms = this.db.platforms;
@@ -63,12 +67,6 @@ export class PlatformComponent implements OnInit, OnDestroy  {
       
     });
 
-  }
-
-  
-
-  ngOnInit() {
-  let selectedsubject:any = sessionStorage.getItem('selectedsubject');
   //console.log("THIS IS THE SELECTED SUBJECT",selectedsubject);
   this.route.params.subscribe(routedparams => {
       this.selectedplatform = routedparams['selection']; 
@@ -85,7 +83,8 @@ export class PlatformComponent implements OnInit, OnDestroy  {
                     platformdetails[pltdetkey].params.forEach((par, i) => {
                       //console.log('THIS IS THE params OF SELECTED PLATFORM', i, par.replace(/-|_|\/|:/ig,' '))
                       //console.log('THIS IS THE params OF SELECTED PLATFORM', i, par.replace(/\W|\d/ig,' '))
-                      this.loadELlist(par, i)
+                      this.loadELlist(par, i);
+                      this.elunr.getDocuments(par, i)
 
                     })
                   //}
@@ -97,6 +96,9 @@ export class PlatformComponent implements OnInit, OnDestroy  {
       })
     });
 
+  let selectedsubject:any = sessionStorage.getItem('selectedsubject');
+
+
     this.sub = this.route.params.subscribe(routedparams => {
       this.selectedplatform = routedparams['selection']; 
       this.platforms.forEach((platform) => {
@@ -106,6 +108,14 @@ export class PlatformComponent implements OnInit, OnDestroy  {
 
                 if (platformdetails[pltdetkey].category) {
                   this.platform = platformdetails[pltdetkey];
+                  console.log("THIS IS THE showELlist as service... ", this.elunr.getRanking("OTHER"));
+                  //this.oldRank = this.elunr.getRanking("OTHER")
+                  if (localStorage.getItem('rankList').split(',')[0] === 'undefined'){
+                    console.log("LOCAL STORAGE undefined");
+                    localStorage.setItem('rankList', String(this.elunr.getRanking("ANOTHER")));
+                  }else{
+                    console.log("LOCAL STORAGE ", localStorage.getItem('rankList').split(','))
+                  }
                   //console.log(platformdetails[pltdetkey]);
                   //console.log(this.elObj)
                   //this.showELlist("AQUI")
@@ -118,8 +128,28 @@ export class PlatformComponent implements OnInit, OnDestroy  {
     });
 
   //console.log(this.subjOptions)  
-  console.log("THIS IS THE showELlist outside... ", this.showELlist("OTHER"));
+  //console.log("THIS IS THE showELlist here... ", this.showELlist("OTHER")) 
+  //console.log("THIS IS THE showELlist as service... ", this.elunr.getRanking("OTHER"));
+
   }
+
+  
+
+  ngOnInit() {
+
+  }
+
+ngOnChanges(changes: SimpleChanges) {
+  console.log("THIS IS AFTER CHANGES ", changes, changes.results.currentValue);
+  //if (changes.results.currentValue != changes.results.previousValue){
+  //  //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
+  //  //https://codepen.io/chrisenytc/pen/gyGcx
+  //  localStorage.setItem('selectedsubject', changes.results.currentValue);
+  //  this.outputResult(changes.results.currentValue);
+  //  this.setFilters(this.results);
+  //  console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
+  //}
+    }
 
   saveLength(v:number){
     var vv = v;
@@ -171,6 +201,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   ngOnDestroy() {
     console.log("this.platform in ngOnDestroy", Object.keys(this.platform))
     this.deleteELlist()
+    this.elunr.deleteDocuments(this.platform, this.bla)
     //console.log("this.platform IN ngOnDestroy ", this.platform)
     this.sub.unsubscribe();
 
