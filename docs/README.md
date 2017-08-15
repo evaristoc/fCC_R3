@@ -26,6 +26,8 @@ platformstable (an object) --->
 
                    category: (category of the platform: tutorial, blog, etc)
 
+                   cat_regex: a simple regex format describing the category
+
                    prevalence: (a list of numbers used for the calculation of the popularity ranking; might rename into a intuitive name)
 
                    minsecurity, crawlstatus, created, modified : not important for rendering

@@ -10,13 +10,13 @@
         <div class="col-md-8" style="padding:1em; background: #eee">
             <h3>Filter by:</h3>
             <p>
-              <button *ngFor="let cat of results[1]" class="btn btn-success mb-3 mr-3" (click)="toggleCat($event, cat)">{{cat}}</button>
+                <button *ngFor="let cat of results[1]" class="btn btn-success mb-3 mr-3" (click)="toggleCat($event, cat)">{{cat}}</button>
             </p>
         </div>
 
     </div>
 
-    
+
     <div class="col-12 d-flex justify-content-center flex-wrap">
         <div class="col-md-8">
             <table class="table">
@@ -31,17 +31,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngFor="let selection of selectedPlatforms" >
-                    <tr *ngIf="filters[selection[6]]" >
-                        <td class="text-left"><strong>{{selection[0]}}</strong><br/><span class="badge badge-default">{{selection[6]}}</span></td>
-                        <td class="text-left"><a [routerLink]="['/platform/',selection[5]]" routerLinkActive="active" class="btn btn-primary">
+                    <ng-container *ngFor="let selection of selectedPlatforms">
+                        <tr *ngIf="filters[selection[6]]">
+                            <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}</strong><br/><span class="badge badge-default">{{selection[6]|maxlengthdoc:50}}</span></td>
+                            <td class="text-left"><a [routerLink]="['/platform/',selection[5]]" routerLinkActive="active" class="btn btn-primary">
                             More info
                         </a></td>
-                    </tr>
+                        </tr>
                     </ng-container>
                 </tbody>
             </table>
         </div>
     </div>
-    
+
 </div>

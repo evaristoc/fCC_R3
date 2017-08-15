@@ -28,6 +28,7 @@ import { PlatformComponent } from './platform/platform.component';
 import { MainbodyComponent } from './mainbody/mainbody.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AboutComponent,
     PlatformComponent,
     MainbodyComponent,
+    MaxlengthdocPipe
     
   ],
   imports: [
