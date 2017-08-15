@@ -21,6 +21,7 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
   allsubjects: Array<any>;
   platform: object;
   subjects: object;
+  xxxx: any;
   subjOptions:Array<any>;
   subjectOptions: Array<any>;
   //subjOptions:Observable;
@@ -40,7 +41,7 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
    this.elObj = new elasticlunr(function() {
                 this.addField('suburls');
                 this.setRef('suburlsid');
-                this.saveDocument(false);
+                this.saveDocument(true);
             });
     
     console.log("IN CONSTRUCTOR ", localStorage.getItem('rankList').split(','));
@@ -108,6 +109,7 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
 
                 if (platformdetails[pltdetkey].category) {
                   this.platform = platformdetails[pltdetkey];
+                  this.xxxx = this.elObj;
                   console.log("THIS IS THE showELlist as service... ", this.elunr.getRanking("OTHER"));
                   //this.oldRank = this.elunr.getRanking("OTHER")
                   if (localStorage.getItem('rankList').split(',')[0] === 'undefined'){

@@ -6,14 +6,14 @@ declare var elasticlunr: any;
 
 @Injectable()
 export class ElasticlunrService {
-  elObj: any;
+  //elObj: any;
   bla : any;
-
+  elObj : any;
   constructor() {
     this.elObj = new elasticlunr(function() {
                 this.addField('suburls');
                 this.setRef('suburlsid');
-                this.saveDocument(false);
+                this.saveDocument(true);
             });
   }
   
@@ -30,11 +30,16 @@ export class ElasticlunrService {
 
  getRanking(filterer:string) {
      //let filterer ;
+     let that = this;
      console.log("THIS IS filterer inside service getRanking", filterer)
-     console.log(this.elObj);
+     console.log("I am elObj ", this.elObj);
      //console.log(this.elObj.search);
      console.log("THIS IS THE SEARCH OF elObj in service getRanking", this.elObj.search("react", { "fields": { "suburls": { "boost": 1 } } }));
      //console.log("THIS IS THE SEARCH OF elObj", this.elObj.search("JavaScript")); 
+     console.log("getRanking is Empty but ", this.elObj.documentStore, ' shows...')
+     if (this.elObj.search("react", { "fields": { "suburls": { "boost": 1 } } }) == []){
+         console.log("getRanking is Empty but ", this.elObj, ' shows...')
+     }
  }
 
  deleteDocuments(platform : any, bla : number) {
