@@ -9,9 +9,14 @@
 
         <div class="col-md-8" style="padding:1em; background: #eee">
             <h3>Filter by:</h3>
-            <p>
+            <!--<p>
                 <button *ngFor="let cat of results[1]" class="btn btn-success mb-3 mr-3" (click)="toggleCat($event, cat)">{{cat}}</button>
-            </p>
+            </p>-->
+            <ul *ngFor="let cat of results[1]; let i=index">
+                <li style='list-style-type: none;'>
+                    <label [class.selected]="cat.checked"><input id={{cat}} type="checkbox" value={{cat}} (change)="logCheckbox(cat)" checked> {{cat}}</label>
+                </li>
+            </ul>
         </div>
 
     </div>

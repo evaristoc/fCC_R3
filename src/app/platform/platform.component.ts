@@ -40,6 +40,7 @@ export class PlatformComponent implements OnInit, OnChanges, OnDestroy  {
 
    this.elObj = new elasticlunr(function() {
                 this.addField('suburls');
+                this.addField('docurl');
                 this.setRef('suburlsid');
                 this.saveDocument(true);
             });
@@ -162,6 +163,7 @@ ngOnChanges(changes: SimpleChanges) {
     if (par !== null) {
       this.elObj.addDoc({
          'suburls': par.replace(/\W|\d/ig, ' '),
+         'docurl' : par,
         //'suburls' : 'adfgart;logn',
          'suburlsid': i
        })

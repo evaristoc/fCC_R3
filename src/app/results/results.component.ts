@@ -92,6 +92,26 @@ calculateRanking(relevance, prevalence) {
   return relevance * prevalence
 }
 
+////private logCheckbox(element: HTMLInputElement): void {
+//private logCheckbox(idx: string): void {
+//    console.log(document.getElementById(idx).value)
+//    this.log += `Checkbox ${document.getElementById(idx).value} was ${document.getElementById(idx).checked ? '' : 'un'}checked\n`
+//
+//    //this.log += `Checkbox ${element.value} was ${element.checked ? '' : 'un'}checked\n`
+//}
+
+  //private logCheckbox(element: HTMLInputElement): void {
+  logCheckbox(cat: string): void {
+  console.log(cat, document.getElementById(cat).attributes, document.getElementById(cat)['checked'])
+  if (document.getElementById(cat)['checked'] != false){
+    this.filters[cat] = true
+  }else{
+    this.filters[cat] = false
+  }
+
+  }
+
+
 
 ngOnChanges(changes: SimpleChanges) {
   console.log(changes, changes.results.currentValue);
