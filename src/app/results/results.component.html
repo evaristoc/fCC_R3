@@ -51,7 +51,7 @@
                     <!--<ng-container *ngFor="let catty of convertToArray(myform.value | json)">-->
                     <!--This is in HTML {{catty}}-->
                     <tr *ngFor="let selection of selectedPlatforms">
-                        {{myform.value[selection[6]]}}
+                        this is {{myform.value[selection[6]]}}
                         <td *ngIf="myform.value[selection[6]]">{{selection[6]}}</td>
                     </tr>
                     <!--<tr *ngIf="selection[6] in catty">

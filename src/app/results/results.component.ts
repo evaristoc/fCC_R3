@@ -91,6 +91,7 @@ setResults(results){
 
   outputResult(results) {
     this.selectedPlatforms = [];
+    console.log("INSIDE outputResult")
     this.platforms.forEach((x) => {
   x.forEach((a) => {
     Object.keys(a).forEach((x) => {
@@ -98,8 +99,9 @@ setResults(results){
       if (value.category) {
      // console.log("key", a.$key, x);
       }
-      //console.log("FILTERER in outputResult", results, results.map((cat)=>{console.log(cat); if(cat.isActive === true){return cat.name}},[]))
-      if(value.category in results.map((cat)=>{if(cat.isActive === true){return cat.name}},[])){
+      //Object.keys(value)
+      console.log("FILTERER in outputResult", results.filter((cat)=>{if(cat.isActive === true){return cat.name}},[]), results.map((cat)=>{if(cat.isActive === true){return cat.name}},[]).indexOf(value.category) != -1?true:false)
+      if(results.map((cat)=>{if(cat.isActive === true){return cat.name}},[]).indexOf(value.category) != -1){
         //var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[] : undefined);
         //var prevalence = this.calculatePrevalence(value.prevalence); 
         //var ranking = this.calculateRanking(relevance, prevalence)
