@@ -35,7 +35,8 @@ export class ResultsComponent implements OnInit {
     //  {name:"learn|tutorial|course|training| tips|example", isActive: true}
     //]
     this.setFilters(this.results);
-
+    this.setResults(this.results)
+    //this.outputResult(this.filters);
   }
   
   setFilters(results) {
@@ -44,9 +45,45 @@ export class ResultsComponent implements OnInit {
     //console.log("THIS IS results in setFilters ", results[1]);
     //console.log(typeof this.filters)
     results[1].forEach((result)=> this.filters.push({name:result, isActive:true}));
-    //console.log("in setFilter: values of filters", this.filters)
+    console.log("in setFilter: values of filters", this.filters);
   } 
   
+setResults(results){
+    this.selectedPlatforms = [];
+    this.platforms.forEach((x) => {
+  x.forEach((a) => {
+    Object.keys(a).forEach((x) => {
+      var value = a[x]; 
+      if (value.category) {
+     // console.log("key", a.$key, x);
+      }
+      //console.log("FILTERER in outputResult", results, results.map((cat)=>{console.log(cat); if(cat.isActive === true){return cat.name}},[]))
+      if(value.category){
+        //var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[] : undefined);
+        //var prevalence = this.calculatePrevalence(value.prevalence); 
+        //var ranking = this.calculateRanking(relevance, prevalence)
+        //only show relevant
+        var relevance = 1;
+        var prevalence = 1;
+        var ranking = 1;
+        if (relevance > 0 && typeof a.subjects != 'undefined') {
+          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, value.category]);
+          //console.log("title", value.title)
+        }
+      }
+    })
+  })
+  this.selectedPlatforms = this.selectedPlatforms.sort((a,b)=> {
+    if (a[4]<b[4]) {
+      return 1
+    } else if (a[4]>b[4]) {
+      return -1
+    } 
+    return 0
+  })
+})  
+}
+
   outputResult(results) {
     this.selectedPlatforms = [];
     this.platforms.forEach((x) => {
@@ -56,12 +93,16 @@ export class ResultsComponent implements OnInit {
       if (value.category) {
      // console.log("key", a.$key, x);
       }
-      if(value.category){
-        var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[results[0][0]] : undefined);
-        var prevalence = this.calculatePrevalence(value.prevalence); 
-        var ranking = this.calculateRanking(relevance, prevalence)
+      //console.log("FILTERER in outputResult", results, results.map((cat)=>{console.log(cat); if(cat.isActive === true){return cat.name}},[]))
+      if(value.category in results.map((cat)=>{if(cat.isActive === true){return cat.name}},[])){
+        //var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[] : undefined);
+        //var prevalence = this.calculatePrevalence(value.prevalence); 
+        //var ranking = this.calculateRanking(relevance, prevalence)
         //only show relevant
-        if (relevance > 0) {
+        var relevance = 1;
+        var prevalence = 1;
+        var ranking = 1;
+        if (relevance > 0 && typeof a.subjects != 'undefined') {
           this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, value.category]);
           //console.log("title", value.title)
         }
@@ -152,15 +193,26 @@ onSubmit(){
 }
 
 
+convertToArray(obj:any){
+  obj = JSON.parse(obj);
+  let tempobj = [];
+  //console.log("IN convertToArray", Object.keys(obj).filter((k)=>{if(obj[k]){return k}}));
+  tempobj = Object.keys(obj).filter((k)=>{if(obj[k]){return k;}})
+  return tempobj;
+  //Object.keys(obj).map(function(k) {return obj[k]});
+}
+
  ngOnChanges(changes: SimpleChanges) {
    console.log("RESULTS CURRENT VALUE IN ngOnChanges ", changes, changes.results.currentValue);
 //   //console.log(this.sevsubjects)
 //   //console.log(changes, changes.sevsubjects);
+
    if (changes.results.currentValue != changes.results.previousValue){
 // //    //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
 // //    //https://codepen.io/chrisenytc/pen/gyGcx
      localStorage.setItem('selectedsubject', changes.results.currentValue);
-     this.outputResult(changes.results.currentValue);
+     //this.outputResult(changes.results.currentValue);
+    this.outputResult(this.filters);
 //     //this.setFilters(this.results);
 // //    //console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
    }
