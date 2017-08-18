@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
-//import { Subject } from '../models/Subject'
+import { Subject } from '../models/Subject'
 
 @Component({
   selector: 'app-results',
@@ -15,36 +15,33 @@ export class ResultsComponent implements OnInit {
   selectedSubjects = {};
   selectedPlatforms: Array<any> = [];
   show:boolean = true;
-  public filters:Array<any> = [];
+  filters:object = {};
   public platforms : FirebaseListObservable<any>;
   @Input('result') results: Array<any>;
   title= "You chose";
-  //public sevsubjects: Array<any>;
+  public sevsubjects: Subject[];
 
  @ViewChild('myform') mycheckbox:NgForm;
 
   constructor(public db : FirebasedbService) {
     this.platforms = this.db.platforms;
-   
+    
   }
 
   ngOnInit() {
 //"---", "blog|media|news|articl|content|post|journal", "community|support|people|forum", "(text )?editor|interpreter|repl", "shop|commerce", "learn|tutorial|course|training| tips|example", "api|package|framework|librar|stack|licens|addon|app", "cloud|platform|service", "searchtools", "on?(-|\s)?demand|business|compan(y|ies)|enterprise", "manual|guide|docs", "design|galler|template|theme"
-    //this.sevsubjects = [
-    //  {name:"blog|media|news|articl|content|post|journal", isActive: true},
-    //  {name:"learn|tutorial|course|training| tips|example", isActive: true}
-    //]
-    this.setFilters(this.results);
+    this.sevsubjects = [
+      {name:"blog|media|news|articl|content|post|journal", isActive?: true},
+      {name:"learn|tutorial|course|training| tips|example", isActive?: true}
 
+    ]
+   
   }
   
   setFilters(results) {
     
-    //results[1].forEach((result)=> {this.filters[result] = true});
-    //console.log("THIS IS results in setFilters ", results[1]);
-    //console.log(typeof this.filters)
-    results[1].forEach((result)=> this.filters.push({name:result, isActive:true}));
-    //console.log("in setFilter: values of filters", this.filters)
+    results[1].forEach((result)=> {this.filters[result] = true});
+    console.log(this.filters)
   } 
   
   outputResult(results) {
@@ -79,18 +76,18 @@ export class ResultsComponent implements OnInit {
 })
   }
 
-// toggleCat(event, cat) {
-//   console.log(event.target, cat)
-//   event.target.classList.toggle("btn-success");
-//   event.target.classList.toggle("btn-danger");
+toggleCat(event, cat) {
+  console.log(event.target, cat)
+  event.target.classList.toggle("btn-success");
+  event.target.classList.toggle("btn-danger");
   
-//   if (event.target.classList.contains("btn-danger")) {
-//     this.filters[cat]= false
-//   } else {
-//     this.filters[cat] = true;
-//   }
+  if (event.target.classList.contains("btn-danger")) {
+    this.filters[cat]= false
+  } else {
+    this.filters[cat] = true;
+  }
   
-// }
+}
 
 calculateRelevance(subjects) {
   // return relevance
@@ -115,33 +112,17 @@ calculateRanking(relevance, prevalence) {
 //    //this.log += `Checkbox ${element.value} was ${element.checked ? '' : 'un'}checked\n`
 //}
 
-//  //private logCheckbox(element: HTMLInputElement): void {
-//  logCheckbox(event : any, cat: string): void {
-//    console.log("THIS IS event ", event)
-//  console.log(cat, document.getElementById(cat).attributes, document.getElementById(cat)['checked'])
-//  if (document.getElementById(cat)['checked'] != false){
-//    this.filters[cat] = true
-//  }else{
-//    this.filters[cat] = false
-//  }
-//  }
+  //private logCheckbox(element: HTMLInputElement): void {
+  logCheckbox(event : any, cat: string): void {
+    console.log("THIS IS event ", event)
+  console.log(cat, document.getElementById(cat).attributes, document.getElementById(cat)['checked'])
+  if (document.getElementById(cat)['checked'] != false){
+    this.filters[cat] = true
+  }else{
+    this.filters[cat] = false
+  }
 
-   logCheckbox(event : any, cat: string): void {
-     //console.log("THIS IS event ", event)
-   //console.log(cat, document.getElementById(cat).attributes, document.getElementById(cat)['checked'])
-  
-   if (document.getElementById(cat)['checked'] === true){
-     //console.log(this.filters)
-     this.filters.forEach(ssubs => {if(ssubs.name === cat){console.log("CAT DETECTED AS true"); ssubs.isActive = true}})
-     //this.filters[cat] = true
-   }else{
-     //console.log(this.filters)
-     this.filters.forEach(ssubs => {if(ssubs.name === cat){console.log("CAT DETECTED AS false"); ssubs.isActive = false}})
-     //console.log(this.sevsubjects)
-     //this.filters[cat] = false
-   }
-
-   }
+  }
 //onSubmit(form:HTMLFormElement){
 //onSubmit(form:ngForm){
 //  console.log(form)
@@ -152,19 +133,17 @@ onSubmit(){
 }
 
 
- ngOnChanges(changes: SimpleChanges) {
-   console.log("RESULTS CURRENT VALUE IN ngOnChanges ", changes, changes.results.currentValue);
-//   //console.log(this.sevsubjects)
-//   //console.log(changes, changes.sevsubjects);
-   if (changes.results.currentValue != changes.results.previousValue){
-// //    //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
-// //    //https://codepen.io/chrisenytc/pen/gyGcx
-     localStorage.setItem('selectedsubject', changes.results.currentValue);
-     this.outputResult(changes.results.currentValue);
-//     //this.setFilters(this.results);
-// //    //console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
-   }
-     }
+ngOnChanges(changes: SimpleChanges) {
+  console.log(changes, changes.results.currentValue);
+  if (changes.results.currentValue != changes.results.previousValue){
+//    //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
+//    //https://codepen.io/chrisenytc/pen/gyGcx
+    localStorage.setItem('selectedsubject', changes.results.currentValue);
+    this.outputResult(changes.results.currentValue);
+    this.setFilters(this.results);
+//    //console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
+  }
+    }
     
 
 }

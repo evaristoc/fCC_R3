@@ -13,9 +13,9 @@
                 <button *ngFor="let cat of results[1]" class="btn btn-success mb-3 mr-3" (click)="toggleCat($event, cat)">{{cat}}</button>
             </p>-->
             <form (ngSubmit)="onSubmit()" #myform="ngForm">
-                <ul *ngFor="let cat of filters; let i=index">
+                <ul *ngFor="let cat of results[1]; let i=index">
                     <li class='form-group' style='list-style-type: none;'>
-                        <label [class.selected]="cat.name.checked"><input id={{cat.name}} class="form-control" type="checkbox" value={{cat.name}} (change)="logCheckbox($event, cat.name)" name={{cat.name}} NgModel [checked]="cat.isActive"> {{cat.name}}</label>
+                        <label [class.selected]="cat.checked"><input id={{cat}} class="form-control" type="checkbox" value={{cat}} (change)="logCheckbox($event, cat)" name={{cat}} NgModel checked> {{cat}}</label>
                     </li>
                 </ul>
             </form>
@@ -39,14 +39,12 @@
                 </thead>
                 <tbody>
                     <ng-container *ngFor="let selection of selectedPlatforms">
-                        <ng-container *ngFor="let cat of filters">
-                            <tr *ngIf="cat.name === selection[6]">
-                                <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}</strong><br/><span class="badge badge-default">{{selection[6]|maxlengthdoc:50}}</span></td>
-                                <td class="text-left"><a [routerLink]="['/platform/',selection[5]]" routerLinkActive="active" class="btn btn-primary">
+                        <tr *ngIf="filters[selection[6]]">
+                            <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}</strong><br/><span class="badge badge-default">{{selection[6]|maxlengthdoc:50}}</span></td>
+                            <td class="text-left"><a [routerLink]="['/platform/',selection[5]]" routerLinkActive="active" class="btn btn-primary">
                             More info
                         </a></td>
-                            </tr>
-                        </ng-container>
+                        </tr>
                     </ng-container>
                 </tbody>
             </table>
