@@ -1,5 +1,5 @@
 import { Component, Input , OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
@@ -16,6 +16,7 @@ export class ResultsComponent implements OnInit {
   selectedPlatforms: Array<any> = [];
   show:boolean = true;
   public filters:Array<any> = [];
+  public start: number = 1;
   public platforms : FirebaseListObservable<any>;
   @Input('result') results: Array<any>;
   title= "You chose";
@@ -37,6 +38,10 @@ export class ResultsComponent implements OnInit {
     this.setFilters(this.results);
     this.setResults(this.results)
     //this.outputResult(this.filters);
+    //console.log(this.mycheckbox.form.setValue({'api|package|framework|librar|stack|licens|addon|app':true},{onlySelf: true}))
+    //setValue('api|package|framework|librar|stack|licens|addon|app', true))
+    //.setValue(this.'---', {onlySelf: true})
+    //.setValue(this.isActive, {onlySelf: true});
   }
   
   setFilters(results) {
@@ -103,6 +108,7 @@ setResults(results){
         var prevalence = 1;
         var ranking = 1;
         if (relevance > 0 && typeof a.subjects != 'undefined') {
+          this.start = 0;
           this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, value.category]);
           //console.log("title", value.title)
         }
@@ -170,7 +176,7 @@ calculateRanking(relevance, prevalence) {
    logCheckbox(event : any, cat: string): void {
      //console.log("THIS IS event ", event)
    //console.log(cat, document.getElementById(cat).attributes, document.getElementById(cat)['checked'])
-  
+   this.start = 0;
    if (document.getElementById(cat)['checked'] === true){
      //console.log(this.filters)
      this.filters.forEach(ssubs => {if(ssubs.name === cat){console.log("CAT DETECTED AS true"); ssubs.isActive = true}})
