@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, trigger, transition, style, animate, state } from '@angular/core';
+import { NgForm, FormGroup } from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 //import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
 // from https://github.com/softsimon/angular-2-dropdown-multiselect
-import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts   } from 'angular-2-dropdown-multiselect';
+//import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts   } from 'angular-2-dropdown-multiselect';
 
 //OJO: check the use of Enums https://www.gurustop.net/blog/2016/05/24/how-to-use-typescript-enum-with-angular2/
 
@@ -46,11 +47,12 @@ export class SearchFormComponent implements OnInit {
   public platforms : FirebaseListObservable<any>;
   isActive = false;
   showResultSection = false;
-  
+  subjectOptions: Array<any> = [];
+
   constructor(public db: FirebasedbService) {
-    db.getCategories().forEach((x) => {
-      console.log(x[0]); 
-      this.categories = x[0];
+    db.getCategories().forEach((cats) => {
+      console.log(cats[0]); 
+      this.categories = cats[0];
       console.log(this.categories[0]);
       this.catOptions = [];
       this.categories.forEach((category, index) => {
@@ -58,8 +60,8 @@ export class SearchFormComponent implements OnInit {
       });
     });
     
-    db.getSubjects().forEach((x)=>{
-      this.subjects = x[0];
+    db.getSubjects().forEach((subjs)=>{
+      this.subjects = subjs[0];
       this.subjOptions = [];
       this.subjects.forEach((subject, index) => {
         var subjectObj = {};
@@ -76,15 +78,15 @@ export class SearchFormComponent implements OnInit {
 
     //db.getPlatforms();
     this.platforms = this.db.platforms;
-    this.platforms.forEach((x) => {
-      x.forEach((arrItem) => {
+    this.platforms.forEach((plat) => {
+      plat.forEach((platdetails) => {
         //console.log(arrItem);
       })
     })
     
     console.log(this.platforms);
 
-    db.getTexts().forEach((x)=>{
+    db.getTexts().forEach((txts)=>{
       //console.log(x)
     });
     //console.log(this.platforms)
@@ -94,34 +96,41 @@ export class SearchFormComponent implements OnInit {
   
  
   
-  subjectModel: number[];
-  // Settings configuration
-  subjectSettings: IMultiSelectSettings = {
-      checkedStyle: 'fontawesome',
-      buttonClasses: 'btn btn-default btn-block',
-      displayAllSelectedText: false,
-      dynamicTitleMaxItems: 2,
-      showCheckAll: false,
-      showUncheckAll: false,
-      selectionLimit: 1,
-      autoUnselect: true,
-      closeOnSelect: true
-  };
+  subjectModels: any[] = [
+    { backgroundColor: 'black', fontColor: 'white', display: 'Dark' },
+    { backgroundColor: 'white', fontColor: 'black', display: 'Light' },
+    { backgroundColor: 'grey', fontColor: 'white', display: 'Sleek' }
+  ];
+  subjectModel: any;
+    // // Settings configuration
+  // subjectSettings: IMultiSelectSettings = {
+  //     checkedStyle: 'fontawesome',
+  //     buttonClasses: 'btn btn-default btn-block',
+  //     displayAllSelectedText: false,
+  //     dynamicTitleMaxItems: 2,
+  //     showCheckAll: false,
+  //     showUncheckAll: false,
+  //     selectionLimit: 1,
+  //     autoUnselect: true,
+  //     closeOnSelect: true
+  // };
   
-  // Text configuration
-  subjectTexts: IMultiSelectTexts = {
-      checkAll: 'Select all',
-      uncheckAll: 'Unselect all',
-      checked: 'selected',
-      checkedPlural: 'subjects selected',
-      defaultTitle: 'Please select',
-      allSelected: 'All selected',
-  };
+  // // Text configuration
+  // subjectTexts: IMultiSelectTexts = {
+  //     checkAll: 'Select all',
+  //     uncheckAll: 'Unselect all',
+  //     checked: 'selected',
+  //     checkedPlural: 'subjects selected',
+  //     defaultTitle: 'Please select',
+  //     allSelected: 'All selected',
+  // };
   
-  // Labels / Parents
-  subjectOptions: IMultiSelectOption[] = [];
+  // // Labels / Parents
+
 
   ngOnInit() {
+    this.subjectModel = this.subjectModels[0]
+
   }
 
   
@@ -132,7 +141,7 @@ export class SearchFormComponent implements OnInit {
         return subj.id === subjModel;
       });
       this.selectedSubjects.push(subj[0].name);
-      this.getReviews();
+      this.getUrls();
       
     })
     
@@ -143,8 +152,8 @@ export class SearchFormComponent implements OnInit {
   }
   
   
-  getReviews() {
-    console.log("get reviews in search-form.component");
+  getUrls() {
+    console.log("get URLs in search-form.component");
     this.searchResults = [];
     this.searchResults.push(this.selectedSubjects);
     this.searchResults.push(this.catOptions);

@@ -6,10 +6,15 @@
                 <p>Select what and how you want to learn, and read what fellow programmers think of the resources available.</p>
 
                 <div class="card col-12">
-                    <h3>What subject(s) interest you? </h3>
-                    <ss-multiselect-dropdown [options]="subjectOptions" [texts]="subjectTexts" [settings]="subjectSettings" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">
 
-                    </ss-multiselect-dropdown>
+                    <form>
+                        <div class="form-group">
+                            <h3>What subject(s) interest you? </h3>
+                            <select name="subjects" class="form-control" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">
+                            <option *ngFor="let subj of subjectModels" [ngValue]="subj">{{subj.display}}</option>
+        </select>
+                        </div>
+                    </form>
                 </div>
 
                 <!--
