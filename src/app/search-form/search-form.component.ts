@@ -144,7 +144,7 @@ export class SearchFormComponent implements OnInit {
   
   
   getReviews() {
-    console.log("get reviews");
+    console.log("get reviews in search-form.component");
     this.searchResults = [];
     this.searchResults.push(this.selectedSubjects);
     this.searchResults.push(this.catOptions);

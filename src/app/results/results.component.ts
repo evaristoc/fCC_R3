@@ -1,9 +1,8 @@
-import { Component, Input , OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input , OnInit, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
-//import { Subject } from '../models/Subject'
 
 @Component({
   selector: 'app-results',
@@ -18,11 +17,9 @@ export class ResultsComponent implements OnInit {
   public filters:Array<any> = [];
   public start: number = 1;
   public platforms : FirebaseListObservable<any>;
-  @Input('result') results: Array<any>;
+  @Input('result_dropdown') result_dropdown: Array<any>;
   title= "You chose";
   //public sevsubjects: Array<any>;
-
- @ViewChild('myform') mycheckbox:NgForm;
 
   constructor(public db : FirebasedbService) {
     this.platforms = this.db.platforms;
@@ -35,44 +32,36 @@ export class ResultsComponent implements OnInit {
     //  {name:"blog|media|news|articl|content|post|journal", isActive: true},
     //  {name:"learn|tutorial|course|training| tips|example", isActive: true}
     //]
-    this.setFilters(this.results);
-    this.setResults(this.results)
-    //this.outputResult(this.filters);
-    //console.log(this.mycheckbox.form.setValue({'api|package|framework|librar|stack|licens|addon|app':true},{onlySelf: true}))
-    //setValue('api|package|framework|librar|stack|licens|addon|app', true))
-    //.setValue(this.'---', {onlySelf: true})
-    //.setValue(this.isActive, {onlySelf: true});
+    
+    
+    this.setResults(this.setFilters(this.result_dropdown), this.outputResult);
   }
   
-  setFilters(results) {
-    
-    //results[1].forEach((result)=> {this.filters[result] = true});
+  setFilters(result_dropdown) {
     //console.log("THIS IS results in setFilters ", results[1]);
     //console.log(typeof this.filters)
-    results[1].forEach((result)=> this.filters.push({name:result, isActive:true}));
+    result_dropdown[1].forEach((cat)=> this.filters.push({name:cat, isActive:true}));
     console.log("in setFilter: values of filters", this.filters);
   } 
   
-setResults(results){
+setResults(filterset_result_dropdown, callback){
+  //callback(filterset_result_dropdown);
+  console.log("FILTERER in setResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
     this.selectedPlatforms = [];
-    this.platforms.forEach((x) => {
-  x.forEach((a) => {
-    Object.keys(a).forEach((x) => {
-      var value = a[x]; 
-      if (value.category) {
+    this.platforms.forEach((plat) => {
+  plat.forEach((platdetails) => {
+    Object.keys(platdetails).forEach((platdetailskey) => {
+      var platdetailsvalues = platdetails[platdetailskey]; 
+      if (platdetailsvalues.category) {
      // console.log("key", a.$key, x);
       }
       //console.log("FILTERER in outputResult", results, results.map((cat)=>{console.log(cat); if(cat.isActive === true){return cat.name}},[]))
-      if(value.category){
-        //var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[] : undefined);
-        //var prevalence = this.calculatePrevalence(value.prevalence); 
-        //var ranking = this.calculateRanking(relevance, prevalence)
-        //only show relevant
+      if(platdetailsvalues.category){
         var relevance = 1;
         var prevalence = 1;
         var ranking = 1;
-        if (relevance > 0 && typeof a.subjects != 'undefined') {
-          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, value.category]);
+        if (relevance > 0 && typeof platdetails.subjects != 'undefined') {
+          this.selectedPlatforms.push([platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
           //console.log("title", value.title)
         }
       }
@@ -87,31 +76,24 @@ setResults(results){
     return 0
   })
 })  
+callback(filterset_result_dropdown);
 }
 
-  outputResult(results) {
+  outputResult(filterset_result_dropdown) {
     this.selectedPlatforms = [];
     console.log("INSIDE outputResult")
-    this.platforms.forEach((x) => {
-  x.forEach((a) => {
-    Object.keys(a).forEach((x) => {
-      var value = a[x]; 
-      if (value.category) {
-     // console.log("key", a.$key, x);
-      }
-      //Object.keys(value)
-      console.log("FILTERER in outputResult", results.filter((cat)=>{if(cat.isActive === true){return cat.name}},[]), results.map((cat)=>{if(cat.isActive === true){return cat.name}},[]).indexOf(value.category) != -1?true:false)
-      if(results.map((cat)=>{if(cat.isActive === true){return cat.name}},[]).indexOf(value.category) != -1){
-        //var relevance = this.calculateRelevance(typeof a.subjects != 'undefined' ? a.subjects[] : undefined);
-        //var prevalence = this.calculatePrevalence(value.prevalence); 
-        //var ranking = this.calculateRanking(relevance, prevalence)
-        //only show relevant
+    this.platforms.forEach((plat) => {
+  plat.forEach((platdetails) => {
+    Object.keys(platdetails).forEach((platdetailskey) => {
+      var platdetailsvalues = platdetails[platdetailskey];
+      console.log("FILTERER in outputResult", filterset_result_dropdown, filterset_result_dropdown.filter((cat)=>{if(cat.isActive === true){return cat.name}},[]), filterset_result_dropdown.map((cat)=>{if(cat.isActive === true){return cat.name}},[]).indexOf(platdetailsvalues.category) != -1?true:false)
+      if(filterset_result_dropdown.map((cat)=>{if(cat.isActive === true){return cat.name}},[]).indexOf(platdetailsvalues.category) != -1){
         var relevance = 1;
         var prevalence = 1;
         var ranking = 1;
-        if (relevance > 0 && typeof a.subjects != 'undefined') {
+        if (relevance > 0 && typeof platdetails.subjects != 'undefined') {
           this.start = 0;
-          this.selectedPlatforms.push([value.title, value.category, relevance, prevalence, ranking, a.$key, value.category]);
+          this.selectedPlatforms.push([platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
           //console.log("title", value.title)
         }
       }
@@ -128,52 +110,6 @@ setResults(results){
 })
   }
 
-// toggleCat(event, cat) {
-//   console.log(event.target, cat)
-//   event.target.classList.toggle("btn-success");
-//   event.target.classList.toggle("btn-danger");
-  
-//   if (event.target.classList.contains("btn-danger")) {
-//     this.filters[cat]= false
-//   } else {
-//     this.filters[cat] = true;
-//   }
-  
-// }
-
-calculateRelevance(subjects) {
-  // return relevance
-  return typeof subjects != 'undefined' ? 
-          Object.keys(subjects).map((d) => {return subjects[d]['count']})[0]:0
-}
-
-calculatePrevalence(prevalence){
-  // return prevalence (popularity)
-  return prevalence.reduce((a,b) => {return a+b}, 0)/11;
-}
-
-calculateRanking(relevance, prevalence) {
-  return relevance * prevalence
-}
-
-////private logCheckbox(element: HTMLInputElement): void {
-//private logCheckbox(idx: string): void {
-//    console.log(document.getElementById(idx).value)
-//    this.log += `Checkbox ${document.getElementById(idx).value} was ${document.getElementById(idx).checked ? '' : 'un'}checked\n`
-//
-//    //this.log += `Checkbox ${element.value} was ${element.checked ? '' : 'un'}checked\n`
-//}
-
-//  //private logCheckbox(element: HTMLInputElement): void {
-//  logCheckbox(event : any, cat: string): void {
-//    console.log("THIS IS event ", event)
-//  console.log(cat, document.getElementById(cat).attributes, document.getElementById(cat)['checked'])
-//  if (document.getElementById(cat)['checked'] != false){
-//    this.filters[cat] = true
-//  }else{
-//    this.filters[cat] = false
-//  }
-//  }
 
    logCheckbox(event : any, cat: string): void {
      //console.log("THIS IS event ", event)
@@ -191,14 +127,11 @@ calculateRanking(relevance, prevalence) {
    }
 
    }
-//onSubmit(form:HTMLFormElement){
-//onSubmit(form:ngForm){
-//  console.log(form)
-//}
 
-onSubmit(){
-  console.log(this.mycheckbox)
-}
+
+//onSubmit(){
+//  console.log(this.mycheckbox)
+//}
 
 
 convertToArray(obj:any){
@@ -207,24 +140,24 @@ convertToArray(obj:any){
   //console.log("IN convertToArray", Object.keys(obj).filter((k)=>{if(obj[k]){return k}}));
   tempobj = Object.keys(obj).filter((k)=>{if(obj[k]){return k;}})
   return tempobj;
-  //Object.keys(obj).map(function(k) {return obj[k]});
 }
 
- ngOnChanges(changes: SimpleChanges) {
-   console.log("RESULTS CURRENT VALUE IN ngOnChanges ", changes, changes.results.currentValue);
-//   //console.log(this.sevsubjects)
-//   //console.log(changes, changes.sevsubjects);
 
-   if (changes.results.currentValue != changes.results.previousValue){
-// //    //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
-// //    //https://codepen.io/chrisenytc/pen/gyGcx
-     localStorage.setItem('selectedsubject', changes.results.currentValue);
-     //this.outputResult(changes.results.currentValue);
-    this.outputResult(this.filters);
-//     //this.setFilters(this.results);
-// //    //console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
-   }
-     }
+
+
+//  ngOnChanges(changes: SimpleChanges) {
+//    console.log("RESULTS CURRENT VALUE IN ngOnChanges ", changes, changes.result_dropdown.currentValue);
+// //   //console.log(this.sevsubjects)
+// //   //console.log(changes, changes.sevsubjects);
+
+//    if (changes.result_dropdown.currentValue != changes.result_dropdown.previousValue){
+// // //    //https://stackoverflow.com/questions/39840457/how-to-store-token-in-local-or-session-storage-in-angular-2
+// // //    //https://codepen.io/chrisenytc/pen/gyGcx
+//      localStorage.setItem('selectedsubject', changes.result_dropdown.currentValue);
+//     this.outputResult(this.filters);
+// // //    //console.log("changes at ngOnChanges", typeof changes.results, changes.results[Object.keys(changes.results)[0]][0])
+//    }
+//      }
     
 
 }
