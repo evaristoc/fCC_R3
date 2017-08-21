@@ -31,6 +31,7 @@ import { MainbodyComponent } from './mainbody/mainbody.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,7 @@ import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
     AboutComponent,
     PlatformComponent,
     MainbodyComponent,
-    MaxlengthdocPipe
+    MaxlengthdocPipe,
     
   ],
   imports: [

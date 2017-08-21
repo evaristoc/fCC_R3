@@ -51,8 +51,8 @@
                     <!--<ng-container *ngFor="let catty of convertToArray(myform.value | json)">-->
                     <!--This is in HTML {{catty}}-->
                     <tr *ngFor="let selection of selectedPlatforms">
-                        this is {{myform.value[selection[6]]}}
-                        <td *ngIf="myform.value[selection[6]]">{{selection[6]}}</td>
+                        <b>Filter value</b>: {{myform.value[selection[6]]}};
+                        <td *ngIf="myform.value[selection[6]]"><b>Subject</b>: {{result_dropdown[0]}}; <b>Category</b>: {{selection[6]}}</td>
                     </tr>
                     <!--<tr *ngIf="selection[6] in catty">
                                 <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}</strong><br/><span class="badge badge-default">{{selection[6]|maxlengthdoc:50}}</span></td>
