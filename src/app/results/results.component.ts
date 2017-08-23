@@ -155,6 +155,29 @@ convertToArray(obj:any){
   return tempobj;
 }
 
+toggleCat(event, cat) {
+  // console.log(event.target, cat)
+  // event.target.classList.toggle("btn-success");
+  // event.target.classList.toggle("btn-danger");
+  
+  // if (event.target.classList.contains("btn-danger")) {
+  //   this.filters[cat]= false
+  // } else {
+  //   this.filters[cat] = true;
+  // }
+  
+}
+
+calculateRelevance(subjects) {
+}
+
+calculatePrevalence(prevalence){
+}
+
+calculateRanking(relevance, prevalence) {
+}
+
+
 
 
 

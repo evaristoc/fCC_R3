@@ -11,10 +11,11 @@
                         <div class="form-group">
                             <h3>What subject(s) interest you? </h3>
                             <select name="subjects" class="form-control" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">
-                            <option *ngFor="let subj of subjectModels" [ngValue]="subj">{{subj.display}}</option>
+                            <option *ngFor="let subj of subjectOptions" [ngValue]="subj">{{subj.name}}</option>
         </select>
                         </div>
                     </form>
+                    <p>your selection : {{subjectModel.name}}</p>
                 </div>
 
                 <!--

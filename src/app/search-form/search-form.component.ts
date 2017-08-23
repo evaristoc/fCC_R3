@@ -48,6 +48,7 @@ export class SearchFormComponent implements OnInit {
   isActive = false;
   showResultSection = false;
   subjectOptions: Array<any> = [];
+  OPTIONTEST : any;
 
   constructor(public db: FirebasedbService) {
     db.getCategories().forEach((cats) => {
@@ -61,15 +62,17 @@ export class SearchFormComponent implements OnInit {
     });
     
     db.getSubjects().forEach((subjs)=>{
+      //console.log(subjs)
       this.subjects = subjs[0];
       this.subjOptions = [];
       this.subjects.forEach((subject, index) => {
         var subjectObj = {};
         subjectObj['id'] = index+1;
         subjectObj['name'] = subject[1];
-        this.subjOptions.push(subjectObj);
+        this.subjectOptions.push(subjectObj);
       });
-      this.loadSubject();
+      //console.log(this.subjOptions)
+      //this.loadSubject();
       
     });
 
@@ -129,18 +132,20 @@ export class SearchFormComponent implements OnInit {
 
 
   ngOnInit() {
-    this.subjectModel = this.subjectModels[0]
+    this.subjectModel = this.subjectOptions[0]
+    //this.subjectModel = this.subjectModels[0]
+    //console.log("THIS IS subjectOptions", this.subjectOptions)
 
   }
 
   
   onChangeSubject() {
     this.selectedSubjects =[];
-    this.subjectModel.forEach((subjModel) => {
+    this.subjectOptions.forEach((subjModel) => {
       var subj = this.subjectOptions.filter((subj) => {
         return subj.id === subjModel;
       });
-      this.selectedSubjects.push(subj[0].name);
+      if (subj[0] !== undefined){this.selectedSubjects.push(subj[0].name);}
       this.getUrls();
       
     })
@@ -156,7 +161,9 @@ export class SearchFormComponent implements OnInit {
   getUrls() {
     console.log("get URLs in search-form.component");
     this.searchResults = [];
-    this.searchResults.push(this.selectedSubjects);
+    //this.searchResults.push(this.selectedSubjects);
+    //console.log("THIS IS selectedSubjects", this.selectedSubjects)
+    this.searchResults.push(this.subjectModel.name);
     this.searchResults.push(this.catOptions);
     this.showResultSection = true;
     var el = document.getElementById("resultDiv");
