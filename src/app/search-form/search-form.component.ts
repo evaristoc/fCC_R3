@@ -144,7 +144,7 @@ export class SearchFormComponent implements OnInit {
       this.getUrls();
       
     })
-    this.getUrls();
+    
     
     this.isActive = (this.selectedSubjects.length > 0) ? true : false;
   }
