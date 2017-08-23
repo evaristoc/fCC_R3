@@ -136,16 +136,15 @@ export class SearchFormComponent implements OnInit {
   
   onChangeSubject() {
     this.selectedSubjects =[];
-    // this.subjectModel.forEach((subjModel) => {
-    //   var subj = this.subjectOptions.filter((subj) => {
-    //     return subj.id === subjModel;
-    //   });
-    //   this.selectedSubjects.push(subj[0].name);
-    //   this.getUrls();
+    this.subjectModel.forEach((subjModel) => {
+      var subj = this.subjectOptions.filter((subj) => {
+        return subj.id === subjModel;
+      });
+      this.selectedSubjects.push(subj[0].name);
+      this.getUrls();
       
-    // })
+    })
     this.getUrls();
-    this.selectedSubjects = this.subjectOptions.slice();
     
     this.isActive = (this.selectedSubjects.length > 0) ? true : false;
   }
