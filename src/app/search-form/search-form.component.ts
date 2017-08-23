@@ -150,6 +150,7 @@ export class SearchFormComponent implements OnInit {
       
     })
     
+    
     this.isActive = (this.selectedSubjects.length > 0) ? true : false;
   }
   loadSubject() {

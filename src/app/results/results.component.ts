@@ -15,6 +15,7 @@ export class ResultsComponent implements OnInit {
   selectedPlatforms: Array<any> = [];
   show:boolean = true;
   public filters:Array<any> = [];
+  public filteredResults: Array<any> = [];
   public start: number = 1;
   public platforms : FirebaseListObservable<any>;
   @Input('result_dropdown') result_dropdown: Array<any>;
@@ -40,7 +41,10 @@ export class ResultsComponent implements OnInit {
   setFilters(result_dropdown) {
     //console.log("THIS IS results in setFilters ", results[1]);
     //console.log(typeof this.filters)
-    result_dropdown[1].forEach((cat)=> this.filters.push({name:cat, isActive:true}));
+    this.filters = this.result_dropdown[1].slice();
+    if( this.filteredResults.length === 0 ){
+      this.filteredResults = this.result_dropdown[1].slice();
+    } 
     console.log("in setFilter: values of filters", this.filters);
   } 
   
@@ -126,7 +130,16 @@ callback(filterset_result_dropdown);
      //this.filters[cat] = false
    }
 
-   }
+  }
+
+  
+  toggleCat( category ) {
+    if( this.filteredResults.includes( category ) ) {
+      this.filteredResults.splice( this.filteredResults.indexOf( category ), 1 )
+    } else {
+      this.filteredResults.push(category);
+    }
+  }
 
 
 //onSubmit(){

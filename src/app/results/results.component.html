@@ -9,16 +9,20 @@
 
         <div class="col-md-8" style="padding:1em; background: #eee">
             <h3>Filter by:</h3>
-            <!--<p>
-                <button *ngFor="let cat of results[1]" class="btn btn-success mb-3 mr-3" (click)="toggleCat($event, cat)">{{cat}}</button>
-            </p>-->
-            <form (ngSubmit)="onSubmit()" #myform="ngForm">
+            <p>
+                <button *ngFor="let cat of filters" 
+                        class="btn mb-3 mr-3" 
+                        [ngClass]="this.filteredResults.includes( cat ) ? 'btn-success' : 'btn-danger'"
+                        (click)="toggleCat(cat)">{{cat}}
+                </button>
+            </p>
+            <!--<form (ngSubmit)="onSubmit()" #myform="ngForm">
                 <ul *ngFor="let cat of filters; let i=index">
                     <li class='form-group' style='list-style-type: none;'>
                         <label [class.selected]="cat.name.checked"><input id={{cat.name}} class="form-control" type="checkbox" value={{cat.isActive}} (change)="logCheckbox($event, cat.name)" name={{cat.name}} NgModel [(ngModel)]="cat.isActive" [checked]="cat.isActive"> {{cat.name}}</label>
                     </li>
                 </ul>
-            </form>
+            </form>-->
         </div>
 
     </div>
@@ -51,8 +55,14 @@
                     <!--<ng-container *ngFor="let catty of convertToArray(myform.value | json)">-->
                     <!--This is in HTML {{catty}}-->
                     <tr *ngFor="let selection of selectedPlatforms">
+
+                        <td [hidden]="!filteredResults.includes(selection[6])">this is {{ selection }}</td>
+                        <!--<td [hidden]="!filteredResults.includes(selection[6])">{{ filteredResults.includes(selection[6]) }}</td>-->
+                        <!--<td *ngIf="filters.includes(selection[6])">{{selection[6]}}</td>-->
+
                         <b>Filter value</b>: {{myform.value[selection[6]]}};
                         <td *ngIf="myform.value[selection[6]]"><b>Subject</b>: {{result_dropdown[0]}}; <b>Category</b>: {{selection[6]}}</td>
+
                     </tr>
                     <!--<tr *ngIf="selection[6] in catty">
                                 <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}</strong><br/><span class="badge badge-default">{{selection[6]|maxlengthdoc:50}}</span></td>
