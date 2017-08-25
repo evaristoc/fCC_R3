@@ -25,11 +25,12 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { ResultsComponent } from './results/results.component';
 import { AboutComponent } from './about/about.component';
 import { NgxElasticlunrModule } from 'ngx-elasticlunr';
-import { PlatformComponent } from './platform/platform.component';
+//import { PlatformComponent } from './platform/platform.component';
 import { MainbodyComponent } from './mainbody/mainbody.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
+import { TestingservicesComponent } from './testingservices/testingservices.component';
 
 
 @NgModule({
@@ -40,9 +41,10 @@ import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
     SearchFormComponent,
     ResultsComponent,
     AboutComponent,
-    PlatformComponent,
+    //PlatformComponent,
     MainbodyComponent,
     MaxlengthdocPipe,
+    TestingservicesComponent,
     
   ],
   imports: [

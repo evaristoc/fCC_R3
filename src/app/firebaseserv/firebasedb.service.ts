@@ -7,12 +7,12 @@ import 'rxjs/add/operator/map';
 export class FirebasedbService {
   categories: FirebaseListObservable<any[]>;
   subjects: FirebaseListObservable<any[]>;
-  platforms: FirebaseListObservable<any[]>;
+  platforms: FirebaseListObservable<any>;
   texts: FirebaseListObservable<any[]>;
   userslist: FirebaseListObservable<any[]>;
 
   constructor(private db: AngularFireDatabase) {
-    this.platforms = this.db.list('/platformstable');
+    this.platforms = this.db.list('/platformstable',{query:{limitToFirst:50}});
   }
   
   
