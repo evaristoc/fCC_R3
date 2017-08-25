@@ -25,7 +25,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { ResultsComponent } from './results/results.component';
 import { AboutComponent } from './about/about.component';
 import { NgxElasticlunrModule } from 'ngx-elasticlunr';
-//import { PlatformComponent } from './platform/platform.component';
+import { PlatformComponent } from './platform/platform.component';
 import { MainbodyComponent } from './mainbody/mainbody.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -41,7 +41,7 @@ import { TestingservicesComponent } from './testingservices/testingservices.comp
     SearchFormComponent,
     ResultsComponent,
     AboutComponent,
-    //PlatformComponent,
+    PlatformComponent,
     MainbodyComponent,
     MaxlengthdocPipe,
     TestingservicesComponent,

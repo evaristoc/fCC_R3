@@ -66,7 +66,7 @@ export class SearchFormComponent implements OnInit {
     console.log(this.selPlatforms)
     this.subjectModel = this.subjectOptions[0]
     this.selectedCat(this.catOptions);
-    this.setResults(this.catOptions,this.outputResults)
+    this.setResults(this.catOptions,console.log)
   }
 
   toggleCat( category ) {
@@ -104,7 +104,7 @@ setResults(filterset_result_dropdown, callback){
             var prevalence = 1;
             var ranking = 1;
             if (relevance > 0 && typeof platdetails.subjects != 'undefined') {
-              this.selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category, true]);
+              this.selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
               console.log("title", platdetailsvalues.category)
             }
           }
@@ -122,19 +122,20 @@ setResults(filterset_result_dropdown, callback){
   callback(filterset_result_dropdown, this.selplats);
 }
 
-outputResults(filterset_result_dropdown, selplats){
-  //callback(filterset_result_dropdown);
-  console.log("FILTERER in outputResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
-  for(let sp = 0; sp < selplats.length; sp++){
-    var selplat = selplats[sp]
-    var fil = filterset_result_dropdown.filter((cat)=>{
-        if(cat.category===selplat[2]){
-          return cat.isActive
-        }
-      })[0];
-    selplats[sp] = selplat.slice(selplat.length-1)+[fil]  
-  }
-}
+// outputResults(filterset_result_dropdown, selplats){
+//   //callback(filterset_result_dropdown);
+//   console.log("FILTERER in outputResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
+//   for(let sp = 0; sp < selplats.length; sp++){
+//     var selplat = selplats[sp]
+//     var fil = filterset_result_dropdown.filter((cat)=>{
+//         if(cat.category===selplat[2]){
+//           return cat.isActive
+//         }
+//       })[0];
+    
+//     selplats[sp] = selplat.slice(selplat.length-1)+[fil]  
+//   }
+// }
 
 
 outputR(selOp, sel){

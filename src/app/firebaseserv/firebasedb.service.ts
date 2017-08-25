@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 //import {Category} from '../models/Category';
 
@@ -10,6 +11,7 @@ export class FirebasedbService {
   platforms: FirebaseListObservable<any>;
   texts: FirebaseListObservable<any[]>;
   userslist: FirebaseListObservable<any[]>;
+   platform: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.platforms = this.db.list('/platformstable',{query:{limitToFirst:50}});
@@ -32,10 +34,17 @@ export class FirebasedbService {
  }
 
 
- //getPlatforms() {
- //    this.platforms = this.db.list('/platformstable');
- //    return this.platforms;   
- //}
+ getPlatform(platObs, collector) {
+    //var collector;
+     platObs
+            .subscribe(
+            //(rp) => {console.log(rp); console.log(this.db.list('/platformstable/'+rp['selection']).forEach((x)=>{console.log(x); cb(x).then((data)=>{collector = data},(err)=>{console.log(err)})}))},
+            (rp) => {console.log(rp); console.log(this.db.list('/platformstable/'+rp['selection']).forEach((x)=>{if(typeof x !== undefined && x.length > 0){collector = x;}}))},
+            (err)=>console.log('An error happened: '+err.message),
+            ()=>console.log('END') );
+    //console.log('collector', collector)
+    //return collector;   
+ }
 
  //getPlatforms() {
  //    var message;
