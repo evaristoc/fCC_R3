@@ -34,8 +34,10 @@
 </div>
 <!--<div id="resultDiv"></div>-->
 <!--<app-results [selectedsubj]="subj.name"></app-results>-->
-<div>
-
+<!--<app-results [selectedsubj]="subj.subject" *ngIf="subj.subject" [@myAnimation]></app-results>
+<ng-content></ng-content>-->
+<div id="resultDiv"></div>
+<div *ngIf="subj.subject" [@myAnimation]>
     <div class="col-12" style="margin-top:3em;">
         <h2>Platforms for <span class="badge badge-pill badge-default">
                     {{subj.subject}}
@@ -49,13 +51,6 @@
                 <button *ngFor="let cat of catOptions" class="btn mb-3 mr-3" [ngClass]="selectedCat(cat) ? 'btn-success' : 'btn-danger'" (click)="toggleCat(cat)">{{cat.category}}, {{cat.isActive}}
                 </button>
             </p>
-            <!--<form (ngSubmit)="onSubmit()" #myform="ngForm">
-                <ul *ngFor="let cat of catfilters; let i=index">
-                    <li class='form-group' style='list-style-type: none;'>
-                        <label [class.selected]="cat.category.checked"><input id={{cat.category}} class="form-control" type="checkbox" value={{cat.isActive}} (change)="logCheckbox($event, cat.name)" name={{cat.name}} NgModel [(ngModel)]="cat.isActive" [checked]="cat.isActive"> {{cat.name}}</label>
-                    </li>
-                </ul>
-            </form>-->
         </div>
 
     </div>
@@ -66,34 +61,34 @@
         <pre>submitted value: <br>{{myform.value | json}}</pre>
 
     </div>
-</div>
 
-<div class="col-12 d-flex justify-content-center flex-wrap">
-    <div class="col-md-8">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Platform
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <ng-container *ngFor="let selection of selplats">
-                    <!--<p hidden="{selection[-1]}"> {{selection}}</p>-->
-                    <!--<p *ngIf="outputR(catOptions, selection)"> {{selection[0]}}, {{selection[selection.length - 1]}}</p>-->
-                    <tr *ngIf="outputR(catOptions, selection)">
-                        <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}, {{selection[6]}}</strong><br/><span class="badge badge-default">{{selection[1]|maxlengthdoc:50}}</span></td>
-                        <td class="text-left">
-                            <a [routerLink]="['/platform/',selection[6]]" [queryParams]="{selsubject:subj.subject} " routerLinkActive="active " class="btn btn-primary ">
+    <div class="col-12 d-flex justify-content-center flex-wrap">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Platform
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let selection of selplats">
+                        <!--<p hidden="{selection[-1]}"> {{selection}}</p>-->
+                        <!--<p *ngIf="outputR(catOptions, selection)"> {{selection[0]}}, {{selection[selection.length - 1]}}</p>-->
+                        <tr *ngIf="outputR(catOptions, selection)">
+                            <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}, {{selection[6]}}</strong><br/><span class="badge badge-default">{{selection[1]|maxlengthdoc:50}}</span></td>
+                            <td class="text-left">
+                                <a [routerLink]="['/platform/',selection[6]]" [queryParams]="{selsubject:subj.subject} " routerLinkActive="active " class="btn btn-primary ">
                             More info
                         </a></td>
-                    </tr>
-                </ng-container>
-            </tbody>
-        </table>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
