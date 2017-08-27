@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, trigger, transition, style, animate, state } from '@angular/core';
+import { Component, OnInit, Input, trigger, transition, style, animate, state, OnDestroy } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -7,7 +7,8 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
 // from https://github.com/softsimon/angular-2-dropdown-multiselect
 //import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts   } from 'angular-2-dropdown-multiselect';
-
+//https://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html
+//https://blog.thoughtram.io/angular/2016/10/13/two-way-data-binding-in-angular-2.html
 //OJO: check the use of Enums https://www.gurustop.net/blog/2016/05/24/how-to-use-typescript-enum-with-angular2/
 
 @Component({
@@ -34,141 +35,107 @@ import { FirebasedbService } from '../firebaseserv/firebasedb.service';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements OnInit {
-  
-  categories : Array<any>;
-  subjects : Array<any>;
-  catOptions: Array<any>;
-  categoryOptions: Array<any>;
-  subjOptions: Array<any>;
-  selectedSubjects: Array<any> = [];
-  selectedCategories: Array<any> = [];
-  searchResults: Array<any>;
-  //platforms : Array<any>;
-  public platforms : FirebaseListObservable<any>;
-  isActive = false;
-  showResultSection = false;
-  subjectOptions: Array<any> = [];
+  public selectedSubject: Array<any>;
+  public showSubjectSection = false;
+  public subjectOptions: Array<any> = [{name:"NOTHING"}];
   OPTIONTEST : any;
+  public subj:string='';
+  subjectModel: any;
+
+  private selPlatforms : FirebaseListObservable<any>;
+  public selplats : Array<any> = [];
+  public catfilters:Array<any>;
+  public catOptions: Array<any> = [];
 
   constructor(public db: FirebasedbService) {
-    db.getCategories().forEach((cats) => {
-      console.log(cats[0]); 
-      this.categories = cats[0];
-      console.log(this.categories[0]);
-      this.catOptions = [];
-      this.categories.forEach((category, index) => {
-        this.catOptions.push(category);
-      });
-    });
+
+
+    const fireb_subjects$: FirebaseListObservable<any> = this.db.getSubjects();
+    fireb_subjects$.subscribe((subjs) => {console.log(subjs); return this.subjectOptions = subjs[0].map((subjs, i) => {return {subject:subjs[1], id:i+1}},[])});
+  
+    const fireb_categories$: FirebaseListObservable<any> = this.db.getCategories();
+    fireb_categories$.forEach((cats)=>{cats[0].forEach((c)=>{this.catOptions.push({category:c,isActive:true})})});
     
-    db.getSubjects().forEach((subjs)=>{
-      //console.log(subjs)
-      this.subjects = subjs[0];
-      this.subjOptions = [];
-      this.subjects.forEach((subject, index) => {
-        var subjectObj = {};
-        subjectObj['id'] = index+1;
-        subjectObj['name'] = subject[1];
-        this.subjectOptions.push(subjectObj);
-      });
-      //console.log(this.subjOptions)
-      //this.loadSubject();
-      
-    });
-
-    //db.getPlatforms().forEach((x)=>{console.log(x)});
-    //console.log(this.platforms)
-
-    //db.getPlatforms();
-    this.platforms = this.db.platforms;
-    this.platforms.forEach((plat) => {
-      plat.forEach((platdetails) => {
-        //console.log(arrItem);
-      })
-    })
-    
-    console.log(this.platforms);
-
-    db.getTexts().forEach((txts)=>{
-      //console.log(x)
-    });
-    //console.log(this.platforms)
+    this.selPlatforms = this.db.platforms;
 
   };
   
-  
- 
-  
-  subjectModels: any[] = [
-    { backgroundColor: 'black', fontColor: 'white', display: 'Dark' },
-    { backgroundColor: 'white', fontColor: 'black', display: 'Light' },
-    { backgroundColor: 'grey', fontColor: 'white', display: 'Sleek' }
-  ];
-  subjectModel: any;
-    // // Settings configuration
-  // subjectSettings: IMultiSelectSettings = {
-  //     checkedStyle: 'fontawesome',
-  //     buttonClasses: 'btn btn-default btn-block',
-  //     displayAllSelectedText: false,
-  //     dynamicTitleMaxItems: 2,
-  //     showCheckAll: false,
-  //     showUncheckAll: false,
-  //     selectionLimit: 1,
-  //     autoUnselect: true,
-  //     closeOnSelect: true
-  // };
-  
-  // // Text configuration
-  // subjectTexts: IMultiSelectTexts = {
-  //     checkAll: 'Select all',
-  //     uncheckAll: 'Unselect all',
-  //     checked: 'selected',
-  //     checkedPlural: 'subjects selected',
-  //     defaultTitle: 'Please select',
-  //     allSelected: 'All selected',
-  // };
-  
-  // // Labels / Parents
-
 
   ngOnInit() {
+    console.log("subjectOptions in ngOnInit, searchform ", this.subjectOptions);
     this.subjectModel = this.subjectOptions[0]
-    //this.subjectModel = this.subjectModels[0]
-    //console.log("THIS IS subjectOptions", this.subjectOptions)
+      console.log("categoryOptionslist in ngOnInit, searchform ", this.catOptions);  
+    this.selectedCat(this.catOptions);
+     this.setResults(this.catOptions,console.log)
+    console.log(this.selPlatforms)
 
   }
 
-  
-  onChangeSubject() {
-    this.selectedSubjects =[];
-    this.subjectOptions.forEach((subjModel) => {
-      var subj = this.subjectOptions.filter((subj) => {
-        return subj.id === subjModel;
-      });
-      if (subj[0] !== undefined){this.selectedSubjects.push(subj[0].name);}
-      this.getUrls();
-      
+   toggleCat( category ) {
+    let cat = this.catOptions.filter(
+     (cats)=> {if (cats.category === category.category)
+       {return cats}
+     })[0]  
+    if (cat.isActive === true){
+      this.catOptions[this.catOptions.indexOf(cat)].isActive = false;
+      return
+    }else{
+      this.catOptions[this.catOptions.indexOf(cat)].isActive = true;
+      return
+    }
+  }
+
+
+selectedCat(category){
+  return this.catOptions.filter(
+     (cats)=> {if (cats.category === category.category)
+       {return cats.isActive}
+     })[0]
+}
+
+setResults(filterset_result_dropdown, callback){
+  //callback(filterset_result_dropdown);
+  console.log("FILTERER in setResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
+   this.selplats = [];
+    this.selPlatforms.forEach((plat) => {
+      plat.forEach((platdetails) => {
+        Object.keys(platdetails).forEach((platdetailskey) => {
+          var platdetailsvalues = platdetails[platdetailskey]; 
+          if(platdetailsvalues.category){
+            var relevance = 1;
+            var prevalence = 1;
+            var ranking = 1;
+            if (relevance > 0 && typeof platdetails.subjects != 'undefined') {
+              this.selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
+              console.log("title", platdetailsvalues.category)
+            }
+          }
+        })
+      })
+    this.selplats = this.selplats.sort((a,b)=> {
+      if (a[4]<b[4]) {
+        return 1
+      } else if (a[4]>b[4]) {
+        return -1
+      } 
+      return 0
     })
+  })  
+  callback(filterset_result_dropdown, this.selplats);
+}
+
+outputR(selOp, sel){
+  //callback(filterset_result_dropdown);
+  //console.log("FILTERER in outputResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
+  return selOp.filter((cat)=>{
+      if(cat.category===sel[2]){
+        return cat.isActive
+      }
+    })[0];
+}
+
+  ngOnDestroy(){
     
-    
-    this.isActive = (this.selectedSubjects.length > 0) ? true : false;
-  }
-  loadSubject() {
-    this.subjectOptions = this.subjOptions;
-  }
-  
-  
-  getUrls() {
-    console.log("get URLs in search-form.component");
-    this.searchResults = [];
-    //this.searchResults.push(this.selectedSubjects);
-    //console.log("THIS IS selectedSubjects", this.selectedSubjects)
-    this.searchResults.push(this.subjectModel.name);
-    this.searchResults.push(this.catOptions);
-    this.showResultSection = true;
-    var el = document.getElementById("resultDiv");
-    var top = el.offsetTop;
-    window.scrollTo(0,top);
   }
 
 }

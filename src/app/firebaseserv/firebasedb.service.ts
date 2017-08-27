@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 //import {Category} from '../models/Category';
 
@@ -7,12 +8,13 @@ import 'rxjs/add/operator/map';
 export class FirebasedbService {
   categories: FirebaseListObservable<any[]>;
   subjects: FirebaseListObservable<any[]>;
-  platforms: FirebaseListObservable<any[]>;
+  platforms: FirebaseListObservable<any>;
   texts: FirebaseListObservable<any[]>;
   userslist: FirebaseListObservable<any[]>;
+  platform: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.platforms = this.db.list('/platformstable');
+    this.platforms = this.db.list('/platformstable');//,{query:{limitToFirst:200}}
   }
   
   
@@ -32,10 +34,9 @@ export class FirebasedbService {
  }
 
 
- //getPlatforms() {
- //    this.platforms = this.db.list('/platformstable');
- //    return this.platforms;   
- //}
+  getItem(id: string) {
+    return this.db.list('/platformstable/'+id);
+  }
 
  //getPlatforms() {
  //    var message;

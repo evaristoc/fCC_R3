@@ -10,12 +10,14 @@
                     <form>
                         <div class="form-group">
                             <h3>What subject(s) interest you? </h3>
-                            <select name="subjects" class="form-control" [(ngModel)]="subjectModel" (ngModelChange)="onChangeSubject($event)">
-                            <option *ngFor="let subj of subjectOptions" [ngValue]="subj">{{subj.name}}</option>
+                            <select name="subjects" class="form-control" [(ngModel)]="subj">
+                            <option *ngFor="let subj of subjectOptions" [ngValue]="subj">{{subj.subject}}</option>
         </select>
                         </div>
                     </form>
-                    <p>your selection : {{subjectModel.name}}</p>
+                    (ngModelChange)="onChangeSubject($event)"
+                    <p>your selection : {{subj.subject}}</p>
+                    <!--<p>{{subjectOptions}}</p>-->
                 </div>
 
                 <!--
@@ -28,7 +30,65 @@
 -->
             </div>
         </div>
-        <div id="resultDiv"></div>
-        <app-results [result_dropdown]="searchResults" *ngIf="showResultSection" [@myAnimation]></app-results>
+    </div>
+</div>
+<!--<div id="resultDiv"></div>-->
+<!--<app-results [selectedsubj]="subj.name"></app-results>-->
+<!--<app-results [selectedsubj]="subj.subject" *ngIf="subj.subject" [@myAnimation]></app-results>
+<ng-content></ng-content>-->
+<div id="resultDiv"></div>
+<div *ngIf="subj.subject" [@myAnimation]>
+    <div class="col-12" style="margin-top:3em;">
+        <h2>Platforms for <span class="badge badge-pill badge-default">
+                    {{subj.subject}}
+                </span></h2>
+    </div>
+    <div class="col-12 d-flex justify-content-center about" id="{subj.subject}" style="margin-bottom:3em; text-align:left">
+
+        <div class="col-md-8" style="padding:1em; background: #eee">
+            <h3>Filter by:</h3>
+            <p>
+                <button *ngFor="let cat of catOptions" class="btn mb-3 mr-3" [ngClass]="selectedCat(cat) ? 'btn-success' : 'btn-danger'" (click)="toggleCat(cat)">{{cat.category}}, {{cat.isActive}}
+                </button>
+            </p>
+        </div>
 
     </div>
+
+    <div style="margin-top: 20px" *ngIf="myform">
+        <div>Form details:-</div>
+        <pre>Is form submitted?: <br>{{myform.submitted | json}}</pre>
+        <pre>submitted value: <br>{{myform.value | json}}</pre>
+
+    </div>
+
+    <div class="col-12 d-flex justify-content-center flex-wrap">
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Platform
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let selection of selplats">
+                        <!--<p hidden="{selection[-1]}"> {{selection}}</p>-->
+                        <!--<p *ngIf="outputR(catOptions, selection)"> {{selection[0]}}, {{selection[selection.length - 1]}}</p>-->
+                        <tr *ngIf="outputR(catOptions, selection)">
+                            <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}, {{selection[6]}}</strong><br/><span class="badge badge-default">{{selection[1]|maxlengthdoc:50}}</span></td>
+                            <td class="text-left">
+                                <a [routerLink]="['/platform/',selection[6]]" [queryParams]="{selsubject:subj.subject} " routerLinkActive="active " class="btn btn-primary ">
+                            More info
+                        </a></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
