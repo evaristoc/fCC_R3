@@ -86,8 +86,9 @@
                     <!--<p hidden="{selection[-1]}"> {{selection}}</p>-->
                     <!--<p *ngIf="outputR(catOptions, selection)"> {{selection[0]}}, {{selection[selection.length - 1]}}</p>-->
                     <tr *ngIf="outputR(catOptions, selection)">
-                        <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}</strong><br/><span class="badge badge-default">{{selection[1]|maxlengthdoc:50}}</span></td>
-                        <td class="text-left"><a [routerLink]="['/platform/',selection[6]]" routerLinkActive="active" class="btn btn-primary">
+                        <td class="text-left"><strong>{{selection[0]|maxlengthdoc:50}}, {{selection[6]}}</strong><br/><span class="badge badge-default">{{selection[1]|maxlengthdoc:50}}</span></td>
+                        <td class="text-left">
+                            <a [routerLink]="['/platform/',selection[6]]" [queryParams]="{selsubject:subj.subject} " routerLinkActive="active " class="btn btn-primary ">
                             More info
                         </a></td>
                     </tr>

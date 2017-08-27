@@ -11,10 +11,10 @@ export class FirebasedbService {
   platforms: FirebaseListObservable<any>;
   texts: FirebaseListObservable<any[]>;
   userslist: FirebaseListObservable<any[]>;
-   platform: FirebaseListObservable<any>;
+  platform: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.platforms = this.db.list('/platformstable',{query:{limitToFirst:50}});
+    this.platforms = this.db.list('/platformstable');//,{query:{limitToFirst:200}}
   }
   
   
@@ -34,17 +34,9 @@ export class FirebasedbService {
  }
 
 
- getPlatform(platObs, collector) {
-    //var collector;
-     platObs
-            .subscribe(
-            //(rp) => {console.log(rp); console.log(this.db.list('/platformstable/'+rp['selection']).forEach((x)=>{console.log(x); cb(x).then((data)=>{collector = data},(err)=>{console.log(err)})}))},
-            (rp) => {console.log(rp); console.log(this.db.list('/platformstable/'+rp['selection']).forEach((x)=>{if(typeof x !== undefined && x.length > 0){collector = x;}}))},
-            (err)=>console.log('An error happened: '+err.message),
-            ()=>console.log('END') );
-    //console.log('collector', collector)
-    //return collector;   
- }
+  getItem(id: string) {
+    return this.db.list('/platformstable/'+id);
+  }
 
  //getPlatforms() {
  //    var message;
