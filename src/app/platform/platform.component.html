@@ -3,20 +3,34 @@
         <h1>{{platformdet.title}}</h1>
         <p>{{platformdet.description}}</p>
     </div>
-    <div class="col-md-6">
-        <h2>{{platformdet.origurl}} links</h2>
-        <h4>that might interest you based on <b>subject's selection</b></h4>
-        <ul>
-            <li *ngFor="let link of platformdet.params"><a href="{{platformdet.minsecurity}}{{platformdet.origurl}}{{link}}"> {{link}}</a></li>
-        </ul>
-        <p>ref, score, doc</p>
-        {{Elquery.length}}
-        <p>{{elObj.search(Elquery, { "fields": { "suburls": { "boost": 1 } } })[0].ref}}</p>
-        <ul>
-            <li *ngFor="let obj of elObj.search(Elquery[0][2], { 'fields': { 'suburls': { 'boost': 1 } } })"><a href="#"> {{obj.doc.suburls}} {{ obj.doc.docurl }}</a></li>
-        </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{{platformdet.origurl}} links</h2>
+            <h4>that might interest you about:</h4>
+            <h4><b>{{selsubject.toUpperCase()}}</b></h4>
+            <!--<ul>
+            <li *ngFor=" let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).slice(5) "><a href="# "> {{obj.doc.suburls}} {{ obj.doc.docurl }}</a></li>
+        </ul>-->
+            <ul *ngIf="elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).length > 0">
+                <li *ngFor="let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } })"><a href="# "> {{ obj.doc.docurl }}</a></li>
+            </ul>
+            <ul *ngIf="elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).length == 0">
+                <li><b>Sorry... our algorithm found no specific relevant match for your subject selection</b></li>
+            </ul>
+            <h4>Change Subject? Change queryParams</h4>
+            This is a Filter by Subject that is saved as queryParam
+            <button class="btn btn-default " (click)="myMethodChangingQueryParams() ">Click me!</button>
+        </div>
     </div>
-</div>
-<div>
-    <h4>Change queryParams</h4>
-    <button class="btn btn-default" (click)="myMethodChangingQueryParams()">Click me!<button>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>See other platforms in the same category</h2>
+            Here, a <b>carrousel</b> of other platforms of similar CATEGORY
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>People that mentioned this link also mentioned these ones...</h2>
+            Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform
+        </div>
+    </div>

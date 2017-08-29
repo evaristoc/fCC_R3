@@ -29,6 +29,7 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   private filterer : string;
   private fireb_subjects$: FirebaseListObservable<any>
   public Elquery:any;
+  public selsubject:string;
 
   constructor(private route: ActivatedRoute, private router: Router,public db : FirebasedbService, public elunr : ElasticlunrService ) {
 
@@ -48,7 +49,8 @@ export class PlatformComponent implements OnInit, OnDestroy  {
     let qparam: string;
     this.route.queryParams.take(1).subscribe((qprm)=>{qparam = qprm["selsubject"]});
     //console.log(qparam)
-    this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === qparam},[])[0][2]});
+    this.selsubject = qparam;
+    this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === qparam},[])[0][2].toString().replace(/,/g," | " )});
     this.route.params.take(1).subscribe((param) => {this.key = param["selection"]});
     //key = 'addons--mozilla--org'
     this.db.getItem(this.key).forEach((platdetails)=>{
