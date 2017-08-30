@@ -30,6 +30,25 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   private fireb_subjects$: FirebaseListObservable<any>
   public Elquery:any;
   public selsubject:string;
+  private getItByCat: any;
+  public itemsByCategory:Array<any>=['Nothing to report'];
+  private selPlatforms : FirebaseListObservable<any>;
+//  something
+//   private getPromise ( h ){
+//      return new Promise( ( res, rej )=>{
+//        if( h ){
+//          res( h )
+//         }
+//       })
+//     }
+
+// bb(f, h){
+//   this.something = f(h)
+// }
+
+public testData:Array<any>=[
+  {platform:'www.example.com',category:'thiscategory',description:'sum dolor sit amet, consectetur adipiscing elit, sed'},
+]
 
   constructor(private route: ActivatedRoute, private router: Router,public db : FirebasedbService, public elunr : ElasticlunrService ) {
 
@@ -43,6 +62,10 @@ export class PlatformComponent implements OnInit, OnDestroy  {
     this.fireb_subjects$ = this.db.getSubjects();
     //fireb_subjects$.subscribe((subjs) => {console.log(subjs); return this.subjectOptions = subjs[0].map((subjs, i) => {return {subject:subjs[1], id:i+1}},[])});  
 
+    //this.getItByCat = this.db.getItemsByCategory;
+
+    this.selPlatforms = this.db.platforms;
+    //console.log("selPlatforms", this.selPlatforms)
 }
 
   ngOnInit(){
@@ -58,6 +81,9 @@ export class PlatformComponent implements OnInit, OnDestroy  {
             if(platdetobj.$key !== 'subjects'){
                 console.log(platdetobj);
                 this.platformdet = platdetobj;
+                //this.itemsByCategory = this.gIBCClosure(platdetobj.category, this.selPlatforms);
+                //console.log("finding nemo",this.getItemsByCategory(platdetobj.category, this.selPlatforms))
+                //this.db.platforms.forEach((x)=>{x.forEach((xs,i)=>{console.log(this.itemsByCategory.push(i)); this.itemsByCategory.push(i); this.bb(this.getPromise,this.itemsByCategory.push(i))})})
                 this.lg = platdetobj.params.length;
                 for(let ixp = 0; ixp < this.lg; ixp++){
                     this.loadElList(platdetobj.params[ixp], ixp);
@@ -67,7 +93,8 @@ export class PlatformComponent implements OnInit, OnDestroy  {
         })
     }); 
     //console.log(this.item) //this.item outside the function is read before and doesn't work!
-  }
+//this.getItemsByCategory("api|package|framework|librar|stack|licens|addon|app", this.db.platforms.forEach((x)=>{console.log(x)}))  
+}
 
   public myMethodChangingQueryParams() {
   
@@ -119,6 +146,45 @@ export class PlatformComponent implements OnInit, OnDestroy  {
      }
    }
 
+
+ getItemsByCategory(cat:string, selPlatforms){
+    console.log(cat, selPlatforms);
+    let selplats = [];
+    selPlatforms.forEach((plat) => {
+      plat.forEach((platdetails) => {
+        Object.keys(platdetails).forEach((platdetailskey) => {
+          var platdetailsvalues = platdetails[platdetailskey]; 
+          if(platdetailsvalues.category === cat){
+            var relevance = 1;
+            var prevalence = 1;
+            var ranking = 1;
+            if (typeof platdetails.subjects != 'undefined') {
+              selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
+            }
+          }
+        })
+      })
+    selplats = selplats.slice(10);
+    selplats = selplats.sort((a,b)=> {
+      if (a[4]<b[4]) {
+        return 1
+      } else if (a[4]>b[4]) {
+        return -1
+      } 
+      return 0
+    })
+    return selplats
+  })
+ }
+
+gIBCClosure(a, b){
+  return this.getItemsByCategory(a, b)
+}
+
+	public images = IMAGES;
+
+
+
   ngOnDestroy(){
     //this.plat.unsubscribe()
     //this.subscription.unsubscribe();
@@ -126,3 +192,12 @@ export class PlatformComponent implements OnInit, OnDestroy  {
     //this.elunr.deleteDocuments(this.item, this.lg)
   }
 }
+
+//IMAGES array implementing Image interface
+var IMAGES = [
+	{ platform:'www.example.com',category:'thiscategory',description:'dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore' },
+  {platform:'www.anotherexample.com',category:'thiscategory',description:'od tempor incididunt ut labore'},
+  {platform:'www.otherexample.com',category:'thiscategory',description:'natus error sit voluptatem accusantium doloremque laudantium'},
+  {platform:'www.andthenmore.com',category:'thiscategory',description:'quaerat voluptatem'},
+  {platform:'www.andfinallythis.com',category:'thiscategory',description:'cillum dolore eu fugiat nulla pariatur'},	
+];

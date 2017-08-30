@@ -14,7 +14,7 @@ export class FirebasedbService {
   platform: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.platforms = this.db.list('/platformstable');//,{query:{limitToFirst:200}}
+    this.platforms = this.db.list('/platformstable',{query:{limitToFirst:200}});//,{query:{limitToFirst:200}}
   }
   
   
@@ -42,6 +42,37 @@ export class FirebasedbService {
  //    var message;
  //    this.platforms.push(message); 
  //}
+
+//  getItemsByCategory(cat:string){
+//      console.log(cat);
+//     let selplats = [];
+//     this.platforms.forEach((plat) => {
+//       plat.forEach((platdetails) => {
+//         Object.keys(platdetails).forEach((platdetailskey) => {
+//           var platdetailsvalues = platdetails[platdetailskey]; 
+//           if(platdetailsvalues.category === cat){
+//             var relevance = 1;
+//             var prevalence = 1;
+//             var ranking = 1;
+//             if (typeof platdetails.subjects != 'undefined') {
+//               selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
+//             }
+//           }
+//         })
+//       })
+//     selplats = selplats.slice(10);
+//     selplats = selplats.sort((a,b)=> {
+//       if (a[4]<b[4]) {
+//         return 1
+//       } else if (a[4]>b[4]) {
+//         return -1
+//       } 
+//       return 0
+//     })
+//     return selplats
+//   })
+//     //this.platforms.forEach((plat)=>{for(let ix; ix < plat.length; ix++){}})
+//  }
 
   getTexts() {
      this.texts = this.db.list('/textstable');

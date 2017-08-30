@@ -64,9 +64,9 @@ export class SearchFormComponent implements OnInit {
   ngOnInit() {
     console.log("subjectOptions in ngOnInit, searchform ", this.subjectOptions);
     this.subjectModel = this.subjectOptions[0]
-      console.log("categoryOptionslist in ngOnInit, searchform ", this.catOptions);  
+    console.log("categoryOptionslist in ngOnInit, searchform ", this.catOptions);  
     this.selectedCat(this.catOptions);
-     this.setResults(this.catOptions,console.log)
+    this.setResults(this.catOptions,console.log)
     console.log(this.selPlatforms)
 
   }
