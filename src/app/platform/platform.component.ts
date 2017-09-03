@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params  } from '@angular/router';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
+import { ModalplatformService } from '../modalserv/modalplatform.service';
 import { ElasticlunrService } from '../elasticlunrserv/elasticlunr.service';
 //import { NgxElasticlunrModule } from 'ngx-elasticlunr';
 import { Subscription } from 'rxjs';
@@ -53,7 +54,7 @@ public testData:Array<any>=[
   {platform:'www.example.com',category:'thiscategory',description:'sum dolor sit amet, consectetur adipiscing elit, sed'},
 ]
 
-  constructor(private route: ActivatedRoute, private router: Router,public db : FirebasedbService, public elunr : ElasticlunrService ) {
+  constructor(private route: ActivatedRoute, private router: Router,public db : FirebasedbService, public elunr : ElasticlunrService, private modalService: ModalplatformService ) {
 
     this.elObj = new elasticlunr(function() {
                  this.addField('suburls');
@@ -198,6 +199,14 @@ public elQuery(sq){
 gIBCClosure(a, b){
   return this.getItemsByCategory(a, b)
 }
+
+    openModal(id: string){
+        this.modalService.open(id);
+    }
+
+    closeModal(id: string){
+        this.modalService.close(id);
+    }
 
 	public images = IMAGES;
 
