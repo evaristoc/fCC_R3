@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params  } from '@angular/router';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
@@ -15,7 +15,7 @@ declare var elasticlunr: any;
   templateUrl: './platform.component.html',
   styleUrls: ['./platform.component.css']
 })
-export class PlatformComponent implements OnInit, OnDestroy  {
+export class PlatformComponent implements OnInit, Input, OnDestroy  {
   public platarr: Array<any> = []
   private plat:FirebaseListObservable<any>;
   private pl:Array<any> = [];
@@ -28,11 +28,14 @@ export class PlatformComponent implements OnInit, OnDestroy  {
   public elObj: any;
   private filterer : string;
   private fireb_subjects$: FirebaseListObservable<any>
-  public Elquery:any;
   public selsubject:string;
+  public qParam: string;
+  @Input() Elquery:any;
   private getItByCat: any;
   public itemsByCategory:Array<any>=['Nothing to report'];
   private selPlatforms : FirebaseListObservable<any>;
+  public subjectOptions: Array<any> = [{name:"NOTHING"}];
+  public subj:string='';
 //  something
 //   private getPromise ( h ){
 //      return new Promise( ( res, rej )=>{
@@ -66,14 +69,22 @@ public testData:Array<any>=[
 
     this.selPlatforms = this.db.platforms;
     //console.log("selPlatforms", this.selPlatforms)
+
+  const fireb_subjects$: FirebaseListObservable<any> = this.db.getSubjects();
+    fireb_subjects$.subscribe((subjs) => {console.log(subjs); return this.subjectOptions = subjs[0].map((subjs, i) => {return {subject:subjs[1], query:subjs[2].toString().replace(/,/g, " | "),id:i+1}},[])});
+  
+
 }
 
+//https://stackoverflow.com/questions/34761224/angular2-child-property-change-not-firing-update-on-bound-property
   ngOnInit(){
     let qparam: string;
     this.route.queryParams.take(1).subscribe((qprm)=>{qparam = qprm["selsubject"]});
     //console.log(qparam)
+    //console.log("subjectOptions", this.subjectOptions)
     this.selsubject = qparam;
-    this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === qparam},[])[0][2].toString().replace(/,/g," | " )});
+    this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === qparam},[])[0][2].toString().replace(/,/g," | " )}).unsubscribe();
+    
     this.route.params.take(1).subscribe((param) => {this.key = param["selection"]});
     //key = 'addons--mozilla--org'
     this.db.getItem(this.key).forEach((platdetails)=>{
@@ -96,20 +107,27 @@ public testData:Array<any>=[
 //this.getItemsByCategory("api|package|framework|librar|stack|licens|addon|app", this.db.platforms.forEach((x)=>{console.log(x)}))  
 }
 
-  public myMethodChangingQueryParams() {
-  
+  public myMethodChangingQueryParams(subj) {
+    console.log("subject in myMethodChangingQueryParams",subj)
     // Object.assign is used as apparently 
     // you cannot add properties to snapshot query params
     const queryParams: Params = Object.assign({}, this.route.snapshot.queryParams);
   
     // Do sth about the params
-    queryParams['selsubject'] = 'myNewValue';
+    queryParams['selsubject'] = subj;
   
     this.router.navigate(['./platform',this.key], { queryParams: queryParams });
   
+  let qparam: string;
+  this.route.queryParams.take(1).subscribe((qprm)=>{qparam = qprm["selsubject"]});
+  this.selsubject = qparam;
+  this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === qparam},[])[0][2].toString().replace(/,/g," | " )}).unsubscribe();
+
   }
 
-
+public elQuery(sq){
+  return sq.toString().replace(/,/g," | " )
+}
 
    loadElList(par: string, i: number) {
      if (par !== null) {
@@ -182,7 +200,6 @@ gIBCClosure(a, b){
 }
 
 	public images = IMAGES;
-
 
 
   ngOnDestroy(){
