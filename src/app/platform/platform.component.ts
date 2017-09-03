@@ -2,12 +2,12 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params  } from '@angular/router';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FirebasedbService } from '../firebaseserv/firebasedb.service';
-import { ModalplatformService } from '../modalserv/modalplatform.service';
 import { ElasticlunrService } from '../elasticlunrserv/elasticlunr.service';
 //import { NgxElasticlunrModule } from 'ngx-elasticlunr';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 declare var elasticlunr: any;
 
@@ -37,6 +37,7 @@ export class PlatformComponent implements OnInit, Input, OnDestroy  {
   private selPlatforms : FirebaseListObservable<any>;
   public subjectOptions: Array<any> = [{name:"NOTHING"}];
   public subj:string='';
+  closeResult: string;
 //  something
 //   private getPromise ( h ){
 //      return new Promise( ( res, rej )=>{
@@ -54,7 +55,11 @@ public testData:Array<any>=[
   {platform:'www.example.com',category:'thiscategory',description:'sum dolor sit amet, consectetur adipiscing elit, sed'},
 ]
 
-  constructor(private route: ActivatedRoute, private router: Router,public db : FirebasedbService, public elunr : ElasticlunrService, private modalService: ModalplatformService ) {
+  constructor(private route: ActivatedRoute, 
+              private router: Router,
+              public db : FirebasedbService,
+              public elunr : ElasticlunrService,
+              public modalService: NgbModal ) {
 
     this.elObj = new elasticlunr(function() {
                  this.addField('suburls');
@@ -131,6 +136,7 @@ public elQuery(sq){
 }
 
    loadElList(par: string, i: number) {
+     console.log(this.elObj.documentStore.docs);
      if (par !== null) {
        this.elObj.addDoc({
           'suburls': par.replace(/\W|\d/ig, ' '),
@@ -139,6 +145,10 @@ public elQuery(sq){
           'suburlsid': i
         })
       }
+    }
+
+    toArray(obj){
+      return Object.keys(obj).map(x => {return obj[x]});
     }
 
     showElList(filterer:string) {
@@ -200,15 +210,26 @@ gIBCClosure(a, b){
   return this.getItemsByCategory(a, b)
 }
 
-    openModal(id: string){
-        this.modalService.open(id);
-    }
-
-    closeModal(id: string){
-        this.modalService.close(id);
-    }
 
 	public images = IMAGES;
+
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 
 
   ngOnDestroy(){

@@ -18,9 +18,9 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { AppComponent } from './app.component';
 
 import { FirebasedbService } from './firebaseserv/firebasedb.service';
-import { ModalplatformService } from './modalserv/modalplatform.service';
 
 import { ElasticlunrService } from './elasticlunrserv/elasticlunr.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchFormComponent } from './search-form/search-form.component';
@@ -34,7 +34,6 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
 
 import { TestingservicesComponent } from './testingservices/testingservices.component';
-import { ModalComponent } from './modals/modalplatf.directive';
 
 
 @NgModule({
@@ -49,7 +48,6 @@ import { ModalComponent } from './modals/modalplatf.directive';
     MainbodyComponent,
     MaxlengthdocPipe,
     TestingservicesComponent,
-    ModalComponent,
     
   ],
   imports: [
@@ -62,8 +60,9 @@ import { ModalComponent } from './modals/modalplatf.directive';
     ScrollToModule.forRoot(),
     NgxElasticlunrModule.forRoot(),
     AppRoutingModule,
+    NgbModule.forRoot(),
   ],
-  providers: [FirebasedbService, ElasticlunrService, ModalplatformService],
+  providers: [FirebasedbService, ElasticlunrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
