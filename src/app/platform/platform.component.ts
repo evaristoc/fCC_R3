@@ -124,15 +124,20 @@ public testData:Array<any>=[
   
     this.router.navigate(['./platform',this.key], { queryParams: queryParams });
   
-  let qparam: string;
-  this.route.queryParams.take(1).subscribe((qprm)=>{qparam = qprm["selsubject"]});
-  this.selsubject = qparam;
-  this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === qparam},[])[0][2].toString().replace(/,/g," | " )}).unsubscribe();
+  //let qparam: string;
+  //this.route.queryParams.take(1).subscribe((qprm)=>{qparam = qprm["selsubject"]});
+  this.selsubject = subj;
+  this.fireb_subjects$.subscribe((subjs) => {return this.Elquery = subjs[0].filter((subjs, i) => {return subjs[1] === this.selsubject},[])[0][2].toString().replace(/,/g," | " )}).unsubscribe();
 
   }
 
+
 public elQuery(sq){
   return sq.toString().replace(/,/g," | " )
+}
+
+public elSearch(sq){
+
 }
 
    loadElList(par: string, i: number) {
@@ -150,6 +155,7 @@ public elQuery(sq){
     toArray(obj){
       return Object.keys(obj).map(x => {return obj[x]});
     }
+
 
     showElList(filterer:string) {
       //let filterer ;

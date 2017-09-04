@@ -1,17 +1,22 @@
-<div class="container-fluid text-left">
-    <div class="col-md-12">
-        <h1>{{platformdet.title}}</h1>
-        <p>{{platformdet.description}}</p>
+<div class="col-md-8">
+    <div class="jumbotron" style="background:#555555 !important; color:white">
+        <div class="container-fluid text-left">
+            <h1>{{platformdet.origurl}}</h1>
+            <h2>{{platformdet.title}}</h2>
+            <p>{{platformdet.description}}</p>
+        </div>
     </div>
+</div>
+
+<div class="container-fluid text-left">
     <div class="row">
         <div class="col-md-6">
-            <h2>{{platformdet.origurl}} links</h2>
-            <h4>that might interest you about:</h4>
+            <h3>{{platformdet.origurl}} links about</h3>
             <h4><b>{{selsubject.toUpperCase()}}</b></h4>
+            <h3>that might interest you</h3>
             <!--<ul>
             <li *ngFor=" let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).slice(5) "><a href="# "> {{obj.doc.suburls}} {{ obj.doc.docurl }}</a></li>
         </ul>-->
-            {{t.value}}
             <ul *ngIf="elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).length > 0">
                 <li *ngFor="let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } })" [value]="Elquery"><a href="# "> {{ obj.doc.docurl }}</a></li>
             </ul>
@@ -37,13 +42,12 @@
 
         <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title">{{platformdet.origurl}} links</h4>
                 <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
             </div>
             <div class="modal-body">
-                <p>One fine body&hellip;</p>
                 <ul>
                     <li *ngFor="let link of toArray(elObj.documentStore.docs); let i = index"><a href="http://{{platformdet.origurl}}{{link.docurl}}">{{link.docurl}}</a></li>
                 </ul>
@@ -53,7 +57,7 @@
             </div>
         </ng-template>
 
-        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">See all the links</button>
 
         <hr>
 
