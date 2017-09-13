@@ -82,7 +82,7 @@
                         <!--<p hidden="{selection[-1]}"> {{selection}}</p>-->
                         <!--<p *ngIf="outputR(catOptions, selection)"> {{selection[0]}}, {{selection[selection.length - 1]}}</p>-->
                         <tr *ngIf="outputR(catOptions, objdetails)">
-                            <td class="text-left"><strong>{{objdetails.origurl?(objdetails.origurl|maxlengthdoc:50):('')}}</strong><br/><span class="badge badge-default">{{objdetails.title?(objdetails.title|maxlengthdoc:50):('')}}</span> <span class="badge badge-success">{{objdetails.c}}</span>                                {{objdetails.rf}} {{objdetails[subj.subject]}}</td>
+                            <td class="text-left"><strong>{{objdetails.origurl?(objdetails.origurl|maxlengthdoc:50):('')}}</strong><br/><span class="badge badge-default">{{objdetails.title?(objdetails.title|maxlengthdoc:50):('')}}</span> <span class="badge badge-success">{{objdetails.c}}</span>                                </td>
                             <td class="text-left">
                                 <a [routerLink]="['/platform/',objdetails.$key]" [queryParams]="{selsubject:subj.subject} " routerLinkActive="active " class="btn btn-primary ">
                             More info
