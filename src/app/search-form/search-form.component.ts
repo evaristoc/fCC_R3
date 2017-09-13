@@ -93,26 +93,68 @@ selectedCat(category){
      })[0]
 }
 
+//https://github.com/angular/angularfire2/issues/558
+//https://stackoverflow.com/questions/39795634/angular-2-change-detection-and-changedetectionstrategy-onpush/39802466#39802466
 setResults(filterset_result_dropdown, callback){
   //callback(filterset_result_dropdown);
   console.log("FILTERER in setResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
    this.selplats = [];
     this.selPlatforms.forEach((plat) => {
       plat.forEach((platdetails) => {
+        let objdetails = {}
         Object.keys(platdetails).forEach((platdetailskey) => {
           var platdetailsvalues = platdetails[platdetailskey]; 
           if(platdetailsvalues.category){
             var relevance = 1;
             var prevalence = 1;
             var ranking = 1;
+            //console.log(platdetailsvalues);
             if (relevance > 0 && typeof platdetails.subjects != 'undefined') {
-              this.selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category]);
-              console.log("title", platdetailsvalues.category)
-            }
+              //platdetailsvalues.category = typeof platdetailsvalues.category === 'object'? platdetailsvalues.category[0]:platdetailsvalues.category;
+              //this.selplats.push([platdetailsvalues.origurl, platdetailsvalues.title, platdetailsvalues.category_regex, relevance, prevalence, ranking, platdetails.$key, platdetailsvalues.category, platdetailsvalues.crawlstatus]);
+              //this.selplats.push({origurl:platdetailsvalues.origurl, title:platdetailsvalues.title, cat:platdetailsvalues.category_regex, $key:platdetails.$key});
+              //console.log("title", platdetailsvalues.category)
+              objdetails['origurl'] = platdetailsvalues.origurl;
+              if(platdetailsvalues.title){
+              if((platdetailsvalues.title !== 'noinformationfound') && (platdetailsvalues.title !== '403 Forbidden') && (platdetailsvalues.title !== 'Login') && (!platdetailsvalues.title.match(/4|5/)) ){
+              objdetails['title'] = platdetailsvalues.title;
+              }else{
+                objdetails['title'] = '';
+              };
+              };
+              objdetails['cat'] = platdetailsvalues.category_regex;
+              objdetails['c'] = platdetailsvalues.category;
+              objdetails['$key'] = platdetails.$key;
+              //console.log(platdetailsvalues['requency-recency'])
+              if(platdetailsvalues['frequency-recency']){
+                
+              objdetails['rf'] = (platdetailsvalues['frequency-recency'].length) > 1? platdetailsvalues['frequency-recency'][1]:1;
+              }else{
+              objdetails['rf'] = 1;
+              };  
+          };
           }
+          if(platdetailskey==='subjects'){
+            //console.log(platdetails[platdetailskey])
+          //   Object.keys(platdetails[platdetailskey]).map((shadowk)=>{
+          //     Object.keys(platdetails[platdetailskey][shadowk]).forEach((cat)=>{
+          //       objdetails['subjects'][cat] = platdetails[platdetailskey][shadowk][cat]['proportion']
+          //   })
+          // })
+          Object.keys(platdetails[platdetailskey]).map((subj)=>{
+           objdetails[subj] = platdetails[platdetailskey][subj][Object.keys(platdetails[platdetailskey][subj])[0]]['proportion']*platdetails[platdetailskey][subj][Object.keys(platdetails[platdetailskey][subj])[0]]['count']
         })
+        }
       })
-    this.selplats = this.selplats.sort((a,b)=> {
+      this.selplats.push(objdetails);
+      //console.log(objdetails['subjects']);
+    })
+  })  
+  callback(filterset_result_dropdown, this.selplats);
+}
+
+sorterData(cat,listofobjs){
+      listofobjs = listofobjs.sort((a,b)=> {
       if (a[4]<b[4]) {
         return 1
       } else if (a[4]>b[4]) {
@@ -120,18 +162,27 @@ setResults(filterset_result_dropdown, callback){
       } 
       return 0
     })
-  })  
-  callback(filterset_result_dropdown, this.selplats);
 }
+
 
 outputR(selOp, sel){
   //callback(filterset_result_dropdown);
-  //console.log("FILTERER in outputResult", filterset_result_dropdown) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
-  return selOp.filter((cat)=>{
-      if(cat.category===sel[2]){
-        return cat.isActive
-      }
-    })[0];
+  //console.log("FILTERER in outputResult", selOp, sel) //OUTPUT: FILTERER in setResult undefined and stop reading for SUBJECTS, but read for CATEGORIES
+  // var d = selOp.filter((cat)=>{
+  //     console.log(cat.category, sel);
+  //     if(cat.category===sel[2]){
+  //       return cat.isActive
+  //     }
+  //   })[0];
+  
+  //console.log(d);
+
+   return selOp.filter((cat)=>{
+       if(cat.category===sel.cat){
+         //console.log(cat.category);
+         return cat.isActive
+       }
+     })[0];
 }
 
   ngOnDestroy(){

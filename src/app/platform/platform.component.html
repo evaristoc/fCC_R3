@@ -11,7 +11,7 @@
 <div class="container-fluid text-left">
     <div class="row">
         <div class="col-md-6">
-            <h3>{{platformdet.origurl}} links about</h3>
+            <h3>Other {{platformdet.origurl}} links about</h3>
             <h4><b>{{selsubject.toUpperCase()}}</b></h4>
             <h3>that might interest you</h3>
             <!--<ul>
@@ -75,17 +75,16 @@
     <div class="row">
         <div class="col-md-6">
             <h2>See other platforms in the same category</h2>
-            <p>Here, a <b>carrousel</b> of other platforms of similar CATEGORY</p>
-
+            <p>Here, a <b>carrousel</b> of other platforms of similar CATEGORY : {{platformdet.category}}</p>
             <div class="carousel">
                 <div class="container fill">
                     <ul class="slides">
 
-                        <li class='item' *ngFor="let image of images" style="text-align:center;color:green;">
-                            <h2>{{image.platform}}</h2>
+                        <li class='item' *ngFor="let similar of similars" style="text-align:center;color:green;">
+                            <h2>{{similar}}</h2>
                             <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
                             <!--<img src="{{image.url}}" alt="">-->
-                            <p><i>{{image.description}}</i></p>
+                            <p><i></i></p>
                         </li>
 
 
@@ -97,6 +96,21 @@
     <div class="row">
         <div class="col-md-6">
             <h2>People that mentioned this link also mentioned these ones...</h2>
-            Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform
+            <p>Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform</p>
+            <div class="carousel">
+                <div class="container fill">
+                    <ul class="slides">
+
+                        <li class='item' *ngFor="let other of listofothers" style="text-align:center;color:green;">
+                            <h2>{{other}}</h2>
+                            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                            <!--<img src="{{image.url}}" alt="">-->
+                            <p><i></i></p>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>

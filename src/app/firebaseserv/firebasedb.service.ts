@@ -14,7 +14,7 @@ export class FirebasedbService {
   platform: FirebaseListObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.platforms = this.db.list('/platformstable',{query:{limitToFirst:200}});//,{query:{limitToFirst:200}}
+    this.platforms = this.db.list('/platformstable',{query:{limitToFirst:400}});//,{query:{limitToFirst:200}}
   }
   
   

@@ -34,6 +34,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
 
 import { TestingservicesComponent } from './testingservices/testingservices.component';
+import { PlatsOrderbyPipe } from './pipes/platsorderby.pipe';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { TestingservicesComponent } from './testingservices/testingservices.comp
     MainbodyComponent,
     MaxlengthdocPipe,
     TestingservicesComponent,
+    PlatsOrderbyPipe,
     
   ],
   imports: [

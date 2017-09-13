@@ -38,6 +38,8 @@ export class PlatformComponent implements OnInit, Input, OnDestroy  {
   public subjectOptions: Array<any> = [{name:"NOTHING"}];
   public subj:string='';
   closeResult: string;
+  public similars;
+  public listofothers;
 //  something
 //   private getPromise ( h ){
 //      return new Promise( ( res, rej )=>{
@@ -83,6 +85,11 @@ public testData:Array<any>=[
 }
 
 //https://stackoverflow.com/questions/34761224/angular2-child-property-change-not-firing-update-on-bound-property
+//https://stackoverflow.com/questions/1789945/how-to-check-whether-a-string-contains-a-substring-in-javascript
+//http://embed.plnkr.co/DHLVc0
+//https://www.learnhowtoprogram.com/javascript/angular-extended/firebase-finding-and-retrieving-entries
+//http://www.advancesharp.com/blog/1211/angular-2-search-and-sort-with-ngfor-repeater-with-example
+
   ngOnInit(){
     let qparam: string;
     this.route.queryParams.take(1).subscribe((qprm)=>{qparam = qprm["selsubject"]});
@@ -96,8 +103,10 @@ public testData:Array<any>=[
     this.db.getItem(this.key).forEach((platdetails)=>{
         platdetails.forEach((platdetobj)=>{
             if(platdetobj.$key !== 'subjects'){
-                console.log(platdetobj);
+                //console.log(platdetobj);
                 this.platformdet = platdetobj;
+                this.similars = this.platformdet.similars.map((sp)=>{return sp.replace(/--/g,'.')})
+                this.listofothers = this.platformdet.listofothers.map((op)=>{return op.replace(/--/g,'.')})
                 //this.itemsByCategory = this.gIBCClosure(platdetobj.category, this.selPlatforms);
                 //console.log("finding nemo",this.getItemsByCategory(platdetobj.category, this.selPlatforms))
                 //this.db.platforms.forEach((x)=>{x.forEach((xs,i)=>{console.log(this.itemsByCategory.push(i)); this.itemsByCategory.push(i); this.bb(this.getPromise,this.itemsByCategory.push(i))})})
@@ -141,7 +150,7 @@ public elSearch(sq){
 }
 
    loadElList(par: string, i: number) {
-     console.log(this.elObj.documentStore.docs);
+     //console.log(this.elObj.documentStore.docs);
      if (par !== null) {
        this.elObj.addDoc({
           'suburls': par.replace(/\W|\d/ig, ' '),
