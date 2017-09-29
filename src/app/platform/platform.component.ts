@@ -263,3 +263,6 @@ var IMAGES = [
   {platform:'www.andthenmore.com',category:'thiscategory',description:'quaerat voluptatem'},
   {platform:'www.andfinallythis.com',category:'thiscategory',description:'cillum dolore eu fugiat nulla pariatur'},	
 ];
+
+//https://www.youtube.com/watch?v=fkmS9Pq7Sww
+//https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm

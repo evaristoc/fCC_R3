@@ -18,7 +18,7 @@
             <li *ngFor=" let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).slice(5) "><a href="# "> {{obj.doc.suburls}} {{ obj.doc.docurl }}</a></li>
         </ul>-->
             <ul *ngIf="elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).length > 0">
-                <li *ngFor="let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } })" [value]="Elquery"><a href="# "> {{ obj.doc.docurl }}</a></li>
+                <li *ngFor="let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }) | slice:0:10" [value]="Elquery"><a href="# "> {{ obj.doc.docurl }}</a></li>
             </ul>
             <ul *ngIf="elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).length == 0">
                 <li><b>Sorry... our algorithm found no specific relevant match for your subject selection</b></li>
@@ -78,13 +78,21 @@
             <p>Here, a <b>carrousel</b> of other platforms of similar CATEGORY : {{platformdet.category}}</p>
             <div class="carousel">
                 <div class="container fill">
-                    <ul class="slides">
+                    <ul class="slides" style="width:500%;">
 
-                        <li class='item' *ngFor="let similar of similars" style="text-align:center;color:green;">
-                            <h2>{{similar}}</h2>
+                        <li class='item' *ngFor="let similar of similars" style="text-align:center;color:green; margin-left:10px">
+                            <div class="card">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                            <!--<h2>{{similar}}</h2>
                             <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
                             <!--<img src="{{image.url}}" alt="">-->
-                            <p><i></i></p>
+                            <!--<p><i></i></p>-->
                         </li>
 
 
