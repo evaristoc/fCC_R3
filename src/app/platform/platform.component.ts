@@ -14,8 +14,9 @@ declare var elasticlunr: any;
 @Component({
   selector: 'app-platform',
   templateUrl: './platform.component.html',
-  styleUrls: ['./platform.component.css']
+  styleUrls: ['./platform.component.css'],
 })
+
 export class PlatformComponent implements OnInit, Input, OnDestroy  {
   public platarr: Array<any> = []
   private plat:FirebaseListObservable<any>;
@@ -52,6 +53,7 @@ export class PlatformComponent implements OnInit, Input, OnDestroy  {
 // bb(f, h){
 //   this.something = f(h)
 // }
+
 
 public testData:Array<any>=[
   {platform:'www.example.com',category:'thiscategory',description:'sum dolor sit amet, consectetur adipiscing elit, sed'},
@@ -120,6 +122,7 @@ public testData:Array<any>=[
     }); 
     //console.log(this.item) //this.item outside the function is read before and doesn't work!
 //this.getItemsByCategory("api|package|framework|librar|stack|licens|addon|app", this.db.platforms.forEach((x)=>{console.log(x)}))  
+
 }
 
   public myMethodChangingQueryParams(subj) {
@@ -247,6 +250,7 @@ gIBCClosure(a, b){
   }
 
 
+
   ngOnDestroy(){
     //this.plat.unsubscribe()
     //this.subscription.unsubscribe();
@@ -266,3 +270,6 @@ var IMAGES = [
 
 //https://www.youtube.com/watch?v=fkmS9Pq7Sww
 //https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm
+//https://www.codementor.io/christiannwamba/build-custom-directives-in-angular-2-jlqrk7dpw
+//https://plnkr.co/edit/tgIBra4bvKiDJ5jehw9v?p=preview
+

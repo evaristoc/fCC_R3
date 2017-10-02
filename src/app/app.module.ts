@@ -27,6 +27,8 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { ResultsComponent } from './results/results.component';
 import { AboutComponent } from './about/about.component';
 import { NgxElasticlunrModule } from 'ngx-elasticlunr';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+
 import { PlatformComponent } from './platform/platform.component';
 import { MainbodyComponent } from './mainbody/mainbody.component';
 
@@ -35,6 +37,7 @@ import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
 
 import { TestingservicesComponent } from './testingservices/testingservices.component';
 import { PlatsOrderbyPipe } from './pipes/platsorderby.pipe';
+
 
 
 @NgModule({
@@ -63,6 +66,7 @@ import { PlatsOrderbyPipe } from './pipes/platsorderby.pipe';
     NgxElasticlunrModule.forRoot(),
     AppRoutingModule,
     NgbModule.forRoot(),
+    Ng2CarouselamosModule,
   ],
   providers: [FirebasedbService, ElasticlunrService],
   bootstrap: [AppComponent]

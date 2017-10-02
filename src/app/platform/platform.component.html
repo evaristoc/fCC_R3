@@ -1,7 +1,7 @@
 <div class="col-md-8">
     <div class="jumbotron" style="background:#555555 !important; color:white">
         <div class="container-fluid text-left">
-            <h1>{{platformdet.origurl}}</h1>
+            <!--<h1>{{platformdet.origurl}}</h1>-->
             <h2>{{platformdet.title}}</h2>
             <p>{{platformdet.description}}</p>
         </div>
@@ -11,7 +11,7 @@
 <div class="container-fluid text-left">
     <div class="row">
         <div class="col-md-6">
-            <h3>Other {{platformdet.origurl}} links about</h3>
+            <!--<h3>Other {{platformdet.origurl}} links about</h3>--->
             <h4><b>{{selsubject.toUpperCase()}}</b></h4>
             <h3>that might interest you</h3>
             <!--<ul>
@@ -101,18 +101,67 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-6">
             <h2>People that mentioned this link also mentioned these ones...</h2>
             <p>Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform</p>
-            <div class="carousel">
-                <div class="container fill">
-                    <ul class="slides">
 
-                        <li class='item' *ngFor="let other of listofothers" style="text-align:center;color:green;">
+            <div ng2-carouselamos class="slide wrapper" [items]="[{name:1},{name:2},{name:3}]" [width]="50" [$prev]="prevTemplate" [$next]="nextTemplate" [$item]="itemTemplate">
+                <!--<div class="container fill ">
+                    <ul class="slides ">
+
+                        <li class='item' *ngFor="let other of listofothers " style="text-align:center;color:green; ">
                             <h2>{{other}}</h2>
-                            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
-                            <!--<img src="{{image.url}}" alt="">-->
+                            <img class="first-slide " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                           
+                            <p><i></i></p>
+                        </li>
+
+
+                    </ul>
+                </div>-->
+            </div>
+            <ng-template #prevTemplate>
+                <img src=" ../assets/images/if_arrow-left-01_186410.png " id="arrow-left">
+            </ng-template>
+            <ng-template #nextTemplate>
+                <img src=" ../assets/images/if_arrow-right-01_186409.png " id="arrow-right">
+            </ng-template>
+            <ng-template let-item let-i="index" #indexTemplate>
+                <div class="card">
+                    <div style="min-width: 200px">
+                        <p>{{item.name}}{{i}}</p>
+                    </div>
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-block">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!--<div class=" row ">
+        <div class="col-md-6 ">
+            <h2>People that mentioned this link also mentioned these ones...</h2>
+            <p>Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform</p>
+            <div class="carousel ">
+                <div class="container fill ">
+                    <ul class="slides ">
+
+                        <li class='item' *ngFor="let other of listofothers " style="text-align:center;color:green; ">
+                            <h2>{{other}}</h2>
+                            <img class="first-slide " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                           
                             <p><i></i></p>
                         </li>
 
@@ -121,4 +170,4 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
