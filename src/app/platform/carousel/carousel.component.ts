@@ -7,11 +7,21 @@ import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'ngbd-carousel-basic',
-  templateUrl: './carousel.component.html'
+  templateUrl: './carousel.component.html',
+  styles:[
+    `img {
+  display: block;
+  width: 100%;
+  height: 80px;
+
+}
+`
+],
+
 })
 export class NgbdCarouselBasic {
-  @Input() similars:Array<any>;
+  @Input() selectedlinks:Array<any>;
   constructor(){
-    this.similars
+    this.selectedlinks
   }
 }

@@ -1,6 +1,7 @@
 <ngb-carousel>
-    <ng-template ngbSlide *ngFor="let similar of similars; let i = index">
-        <img src="https://lorempixel.com/900/500?r={{i}}" alt="Random first slide">
+    <ng-template ngbSlide *ngFor="let selected of selectedlinks; let i = index">
+        <!--<img src="https://lorempixel.com/900/500?r={{i}}" alt="Random first slide">-->
+        <img src=" https://goldenfs.org/wp-content/uploads/revslider/new/financial-planning-background.gif" alt="Random first slide">
         <!--<div class="card">
             <img class="card-img-top" src="..." alt="Card image cap">
             <div class="card-block">
@@ -10,7 +11,7 @@
             </div>
         </div>-->
         <div class="carousel-caption">
-            <h3>{{similar}}</h3>
+            <h3 style="color:#343434;">{{selected}}</h3>
         </div>
     </ng-template>
 </ngb-carousel>
