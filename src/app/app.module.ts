@@ -37,6 +37,7 @@ import { MaxlengthdocPipe } from './pipes/maxlengthdoc.pipe';
 
 import { TestingservicesComponent } from './testingservices/testingservices.component';
 import { PlatsOrderbyPipe } from './pipes/platsorderby.pipe';
+import { NgbdCarouselBasic } from './platform/carousel/carousel.component';
 
 
 
@@ -53,6 +54,7 @@ import { PlatsOrderbyPipe } from './pipes/platsorderby.pipe';
     MaxlengthdocPipe,
     TestingservicesComponent,
     PlatsOrderbyPipe,
+    NgbdCarouselBasic,
     
   ],
   imports: [

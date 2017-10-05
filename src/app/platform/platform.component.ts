@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbdCarouselBasic} from './carousel/carousel.component';
 
 declare var elasticlunr: any;
 
