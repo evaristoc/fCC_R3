@@ -1,9 +1,9 @@
 <div class="col-md-8">
     <div class="jumbotron" style="background:#555555 !important; color:white">
         <div class="container-fluid text-left">
-            <!--<h1>{{platformdet.origurl}}</h1>-->
-            <h2>{{platformdet.title}}</h2>
-            <p>{{platformdet.description}}</p>
+            <h1>{{platformdet.origurl?(platformdet.origurl|maxlengthdoc:50):('')}}</h1>
+            <h2>{{platformdet.title?(platformdet.title|maxlengthdoc:50):('')}}</h2>
+            <p>{{platformdet.description?(platformdet.description|maxlengthdoc:50):('')}}</p>
         </div>
     </div>
 </div>
@@ -13,7 +13,7 @@
         <div class="col-md-6">
             <!--<h3>Other {{platformdet.origurl}} links about</h3>--->
             <h4><b>{{selsubject.toUpperCase()}}</b></h4>
-            <h3>that might interest you</h3>
+            <h3>links related to this site that might interest you</h3>
             <!--<ul>
             <li *ngFor=" let obj of elObj.search(Elquery, { 'fields': { 'suburls': { 'boost': 1 } } }).slice(5) "><a href="# "> {{obj.doc.suburls}} {{ obj.doc.docurl }}</a></li>
         </ul>-->
@@ -65,65 +65,7 @@
     </div>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <!--<div class=" row ">
-        <div class="col-md-6 ">
-            <h2>People that mentioned this link also mentioned these ones...</h2>
-            <p>Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform</p>
-            <div class="carousel ">
-                <div class="container fill ">
-                    <ul class="slides ">
-
-                        <li class='item' *ngFor="let other of listofothers " style="text-align:center;color:green; ">
-                            <h2>{{other}}</h2>
-                            <img class="first-slide " src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
-                           
-                            <p><i></i></p>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-    <!--<div class="row">
-        <div class="col-md-6">
-            <h2>See other platforms in the same category</h2>
-            <p>Here, a <b>carrousel</b> of other platforms of similar CATEGORY : {{platformdet.category}}</p>
-            <div class="carousel">
-                <div class="container fill">
-                    <ul class="slides" style="width:500%;">
-
-                        <li class='item' *ngFor="let similar of similars" style="text-align:center;color:green; margin-left:10px">
-                            <div class="card">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-block">
-                                    <h4 class="card-title">Card title</h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                            <!--<h2>{{similar}}</h2>
-                            <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
-                            <!--<img src="{{image.url}}" alt="">-->
-    <!--<p><i></i></p>-->
-    <!--</li>
-
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>-->
-    <br>
-    <br>
-    <div class="row">
+    <div class="row" style="margin-left:20px;margin-rigth:10px;">
         <div class="col-md-6">
             <h2>See other platforms in the same category</h2>
             <p>Here, a <b>carrousel</b> of other platforms of similar CATEGORY : {{platformdet.category}}</p>
@@ -132,7 +74,7 @@
     </div>
     <br>
     <br>
-    <div class="row">
+    <div class="row" style="margin-left:20px;margin-rigth:10px;">
         <div class="col-md-6">
             <h2>People that mentioned this link also mentioned these ones...</h2>
             <p>Here, a <b>carrousel</b> of a (random?) selection of platforms recommended by the people who mentioned this platform</p>
